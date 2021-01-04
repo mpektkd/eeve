@@ -7,11 +7,11 @@ class Customer(models.Model):
     has_expired_bills = models.BooleanField()
 
     def __str__(self):
-        return self.user.username
+        return self.user.getusername()
 
  # Individual Bill 
 class Bill(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bills") # Many to One relationship with Customers
+    customer = models.ForeignKey(User, related_name="bills", on_delete=models.CASCADE) # Many to One relationship with Customers
     date_created = models.DateTimeField(auto_now_add=True) # Updates automatically the time the object is saved
     total = models.FloatField()
     is_paid = models.BooleanField()
@@ -21,7 +21,7 @@ class Bill(models.Model):
 
  # Monthly Bill expires every 1st of month
 class MonthlyBill(models.Model):
-    customer = models.ManyToManyField(Customer, on_delete=models.CASCADE, related_name="monthlybills")
+    customer = models.ManyToManyField(Customer, related_name="monthlybills")
     monthly_total = models.FloatField()
     start_date = models.DateField()
     end_date = models.DateField()
@@ -31,8 +31,8 @@ class MonthlyBill(models.Model):
 
  # Stored cards for customer
 class Card(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="cards")
-    card_no = models.IntegerField(max_length=16)
+    customer = models.ForeignKey(Customer, related_name="cards", on_delete=models.CASCADE)
+    card_no = models.IntegerField()
 
     def __str__(self):
         first_dig = self.card_no / 10000
