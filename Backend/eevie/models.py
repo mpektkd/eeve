@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.fields import CharField
+from django.db.models.fields import CharField, IntegerField
+from django.core.validators import MaxValueValidator, RegexValidator
 
 from . import validators
 
@@ -42,13 +43,17 @@ class Card(models.Model):
         last_dig = self.card_no % 10000
         return f"{first_dig}********{last_dig}"
 
-
+ # To represent class Car
 class Ports(models.Model):
     id = models.IntegerField()
     title = models.CharField()
 
     def __str__(self):
         return f"Port with ID: {self.id} and title {self.title}."
+
+   ''' @classmethod
+    def create(cls, **kwargs):
+        move = cls.objects.create()'''
 
 class Brands(models.Model):
     id = models.CharField()
@@ -95,8 +100,70 @@ class Car(models.Model):
     def __str__(self):
         return f"Car with ID: {self.id},model {self.model} and type {self.get_car_type_display()} belongs to {self.customer.get_username()}."
 
+'''class Providers(models.Model):
+    name = models.CharField(max_length=15)
+
+    def __str__(self):
+        return f"Provider is: {self.name}."'''
+ 
+# To reprsent class Station
+class Operator(models.Model):
+    website_url = models.URLField()
+    contact_email = models.EmailField()
+    title = models.CharField()
+
+    def __str__(self):
+        return f"Operator {self.title}, website {self.website_url}, email {self.contact_email}."
+    
+class UsageType(models.Model):
+    IsPayAtLocation = models.BooleanField()
+    IsMembershipRequired = models.BooleanField()
+    IsAccessKeyRequired = models.BooleanField()
+    id = models.IntegerField()
+    Title = models.CharField()
+
+    def __str__(self):
+        return f"Is {self.Title}."
+
+class StatusType(models.Model):
+    IsOperational = models.BooleanField()
+    id = models.IntegerField()
+    Title = models.CharField()
+
+    def __str__(self):
+        return f"Is {self.Title}"
+
+class AddressInfo(models.Model):
+    id = models.IntegerField()
+    title = models.CharField()
+    addressLine = models.CharField()
+    town = models.CharField()
+    stateOrProvince = models.CharField()
+    postCode = models.IntegerField()
+    countryId = models.IntegerField()
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longtitude = models.DecimalField(max_digits=9, decimal_places=6)
+    contact_telephone = models.CharField(max_length=13)
+    access_comments = models.CharField()
+
+    def __str__(self):
+        return f"{self.addressLine}, {self.town}, {self.postCode}."
+
+class Station(models.Model):
+    id = models.IntegerField()
+    operators = models.ManyToManyField(Operator, related_name="operates", on_delete=models.DO_NOTHING)
+    ports = models.ManyToManyField(Ports, related_name="exist_at",on_delete=models.DO_NOTHING)
+    photo = models.URLField()
+    addressInfo = models.OneToOneField(AddressInfo,related_name="belongs_to",on_delete=models.CASCADE)
+    generalComments = models.CharField()
+    isOperational = models.BooleanField()
+    rating = models.DecimalField(max_digits=2, decimal_places=1) # Average 
+    
+    def __str__(self):
+        return f"Station with ports {self.ports} ports at {self.addressInfo}."
+
 class Session(models.Model):
-    customer = models.ForeignKey(User, related_name="sesh", on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, related_name="sessions", on_delete=models.CASCADE)
     #provider = models.CharField(max_length=1, choices=PROVIDERS)
     duration = models.TimeField()
     total_kwh = models.FloatField()
@@ -104,20 +171,6 @@ class Session(models.Model):
 
     def __str__(self):
         return f"Charged with {self.provider.get_provider_display} for {self.duration}, transfered totally {self.total_kwh} KWh for {self.cost} euros."
-
-class Providers(models.Model):
-    name = models.CharField(max_length=15)
-
-    def __str__(self):
-        return f"Provider is: {self.name}."
-
-class Station(models.Model):
-    # To implement location and rating
-    providers = models.ManyToManyField(Providers, related_name="providers")
-    # To implement __str__ to display location and rating
-
-class Docks(models.Model):
-    dock_type = models.CharField(max_length=15)
 
     def __str__(self):
         return self.dock_type
