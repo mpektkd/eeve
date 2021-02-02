@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.deletion import DO_NOTHING, PROTECT
 from django.db.models.fields import CharField, IntegerField
 from django.core.validators import MaxValueValidator, RegexValidator
+from django.utils import tree
 
 from . import validators
 
@@ -25,7 +27,7 @@ class Bill(models.Model):
 
  # Monthly Bill expires every 1st of month
 class MonthlyBill(models.Model):
-    customer = models.ForeignKey(User, related_name="monthlybills", on_delete=models.CASCADE) # Many to One relationship with Customers
+    customer = models.ForeignKey(User, related_name="monthlybills", on_delete=models.CASCADE, null=True) # Many to One relationship with Customers
     monthly_total = models.FloatField()
     start_date = models.DateField()
     end_date = models.DateField()
@@ -45,26 +47,22 @@ class Card(models.Model):
 
  # To represent class Car
 class Ports(models.Model):
-    id = models.IntegerField()
-    title = models.CharField()
+    id = models.IntegerField(primary_key=True)
+    title = models.CharField(max_length=100)
 
     def __str__(self):
         return f"Port with ID: {self.id} and title {self.title}."
 
-   ''' @classmethod
-    def create(cls, **kwargs):
-        move = cls.objects.create()'''
-
 class Brands(models.Model):
-    id = models.CharField()
-    name = models.CharField()
+    id = models.CharField(max_length=100 ,primary_key=True)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return f"Brand {self.name} has ID: {self.id}."
 
 class ACcharger(models.Model):
     usable_phases = models.IntegerField()
-    ports = models.ManyToManyField(Ports, on_delete=models.DO_NOTHING) # Many to Many relationship to existing Ports
+    ports = models.ManyToManyField(Ports) # Many to Many relationship to existing Ports
     max_power = models.FloatField()
     # Might want to insert power_per_charging_point afterwards
 
@@ -79,21 +77,21 @@ class chargingCurve(models.Model):
         return f"Charging percentage {self.percentage} with power {self.power}."
 
 class DCcharger(models.Model):
-    ports = models.ManyToManyField(Ports, on_delete=models.DO_NOTHING) # Many to Many relationship to existing Ports
+    ports = models.ManyToManyField(Ports) # Many to Many relationship to existing Ports
     max_power = models.FloatField()
-    charging_curve = models.ManyToManyField(chargingCurve, on_delete=models.DO_NOTHING)
+    charging_curve = models.ManyToManyField(chargingCurve)
 
     def __str__(self):
         return f"DC charger with available ports: {self.ports}."
 
 class Car(models.Model):
-    id = models.CharField()
-    brand = models.OneToOneField(Brands, on_delete=models.DO_NOTHING)
-    model = models.CharField()
+    id = models.CharField(max_length=100, primary_key=True)
+    brand = models.OneToOneField(Brands, on_delete=PROTECT)
+    model = models.CharField(max_length=100)
     release_year = models.IntegerField(validators=[validators.validate_year])
     usable_battery_size = models.FloatField(validators=[validators.validate_percentage])
-    ac_charger = models.OneToOneField(ACcharger, on_delete=models.DO_NOTHING)
-    dc_charger = models.OneToOneField(DCcharger, on_delete=models.DO_NOTHING)
+    ac_charger = models.OneToOneField(ACcharger, on_delete=PROTECT)
+    dc_charger = models.OneToOneField(DCcharger, on_delete=PROTECT)
     average_consumption = models.FloatField(validators=[validators.validate_percentage])
     customer = models.ForeignKey(User, related_name="cars", on_delete=models.CASCADE)
 
@@ -110,52 +108,52 @@ class Car(models.Model):
 class Operator(models.Model):
     website_url = models.URLField()
     contact_email = models.EmailField()
-    title = models.CharField()
+    title = models.CharField(max_length=100)
 
     def __str__(self):
         return f"Operator {self.title}, website {self.website_url}, email {self.contact_email}."
     
 class UsageType(models.Model):
+    id = models.IntegerField(primary_key=True)
     IsPayAtLocation = models.BooleanField()
     IsMembershipRequired = models.BooleanField()
     IsAccessKeyRequired = models.BooleanField()
-    id = models.IntegerField()
-    Title = models.CharField()
+    Title = models.CharField(max_length=100)
 
     def __str__(self):
         return f"Is {self.Title}."
 
 class StatusType(models.Model):
+    id = models.IntegerField(primary_key=True)
     IsOperational = models.BooleanField()
-    id = models.IntegerField()
-    Title = models.CharField()
+    Title = models.CharField(max_length=100)
 
     def __str__(self):
         return f"Is {self.Title}"
 
 class AddressInfo(models.Model):
-    id = models.IntegerField()
-    title = models.CharField()
-    addressLine = models.CharField()
-    town = models.CharField()
-    stateOrProvince = models.CharField()
+    id = models.IntegerField(primary_key=True)
+    title = models.CharField(max_length=100)
+    addressLine = models.CharField(max_length=100)
+    town = models.CharField(max_length=100)
+    stateOrProvince = models.CharField(max_length=100)
     postCode = models.IntegerField()
     countryId = models.IntegerField()
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longtitude = models.DecimalField(max_digits=9, decimal_places=6)
     contact_telephone = models.CharField(max_length=13)
-    access_comments = models.CharField()
+    access_comments = models.CharField(max_length=1000)
 
     def __str__(self):
         return f"{self.addressLine}, {self.town}, {self.postCode}."
 
 class Station(models.Model):
-    id = models.IntegerField()
-    operators = models.ManyToManyField(Operator, related_name="operates", on_delete=models.DO_NOTHING)
-    ports = models.ManyToManyField(Ports, related_name="exist_at",on_delete=models.DO_NOTHING)
+    id = models.IntegerField(primary_key=True)
+    operators = models.ManyToManyField(Operator, related_name="operates")
+    ports = models.ManyToManyField(Ports, related_name="exist_at")
     photo = models.URLField()
     addressInfo = models.OneToOneField(AddressInfo,related_name="belongs_to",on_delete=models.CASCADE)
-    generalComments = models.CharField()
+    generalComments = models.CharField(max_length=1000)
     isOperational = models.BooleanField()
     rating = models.DecimalField(max_digits=2, decimal_places=1) # Average 
     
@@ -171,7 +169,4 @@ class Session(models.Model):
 
     def __str__(self):
         return f"Charged with {self.provider.get_provider_display} for {self.duration}, transfered totally {self.total_kwh} KWh for {self.cost} euros."
-
-    def __str__(self):
-        return self.dock_type
         
