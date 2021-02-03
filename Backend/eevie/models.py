@@ -135,7 +135,7 @@ class DCcharger(models.Model):
         )
         for i in kwargs['ports']:
             formatted_port = format_port[i]
-            port = Ports.objects.filter(title__startswith)=f"{formatted_port}"
+            port = Ports.objects.filter(title__startswith=f"{formatted_port}")
             dcharger.ports.add(port)
         
         for i in kwargs['charging_curve']:
@@ -149,7 +149,7 @@ class DCcharger(models.Model):
 
 class Car(models.Model):
     id = models.CharField(max_length=100, primary_key=True)
-    type = models.CharField(max_length=4)
+    type = models.CharField(max_length=4, null=True)
     brand = models.OneToOneField(Brands, on_delete=PROTECT)
     model = models.CharField(max_length=100)
     release_year = models.IntegerField(validators=[validators.validate_year])
@@ -202,9 +202,9 @@ class Operator(models.Model):
 class UsageType(models.Model):
     id = models.IntegerField(primary_key=True)
     Title = models.CharField(max_length=100)
-    IsPayAtLocation = models.BooleanField(null=True)
-    IsMembershipRequired = models.BooleanField(null=True)
-    IsAccessKeyRequired = models.BooleanField(null=True)
+    IsPayAtLocation = models.BooleanField(null=True, blank=True)
+    IsMembershipRequired = models.BooleanField(null=True, blank=True)
+    IsAccessKeyRequired = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return f"Is {self.Title}."
@@ -225,7 +225,7 @@ class UsageType(models.Model):
 class StatusType(models.Model):
     id = models.IntegerField(primary_key=True)
     Title = models.CharField(max_length=100)
-    IsOperational = models.BooleanField(null=True)
+    IsOperational = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return f"Is {self.Title}"
@@ -250,8 +250,8 @@ class AddressInfo(models.Model):
     countryId = models.IntegerField()
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longtitude = models.DecimalField(max_digits=9, decimal_places=6)
-    contact_telephone = models.CharField(max_length=13, null=True)
-    access_comments = models.CharField(max_length=1000, null=True)
+    contact_telephone = models.CharField(max_length=13, null=True, blank=True)
+    access_comments = models.CharField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
         return f"{self.addressLine}, {self.town}, {self.postCode}."
@@ -267,7 +267,7 @@ class AddressInfo(models.Model):
             stateOrProvince = kwargs['StateOrProvince'],
             postCode = kwargs['Postcode'],
             countryID = kwargs['CountryID'],
-            latitued = kwargs['Latitude'],
+            latitude = kwargs['Latitude'],
             longtitude = kwargs['Longtitude'],
             contact_telephone = kwargs['ContactTelephone1'],
             access_comments = kwargs['AccessComments']
@@ -276,7 +276,7 @@ class AddressInfo(models.Model):
 
  # Filled by reference
 class CurrentType(models.Model):
-    id = models.IntegerField()
+    id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=50)
 
     def __str__(self):
@@ -295,11 +295,11 @@ class CurrentType(models.Model):
 class Connections(models.Model):
     id = models.IntegerField(primary_key=True)
     ports = models.ManyToManyField(Ports, related_name="exist_at")
-    current_type = models.ManyToManyField(CurrentType, related_name="exists_at", null=True)
-    voltage = models.IntegerField(null=True)
+    current_type = models.ManyToManyField(CurrentType, related_name="exists_at", blank=True)
+    voltage = models.IntegerField(null=True, blank=True)
     powerKW = models.FloatField()
     quantity = models.IntegerField()
-    status_type = models.ForeignKey(StatusType) #One status type to many connections
+    status_type = models.ForeignKey(StatusType, on_delete=models.DO_NOTHING) #One status type to many connections
 
     def __str__(self):
         return f"{self.quantity} connections."
@@ -308,13 +308,14 @@ class Connections(models.Model):
 class Station(models.Model):
     id = models.IntegerField(primary_key=True)
     operators = models.ManyToManyField(Operator, related_name="operates")
-    connections = models.OneToOneField(Connections)
-    usageType = models.ForeignKey(UsageType)
-    statusType = models.ForeignKey(StatusType)
+    connections = models.ManyToManyField(Connections)
+    usageType = models.ForeignKey(UsageType, on_delete=DO_NOTHING, null=True)
+    statusType = models.ForeignKey(StatusType, on_delete=DO_NOTHING, null=True)
     addressInfo = models.OneToOneField(AddressInfo,related_name="belongs_to",on_delete=models.CASCADE)
-    photo = models.URLField(null=True)
+    photo = models.URLField(null=True, blank=True)
+    usageCost = models.CharField(null=True, blank=True, max_length=100)
     #userComments in UserComments table, accessed by station.UserComments
-    generalComments = models.CharField(max_length=1000, null=True) 
+    generalComments = models.CharField(max_length=1000, null=True, blank=True) 
     
     def __str__(self):
         return f"Station with ports {self.ports} ports at {self.addressInfo}."
@@ -325,7 +326,8 @@ class Station(models.Model):
         station = cls.objects.create(
             id = kwargs['ID'],
             photo = kwargs['MediaItems']['ItemURL'], #Might have multiple media items MUST BUG FIX
-            generalComments = kwargs['GeneralComments'])
+            generalComments = kwargs['GeneralComments'],
+            usageCost = kwargs['UsageCost'])
 
         opInfo = kwargs['OperatorInfo']
         operator = Operator.objects.get_or_create(
@@ -344,9 +346,33 @@ class Station(models.Model):
                 powerKW = i['PowerKW'],
                 quantity = i['Quantity']
             )
-            port = Ports.objects.get(id)
-
+            port = Ports.objects.get(id=i['ConnectionTypeID'])
+            connection.ports.add(port)
+            currType = CurrentType.objects.get(id=i['CurrentTypeID'])
+            connection.current_type.add(currType)
+            status = StatusType.objects.get(id=i['StatusTypeID'])
+            connection.status_type.add(status)
+            station.connections.add(connection)
         
+        usagetype = UsageType.objects.get(id=kwargs['UsageTypeID'])
+        station.usageType.add(usagetype)
+        statustype = StatusType.objects.get(id=kwargs['StatusTypeID'])
+        station.statusType.add(statustype)
+
+        addressInfo = AddressInfo.create(**kwargs['AddressInfo'])
+        station.addressInfo.add(addressInfo)
+
+        if kwargs['UserComments'] == None:
+            return station
+        for i in kwargs['UserComments']:
+            userComm = UserComments.objects.create(
+                station = station,
+                username = i['UserName'],
+                comment = i['Comment'],
+                rating = i['Rating'],
+                checkinStatus = CheckinStatus.objects.get(id=i['CheckinStatusTypeID'])
+            )
+            station.UserComments.add(userComm)
         return station
 
     @property
@@ -361,17 +387,26 @@ class Station(models.Model):
         
         return rating/count
             
-
+ # Filled by reference
 class CheckinStatus(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=100)
 
+# kwargs is data['CheckinStatusTypes']
+    @classmethod
+    def create(cls, **kwargs):
+        checkin = cls.objects.create(
+            id = kwargs['ID'],
+            title = kwargs['Title']
+        )
+        return checkin
+
 class UserComments(models.Model):
-    station = models.ForeignKey(Station, related_name="UserComments")
+    station = models.ForeignKey(Station, related_name="UserComments", on_delete=models.CASCADE)
     username = models.CharField(max_length=100)
-    comment = models.CharField(max_length=1000)
+    comment = models.CharField(max_length=1000, blank=True, null=True)
     rating = models.IntegerField()
-    customer = models.ForeignKey(User, related_name="myComments",on_delete=models.CASCADE, null=True)
+    customer = models.ForeignKey(User, related_name="myComments",on_delete=models.CASCADE, null=True, blank=True)
     checkinStatus = models.ManyToManyField(CheckinStatus)
 
 class Session(models.Model):
