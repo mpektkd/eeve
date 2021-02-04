@@ -171,3 +171,46 @@ class CheckinStatusTestCase(TestCase):
         cst = CheckinStatus.objects.get(id=120)
         self.assertEqual(cst.title, 'Charging Spot Not Accessible (Access locked or site closed)')
 
+class BillTestCase(TestCase):
+    def setUp(self):
+        Bill.objects.create(
+            total=35.000,
+            is_paid=True
+        )
+
+    def test_bills(self):
+        b = Bill.objects.all()
+        #print(b[0].date_created)
+
+class StationTestCase(TestCase):
+    def setUp(self):
+        f = open("/home/cherry/Downloads/charging_points_europe_json/reference2.json")
+        data = json.load(f)
+        for i in data['ConnectionTypes']:
+            p = Ports.create(**i)
+            p.save()
+        for i in data['CheckinStatusTypes']:
+            cst = CheckinStatus.create(**i)
+            cst.save()
+
+        for i in data['CurrentTypes']:
+            c = CurrentType.create(**i)
+            c.save()
+        
+        for i in data['StatusTypes']:
+            s = StatusType.create(**i)
+            s.save()
+
+        for i in data['UsageTypes']:
+            u = UsageType.create(**i)
+            u.save()
+        g = open("/home/cherry/Downloads/station_info_gr.json")
+        data = json.load(g)
+        for i in data:
+            st = Station.create(**i)
+            if st != None:
+                st.save()
+        
+    def test_stations(self):
+        s = Station.objects.get(id= 108413)
+        print(s.usageCost)

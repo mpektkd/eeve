@@ -27,7 +27,7 @@ class Customer(models.Model):
 
  # Individual Bill 
 class Bill(models.Model):
-    customer = models.ForeignKey(User, related_name="bills", on_delete=models.CASCADE) # Many to One relationship with Customers
+    customer = models.ForeignKey(User, related_name="bills", on_delete=models.CASCADE, null=True) # Many to One relationship with Customers
     date_created = models.DateTimeField(auto_now_add=True) # Updates automatically the time the object is saved
     total = models.FloatField()
     is_paid = models.BooleanField()
@@ -202,9 +202,9 @@ class Car(models.Model):
 # To reprsent class Station
 class Operator(models.Model):
     id = models.IntegerField(primary_key=True)
-    website_url = models.URLField()
-    contact_email = models.EmailField()
-    title = models.CharField(max_length=100)
+    website_url = models.URLField(null=True, blank=True)
+    contact_email = models.EmailField(null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return f"Operator {self.title}, website {self.website_url}, email {self.contact_email}."
@@ -271,7 +271,7 @@ class AddressInfo(models.Model):
  # kwargs is data['AddressInfo']
     @classmethod
     def create(cls,**kwargs):
-        check = AddressInfo.objects.filter(id= kwargs['ID'])
+        check = AddressInfo.objects.filter(id = kwargs['ID'])
         if check:
             return None
         address = cls.objects.create(
@@ -295,7 +295,7 @@ class CurrentType(models.Model):
     title = models.CharField(max_length=50)
 
     def __str__(self):
-        return f"Current type of {self.title}."
+        return f"Current type of {self.title} and id {self.id}."
 
  # kwargs is data['CurrentTypes']
     @classmethod
@@ -310,89 +310,113 @@ class CurrentType(models.Model):
 class Connections(models.Model):
     id = models.IntegerField(primary_key=True)
     ports = models.ManyToManyField(Ports, related_name="exist_at")
-    current_type = models.ManyToManyField(CurrentType, related_name="exists_at", blank=True)
+    current_type = models.ManyToManyField(CurrentType, related_name="exists_at",blank=True)
     voltage = models.IntegerField(null=True, blank=True)
-    powerKW = models.FloatField()
-    quantity = models.IntegerField()
-    status_type = models.ForeignKey(StatusType, on_delete=models.DO_NOTHING) #One status type to many connections
+    powerKW = models.FloatField(null=True)
+    quantity = models.IntegerField(null=True)
+    status_type = models.ForeignKey(StatusType, on_delete=models.DO_NOTHING, null=True) #One status type to many connections
 
     def __str__(self):
-        return f"{self.quantity} connections."
+        return f"{self.quantity} connections with ports {self.ports.all()} and current type {self.current_type.all()}."
      
 
 class Station(models.Model):
     id = models.IntegerField(primary_key=True)
     operators = models.ManyToManyField(Operator, related_name="operates")
     connections = models.ManyToManyField(Connections)
-    usageType = models.ForeignKey(UsageType, on_delete=DO_NOTHING, null=True)
-    statusType = models.ForeignKey(StatusType, on_delete=DO_NOTHING, null=True)
-    addressInfo = models.OneToOneField(AddressInfo,related_name="belongs_to",on_delete=models.CASCADE)
+    usageType = models.ForeignKey(UsageType, on_delete=DO_NOTHING, null=True, blank=True)
+    statusType = models.ForeignKey(StatusType, on_delete=DO_NOTHING, null=True, blank=True)
+    addressInfo = models.OneToOneField(AddressInfo,related_name="belongs_to",on_delete=models.CASCADE, null=True)
     usageCost = models.CharField(null=True, blank=True, max_length=100)
     #userComments in UserComments table, accessed by station.UserComments
     generalComments = models.CharField(max_length=1000, null=True, blank=True) 
     
     def __str__(self):
-        return f"Station with ports {self.ports} ports at {self.addressInfo}."
+        return f"Station with  {self.connections.all()} at {self.addressInfo}."
 
 # kwargs is data
     @classmethod
     def create(cls,**kwargs):
+        check = Station.objects.filter(id = kwargs['ID'])
+        if check:
+            return None
+
         station = cls.objects.create(
             id = kwargs['ID'],
             generalComments = kwargs['GeneralComments'],
             usageCost = kwargs['UsageCost'])
 
         opInfo = kwargs['OperatorInfo']
-        operator = Operator.objects.get_or_create(
-            id = opInfo['ID'],
-            website_url = opInfo['WebsiteURL'],
-            contact_email = opInfo['ContactEmail'],
-            title = opInfo['Title']
-        )
-        station.operators.add(operator)
+        if opInfo != None:
+            operator = Operator.objects.get_or_create(
+                id = opInfo['ID'],
+                website_url = opInfo['WebsiteURL'],
+                contact_email = opInfo['ContactEmail'],
+                title = opInfo['Title']
+            )
+            if operator[1]:
+                operator[0].save
+            station.operators.add(operator[0])
         
         connectionsInfo = kwargs['Connections']
         for i in connectionsInfo:
-            connection = Connections.objects.get_or_create(
+            connectiona = Connections.objects.get_or_create(
                 id = i['ID'],
                 voltage = i['Voltage'],
                 powerKW = i['PowerKW'],
                 quantity = i['Quantity']
             )
+
+            connection = connectiona[0]
             port = Ports.objects.get(id=i['ConnectionTypeID'])
+            #print(port)
             connection.ports.add(port)
-            currType = CurrentType.objects.get(id=i['CurrentTypeID'])
-            connection.current_type.add(currType)
-            status = StatusType.objects.get(id=i['StatusTypeID'])
-            connection.status_type.add(status)
+            if i['CurrentTypeID'] != None:
+                currType = CurrentType.objects.get(id=i['CurrentTypeID'])
+                connection.current_type.add(currType)
+
+            if i['StatusTypeID'] != None:
+                status = StatusType.objects.get(id=i['StatusTypeID'])
+                connection.status_type = status
+
+            if connectiona[1]:
+                connection.save()
+            #print(connection)
             station.connections.add(connection)
         
-        usagetype = UsageType.objects.get(id=kwargs['UsageTypeID'])
-        station.usageType.add(usagetype)
-        statustype = StatusType.objects.get(id=kwargs['StatusTypeID'])
-        station.statusType.add(statustype)
+        if kwargs['UsageTypeID'] != None:
+            usagetype = UsageType.objects.get(id=kwargs['UsageTypeID'])
+            station.usageType = usagetype
+        
+        if kwargs['StatusTypeID'] != None:
+            statustype = StatusType.objects.get(id=kwargs['StatusTypeID'])
+            station.statusType = statustype
 
         addressInfo = AddressInfo.create(**kwargs['AddressInfo'])
-        station.addressInfo.add(addressInfo)
-
-        if kwargs['UserComments'] == None:
-            return station
-        for i in kwargs['UserComments']:
-            userComm = UserComments.objects.create(
-                station = station,
-                username = i['UserName'],
-                comment = i['Comment'],
-                rating = i['Rating'],
-                checkinStatus = CheckinStatus.objects.get(id=i['CheckinStatusTypeID'])
-            )
-            station.UserComments.add(userComm)
+        if addressInfo != None:
+                addressInfo.save()
         
-        for i in kwargs['MediaItems']:
-            mediaItem = MediaTypes.objects.get_or_create(
-                id = i['ID'],
-                itemUrl = i['ItemURL'],
-                station=station
-            )
+        station.addressInfo = addressInfo
+
+        if kwargs['UserComments'] != None:
+            for i in kwargs['UserComments']:
+                ucomm = UserComments.objects.create(
+                    station = station,
+                    username = i['UserName'],
+                    comment = i['Comment'],
+                    rating = i['Rating'],
+                )
+                if i['CheckinStatusTypeID'] != None:
+                    ucomm.checkinStatus.add(CheckinStatus.objects.get(id=i['CheckinStatusTypeID']))
+        
+        if kwargs['MediaItems'] != None:
+            for i in kwargs['MediaItems']:
+                m = station.mediaItems.get_or_create(
+                    id = i['ID'],
+                    itemUrl = i['ItemURL'],
+                )
+                if m[1]:
+                    m[0].save()
 
         return station
 
@@ -403,8 +427,9 @@ class Station(models.Model):
         allComms = UserComments.objects.select_related('rating').filter(station__id=self.id)
         
         for i in allComms:
-            rating += i.rating
-            count += 1
+            if i.rating != None:
+                rating += i.rating
+                count += 1
         
         return rating/count
 
@@ -415,7 +440,7 @@ class MediaTypes(models.Model):
     station = models.ForeignKey(Station, related_name="mediaItems", on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Media ID: {self.id} and URL: {self.itemUrl}."
+        return f"Media ID: {self.id} and URL: {self.itemUrl} and station {self.station}."
 
  # Filled by reference
 class CheckinStatus(models.Model):
@@ -439,7 +464,7 @@ class UserComments(models.Model):
     station = models.ForeignKey(Station, related_name="UserComments", on_delete=models.CASCADE)
     username = models.CharField(max_length=100)
     comment = models.CharField(max_length=1000, blank=True, null=True)
-    rating = models.IntegerField()
+    rating = models.IntegerField(null=True, blank=True)
     customer = models.ForeignKey(User, related_name="myComments",on_delete=models.CASCADE, null=True, blank=True)
     checkinStatus = models.ManyToManyField(CheckinStatus)
 
