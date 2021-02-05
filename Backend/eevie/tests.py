@@ -230,3 +230,35 @@ class StationTestCase(TestCase):
     def test_stations(self):
         s = Station.objects.get(id= 108413)
         #print(s.usageCost)
+
+class UsersTestCase(TestCase):
+    def setUp(self):
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/users.json'
+        f = open(fpath)
+        data = json.load(f)
+        for i in data:
+            u = User.objects.create(
+                first_name = i['first_name'],
+                last_name = i['last_name'],
+                email = i['email'],
+                password = i['password'],
+                username = i['username'],
+                is_staff = i['is_staff'],
+                is_active = i['is_active'],
+                is_superuser = i['is_superuser'],
+                last_login = i['last_login'],
+                date_joined = i['date_joined']
+            )
+            u.save()
+            c = Customer.objects.create(
+                user = u,
+                has_expired_bills = False
+            )
+            c.save()
+
+    def test_users(self):
+        u=User.objects.get(first_name = 'Lorne')
+        print(u.id)
+        self.assertEqual(u.email,'lwooffinden0@dmoz.org')
+        c = Customer.objects.get(user__username = 'lcowherdb2')
+        self.assertEqual(c.user.first_name, 'Lily')
