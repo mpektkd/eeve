@@ -1,12 +1,14 @@
 from django.test import TestCase
 from eevie.models import *
+import pathlib
 import json
 
 # Create your tests here.
 
 class BrandsTestCase(TestCase):
     def setUp(self):
-        f = open("/home/cherry/Downloads/electric_vehicles_data.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json'
+        f = open(fpath)
         data = json.load(f)
         for i in data['brands']:
             b=Brands.create(**i)
@@ -22,7 +24,8 @@ class BrandsTestCase(TestCase):
 
 class PortsTestCase(TestCase):
     def setUp(self):
-        f = open("/home/cherry/Downloads/charging_points_europe_json/reference2.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
+        f = open(fpath)
         data = json.load(f)
         for i in data['ConnectionTypes']:
             p = Ports.create(**i)
@@ -37,12 +40,14 @@ class PortsTestCase(TestCase):
 
 class ACchargerTestCase(TestCase):
     def setUp(self):
-        g = open("/home/cherry/Downloads/charging_points_europe_json/reference2.json")
+        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
+        g = open(gpath)
         data = json.load(g)
         for i in data['ConnectionTypes']:
             p = Ports.create(**i)
             p.save()
-        f = open("/home/cherry/Downloads/electric_vehicles_data.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json'
+        f = open(fpath)
         data = json.load(f)
         for i in data['data']:
             ac = ACcharger.create(**i['ac_charger'])
@@ -56,12 +61,14 @@ class ACchargerTestCase(TestCase):
 
 class DCchargerTestCase(TestCase):
     def setUp(self):
-        g = open("/home/cherry/Downloads/charging_points_europe_json/reference2.json")
+        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
+        g = open(gpath)
         data = json.load(g)
         for i in data['ConnectionTypes']:
             p = Ports.create(**i)
             p.save()
-        f = open("/home/cherry/Downloads/electric_vehicles_data.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json'
+        f = open(fpath)
         data = json.load(f)
         for i in data['data']:
             if(i['dc_charger']==None):
@@ -77,12 +84,14 @@ class DCchargerTestCase(TestCase):
 
 class CarTestCase(TestCase):
     def setUp(self):
-        g = open("/home/cherry/Downloads/charging_points_europe_json/reference2.json")
+        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
+        g = open(gpath)
         data = json.load(g)
         for i in data['ConnectionTypes']:
             p = Ports.create(**i)
             p.save()
-        f = open("/home/cherry/Downloads/electric_vehicles_data.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json'
+        f = open(fpath)
         data = json.load(f)
         for j in data['brands']:
             b=Brands.create(**j)
@@ -104,7 +113,8 @@ class CarTestCase(TestCase):
 
 class UsageTypeTestCase(TestCase):
     def setUp(self):
-        f = open("/home/cherry/Downloads/charging_points_europe_json/reference2.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
+        f = open(fpath)
         data = json.load(f)
         for i in data['UsageTypes']:
             u = UsageType.create(**i)
@@ -118,7 +128,8 @@ class UsageTypeTestCase(TestCase):
 
 class StatusTypeTestCase(TestCase):
     def setUp(self):
-        f = open("/home/cherry/Downloads/charging_points_europe_json/reference2.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
+        f = open(fpath)
         data = json.load(f)
         for i in data['StatusTypes']:
             u = StatusType.create(**i)
@@ -133,7 +144,8 @@ class StatusTypeTestCase(TestCase):
 
 class AddressInfoTestCase(TestCase):
     def setUp(self):
-        f = open("/home/cherry/Downloads/station_info_gr.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json'
+        f = open(fpath)
         data = json.load(f)
         for i in data:
             a = AddressInfo.create(**i['AddressInfo'])
@@ -148,7 +160,8 @@ class AddressInfoTestCase(TestCase):
 
 class CurrentTypeTestCase(TestCase):
     def setUp(self):
-        f = open("/home/cherry/Downloads/charging_points_europe_json/reference2.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
+        f = open(fpath)
         data = json.load(f)
         for i in data['CurrentTypes']:
             c = CurrentType.create(**i)
@@ -161,7 +174,8 @@ class CurrentTypeTestCase(TestCase):
 
 class CheckinStatusTestCase(TestCase):
     def setUp(self):
-        f = open("/home/cherry/Downloads/charging_points_europe_json/reference2.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
+        f = open(fpath)
         data = json.load(f)
         for i in data['CheckinStatusTypes']:
             cst = CheckinStatus.create(**i)
@@ -184,7 +198,8 @@ class BillTestCase(TestCase):
 
 class StationTestCase(TestCase):
     def setUp(self):
-        f = open("/home/cherry/Downloads/charging_points_europe_json/reference2.json")
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
+        f = open(fpath)
         data = json.load(f)
         for i in data['ConnectionTypes']:
             p = Ports.create(**i)
@@ -204,7 +219,8 @@ class StationTestCase(TestCase):
         for i in data['UsageTypes']:
             u = UsageType.create(**i)
             u.save()
-        g = open("/home/cherry/Downloads/station_info_gr.json")
+        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json'
+        g = open(gpath)
         data = json.load(g)
         for i in data:
             st = Station.create(**i)
@@ -213,4 +229,4 @@ class StationTestCase(TestCase):
         
     def test_stations(self):
         s = Station.objects.get(id= 108413)
-        print(s.usageCost)
+        #print(s.usageCost)
