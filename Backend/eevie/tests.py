@@ -83,7 +83,7 @@ class DCchargerTestCase(TestCase):
         dc = DCcharger.objects.get(id=10)
         #print(dc.ports.all())
 
-class CarTestCase(TestCase):
+class CarBaseTestCase(TestCase):
     def setUp(self):
         gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
         g = open(gpath)
@@ -98,15 +98,15 @@ class CarTestCase(TestCase):
             b=Brands.create(**j)
             b.save()
         for i in data['data']:
-            c=Car.create(**i)
+            c=CarBase.create(**i)
             c.save()
         f.close()
         g.close()
 
     def test_cars(self):
-        car = Car.objects.get(id='8b51a06f-676a-46aa-9074-4d3364ea1cca')
+        car = CarBase.objects.get(id='8b51a06f-676a-46aa-9074-4d3364ea1cca')
         #print(car)
-        carCount = Car.objects.all().count()
+        carCount = CarBase.objects.all().count()
 
         #for i in car._meta.get_fields():
         #    print(type(i.name))
@@ -235,7 +235,7 @@ class StationTestCase(TestCase):
         s = Station.objects.get(id= 108413)
         #print(s.usageCost)
 
-class UsersTestCase(TestCase):
+class SessionsTestCase(TestCase):
     def setUp(self):
         fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/users.json'
         f = open(fpath)
@@ -260,10 +260,86 @@ class UsersTestCase(TestCase):
             )
             c.save()
 
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/providers.json'
+        f = open(fpath)
+        data = json.load(f)
+        for i in data:
+            p = Provider.objects.create(**i)
+            p.save()
+
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
+        f = open(fpath)
+        data = json.load(f)
+        for i in data['ConnectionTypes']:
+            p = Ports.create(**i)
+            p.save()
+        for i in data['CheckinStatusTypes']:
+            cst = CheckinStatus.create(**i)
+            cst.save()
+
+        for i in data['CurrentTypes']:
+            c = CurrentType.create(**i)
+            c.save()
+        
+        for i in data['StatusTypes']:
+            s = StatusType.create(**i)
+            s.save()
+
+        for i in data['UsageTypes']:
+            u = UsageType.create(**i)
+            u.save()
+        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json'
+        g = open(gpath)
+        data = json.load(g)
+        for i in data:
+            st = Station.create(**i)
+            if st != None:
+                st.save()
+
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/sessions2.json'
+        f = open(fpath)
+        data = json.load(f)
+        for i in data["_items"]:
+            s = Session.create(**i)
+            s.save()
+        
+    def test_sessions(self):
+        '''for i in User.objects.all():
+            print(i)
+            '''
+
+
+class UsersTestCase(TestCase):
+    def setUp(self):
+        car = CarBaseTestCase()
+        car.setUp()
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/users.json'
+        f = open(fpath)
+        data = json.load(f)
+        for i in data:
+            u = User.objects.create(
+                first_name = i['first_name'],
+                last_name = i['last_name'],
+                email = i['email'],
+                username = i['username'],
+                is_staff = i['is_staff'],
+                is_active = i['is_active'],
+                is_superuser = i['is_superuser'],
+                last_login = i['last_login'],
+                date_joined = i['date_joined']
+            )
+            u.set_password(i['password'])
+            u.save()
+            c = Customer.objects.create(
+                user = u,
+                has_expired_bills = False
+            )
+            c.save()
+        
+        Car.create()
+
     def test_users(self):
-        u=User.objects.get(first_name = 'Lorne')
+        u=User.objects.all().first()
         #print(u.id)
-        print(u.password)
-        self.assertEqual(u.email,'lwooffinden0@dmoz.org')
-        c = Customer.objects.get(user__username = 'lcowherdb2')
-        self.assertEqual(c.user.first_name, 'Lily')
+        print(u.cars.all())
+        print(u.cars.all().first().car)

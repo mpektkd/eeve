@@ -59,20 +59,6 @@ class Card(models.Model):
  # To represent class Car
 
  # Filled by reference 
-class Ports(models.Model):
-    id = models.IntegerField(primary_key=True)
-    title = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"Port with ID: {self.id} and title {self.title}."
-
-    @classmethod
-    def create(cls, **kwargs):
-        port = cls.objects.create(
-            id=kwargs['ID'],
-            title=kwargs['Title']
-        )
-        return port
 
 # Filled by reference
 class Brands(models.Model):
@@ -89,6 +75,23 @@ class Brands(models.Model):
             name = kwargs['name']
         )
         return brand
+
+
+class Ports(models.Model):
+    id = models.IntegerField(primary_key=True)
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"Port with ID: {self.id} and title {self.title}."
+
+    @classmethod
+    def create(cls, **kwargs):
+        port = cls.objects.create(
+            id=kwargs['ID'],
+            title=kwargs['Title']
+        )
+        return port
+
 
 # Filled by model car
 class ACcharger(models.Model):
@@ -156,7 +159,8 @@ class DCcharger(models.Model):
         
         return dcharger
 
-class Car(models.Model):
+
+class CarBase(models.Model):
     id = models.CharField(max_length=100, primary_key=True)
     type = models.CharField(max_length=4, null=True)
     brand = models.ForeignKey(Brands, on_delete=PROTECT, null=True)
@@ -166,7 +170,6 @@ class Car(models.Model):
     ac_charger = models.OneToOneField(ACcharger, on_delete=PROTECT, null=True)
     dc_charger = models.OneToOneField(DCcharger, on_delete=PROTECT, null=True)
     average_consumption = models.FloatField(validators=[validators.validate_percentage])
-    customer = models.ForeignKey(User, related_name="cars", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"Car with ID: {self.id},model {self.model} and type {self.type}."
@@ -194,6 +197,28 @@ class Car(models.Model):
         
         return car
  
+
+class Car(models.Model):
+    id = models.AutoField(primary_key=True)
+    car = models.ForeignKey(CarBase, on_delete=models.DO_NOTHING, null=True)
+    customer = models.ForeignKey(User, related_name="cars", on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"Car with ID: {self.id} belongs to {self.customer.username}."
+
+    @classmethod
+    def create(cls, **kwargs):
+        # Perhaps more cars in each user
+        for i in User.objects.all():
+            cars = CarBase.objects.all()
+            random_car = random.choice(cars)
+            newCar = cls.objects.create(
+                car = random_car,
+                customer = i
+            )
+            newCar.save()
+        return newCar
+
 # To reprsent class Station
 class Operator(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -301,19 +326,11 @@ class CurrentType(models.Model):
         )
         return currType
 
- # Filled by stations.create
-class Connections(models.Model):
-    id = models.IntegerField(primary_key=True)
-    ports = models.ManyToManyField(Ports, related_name="exist_at")
-    current_type = models.ManyToManyField(CurrentType, related_name="exists_at",blank=True)
-    voltage = models.IntegerField(null=True, blank=True)
-    powerKW = models.FloatField(null=True)
-    quantity = models.IntegerField(null=True)
-    status_type = models.ManyToManyField(StatusType, blank=True) #One status type to many connections
 
-    def __str__(self):
-        return f"{self.quantity} connections with ports {self.ports.all()} and current type {self.current_type.all()}."
-     
+
+ # Filled by stations.create
+
+
 
 class Provider(models.Model):
     id = models.AutoField(primary_key=True)
@@ -337,7 +354,6 @@ class Station(models.Model):
     id = models.IntegerField(primary_key=True)
     providers = models.ManyToManyField(Provider, related_name="providers")
     operators = models.ManyToManyField(Operator, related_name="operates")
-    connections = models.ManyToManyField(Connections)
     usageType = models.ManyToManyField(UsageType, blank=True)
     statusType = models.ManyToManyField(StatusType, blank=True)
     addressInfo = models.OneToOneField(AddressInfo,related_name="belongs_to",on_delete=models.CASCADE, null=True)
@@ -346,7 +362,7 @@ class Station(models.Model):
     generalComments = models.CharField(max_length=1000, null=True, blank=True) 
     
     def __str__(self):
-        return f"Station with  {self.connections.all()} at {self.addressInfo}."
+        return f"Station with  {self.ports.all()} at {self.addressInfo}."
 
 # kwargs is data
     @classmethod
@@ -374,29 +390,28 @@ class Station(models.Model):
         
         connectionsInfo = kwargs['Connections']
         for i in connectionsInfo:
-            connectiona = Connections.objects.get_or_create(
+            point = Point.objects.create(
                 id = i['ID'],
                 voltage = i['Voltage'],
                 powerKW = i['PowerKW'],
                 quantity = i['Quantity']
             )
+            print(point)
 
-            connection = connectiona[0]
             port = Ports.objects.get(id=i['ConnectionTypeID'])
             #print(port)
-            connection.ports.add(port)
+            point.ports.add(port)
             if i['CurrentTypeID'] != None:
                 currType = CurrentType.objects.get(id=i['CurrentTypeID'])
-                connection.current_type.add(currType)
+                point.current_type.add(currType)
 
             if i['StatusTypeID'] != None:
                 status = StatusType.objects.get(id=i['StatusTypeID'])
-                connection.status_type.add(status)
+                point.status_type.add(status)
 
-            if connectiona[1]:
-                connection.save()
+            point.station = station
+            point.save()
             #print(connection)
-            station.connections.add(connection)
         
         if kwargs['UsageTypeID'] != None:
             usagetype = UsageType.objects.get(id=kwargs['UsageTypeID'])
@@ -447,6 +462,19 @@ class Station(models.Model):
         
         return rating/count
 
+class Point(models.Model):
+    id = models.IntegerField(primary_key=True)
+    current_type = models.ManyToManyField(CurrentType, related_name="exists_at",blank=True)
+    voltage = models.IntegerField(null=True, blank=True)
+    powerKW = models.FloatField(null=True)
+    quantity = models.IntegerField(null=True)
+    status_type = models.ManyToManyField(StatusType, blank=True) #One status type to many connections
+    station = models.ForeignKey(Station, related_name="points", on_delete=models.DO_NOTHING, null=True)
+    ports = models.ManyToManyField(Ports, related_name="exist_at")
+
+    def __str__(self):
+        return f"{self.quantity} connections with ports {self.ports.all()} and current type {self.current_type.all()}."
+
  # Filled by stations.create
 class MediaTypes(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -484,45 +512,59 @@ class UserComments(models.Model):
 
 class Session(models.Model):
     id = models.AutoField(primary_key=True)
-    provider = models.OneToOneField(Provider, related_name="hasmade", on_delete=models.DO_NOTHING, null=True)
+    provider = models.ForeignKey(Provider, related_name="hasmade", on_delete=models.DO_NOTHING, null=True)
     customer = models.ForeignKey(User, related_name="sessions", on_delete=models.CASCADE)  
-    station = models.OneToOneField(Station, related_name="sessions", on_delete=models.CASCADE, null=True)
+    vehicle = models.ForeignKey(Car, related_name="vehicle", on_delete=models.CASCADE, null=True)
+    station = models.ForeignKey(Station, related_name="sessions", on_delete=models.CASCADE, null=True)
+    point = models.ForeignKey(Point, related_name="points", on_delete=models.CASCADE, null=True)
     connectionTime = models.DateTimeField(null=True)
     disconnectTime = models.DateTimeField(null=True)
     doneChargingTime = models.DateTimeField(null=True)
     kWhDelivered = models.FloatField(null=True)
     
     def __str__(self):
-        return f"Charged with {self.provider.get_provider_display} for {self.duration}, transfered totally {self.total_kwh} KWh for {self.cost} euros."
+        return f"Charged with {self.provider.name} , transfered totally {self.kWhDelivered} KWh."
     
     @classmethod
     def create(cls, **kwargs):
         users = User.objects.all()
         random_user = random.choice(users)
-        providers = Provider.objects.all()
-        random_provider = random.choice(providers)
+
+        users_car = random_user.cars.all()
+        random_vehicle = random.choice(users_car)
+
         stations = Station.objects.all()
         random_station = random.choice(stations)
 
+        random_provider = random.choice(random_station.providers.all())
+        random_point = random.choice(random_station.points.all())
+
         session = cls.objects.create(
             customer = random_user,
+            vehicle = random_vehicle,
             provider = random_provider,
             station = random_station,
+            point = random_point,
             connectionTime = kwargs['connectionTime'],
             disconnectTime = kwargs['disconnectTime'],
             doneChargingTime = kwargs['doneChargingTime'],
             kWhDelivered = kwargs['kWhDelivered']
         )
+        userinputs = []
+        if kwargs['userInputs'] is not None:
+            for i in kwargs['userInputs']:
+                user_inputs = UserInput.create(**i)
+                user_inputs.customer = random_user
+                userinputs.append(user_inputs)
+                user_inputs.save()
+        
+        session.userInputs.set(userinputs)
 
-        for i in kwargs['userInput']:
-            user_inputs = UserInput.create(**i)
-            user_inputs.save()
-        session.userInputs.add(user_inputs)
         return session
         
 class UserInput(models.Model):
-    session = models.ForeignKey(Session, related_name="userInputs", on_delete=models.CASCADE)
-    customer = models.ForeignKey(User, related_name="inputs", on_delete=models.CASCADE)
+    session = models.ForeignKey(Session, related_name="userInputs", on_delete=models.CASCADE, null=True)
+    customer = models.ForeignKey(User, related_name="inputs", on_delete=models.CASCADE, null=True)
     WhPerMile = models.IntegerField(null=True)
     kWhRequested = models.FloatField(null=True)
     milesRequested = models.IntegerField(null=True)
