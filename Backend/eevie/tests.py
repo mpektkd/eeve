@@ -1,5 +1,6 @@
 from django.test import TestCase
 from eevie.models import *
+from django.contrib.auth.models import User
 import pathlib
 import json
 
@@ -106,6 +107,9 @@ class CarTestCase(TestCase):
         car = Car.objects.get(id='8b51a06f-676a-46aa-9074-4d3364ea1cca')
         #print(car)
         carCount = Car.objects.all().count()
+
+        #for i in car._meta.get_fields():
+        #    print(type(i.name))
         #print(car.ac_charger)
         #print(car.dc_charger)
         self.assertEqual(car.type,"phev")
@@ -241,7 +245,6 @@ class UsersTestCase(TestCase):
                 first_name = i['first_name'],
                 last_name = i['last_name'],
                 email = i['email'],
-                password = i['password'],
                 username = i['username'],
                 is_staff = i['is_staff'],
                 is_active = i['is_active'],
@@ -249,6 +252,7 @@ class UsersTestCase(TestCase):
                 last_login = i['last_login'],
                 date_joined = i['date_joined']
             )
+            u.set_password(i['password'])
             u.save()
             c = Customer.objects.create(
                 user = u,
@@ -258,7 +262,8 @@ class UsersTestCase(TestCase):
 
     def test_users(self):
         u=User.objects.get(first_name = 'Lorne')
-        print(u.id)
+        #print(u.id)
+        print(u.password)
         self.assertEqual(u.email,'lwooffinden0@dmoz.org')
         c = Customer.objects.get(user__username = 'lcowherdb2')
         self.assertEqual(c.user.first_name, 'Lily')

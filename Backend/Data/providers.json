@@ -1,0 +1,14 @@
+[
+    {
+        "name": "DEI",
+        "costPerkWh": 0.11057
+    },
+    {
+        "name": "ERON",
+        "costPerkWh": 0.08056
+    },
+    {
+        "name": "PROTERGIA",
+        "costPerkWh": 0.08842
+    }
+]
