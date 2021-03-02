@@ -141,7 +141,7 @@ export default function HeaderLinks(props) {
           href = "/signup-page"
           color="success"
           target="_self"
-          className={classes.navLink}
+          className={classes.navLink2}
         >
          Sign up
         </Button>
