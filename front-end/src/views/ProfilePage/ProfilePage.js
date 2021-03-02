@@ -54,7 +54,7 @@ export default function ProfilePage(props) {
         fixed
         changeColorOnScroll={{
           height: 200,
-          color: "success"
+          color: "white"
         }}
         {...rest}
       />
