@@ -46,7 +46,7 @@ class Car(models.Model):
         ('HEV', 'Hybrid Electric Vehicle')
     )
     customer = models.ForeignKey(User, related_name="cars", on_delete=models.CASCADE)
-    model = models.CharField()
+    model = models.CharField(max_length=100)
     car_type = models.CharField(max_length=4, choices=CAR_TYPE)
 
     def __str__(self):
