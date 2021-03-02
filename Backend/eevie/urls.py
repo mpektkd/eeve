@@ -15,6 +15,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('current_user/', views.current_user),
     path('login/', views.ObtainTokenPairWithUsernameView.as_view(), name='token_create'),
+    path('logout/', views.LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='logout'),
     path('refreshtoken/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('healthcheck/', views.HealthCheckView.as_view(), name='healthcheck')
     #path('users/', views.UserViewSet.as_view())

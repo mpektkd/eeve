@@ -13,6 +13,7 @@ from django.db import connection
 from eevie.serializers import *
 from eevie.models import *
 import json
+from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 
 @api_view(['GET'])
@@ -34,9 +35,24 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class ObtainTokenPairWithUsernameView(TokenObtainPairView):
+class ObtainTokenPairWithUsernameView(TokenObtainPairView):     #refresh and access token
     permission_classes = (permissions.AllowAny,)
     serializer_class = MyTokenObtainPairSerializer
+
+class LogoutAndBlacklistRefreshTokenForUserView(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+            
 
 class CustomerViewSet(viewsets.ModelViewSet):
     
