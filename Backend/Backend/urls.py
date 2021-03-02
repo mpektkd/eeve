@@ -18,5 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('eevie.urls')) #this file will be checked
+    path('evcharge/api/', include('eevie.urls')) #this file will be checked
 ]

@@ -374,7 +374,10 @@ class Station(models.Model):
         station = cls.objects.create(
             id = kwargs['ID'],
             generalComments = kwargs['GeneralComments'],
-            usageCost = kwargs['UsageCost'])
+            usageCost = kwargs['UsageCost'],
+            )
+
+        station.providers.add(random.choice(Provider.objects.all()))
 
         opInfo = kwargs['OperatorInfo']
         if opInfo != None:
@@ -396,7 +399,7 @@ class Station(models.Model):
                 powerKW = i['PowerKW'],
                 quantity = i['Quantity']
             )
-            print(point)
+            #print(point)
 
             port = Ports.objects.get(id=i['ConnectionTypeID'])
             #print(port)
