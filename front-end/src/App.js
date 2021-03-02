@@ -22,9 +22,7 @@ export default function App (props) {
         const response = axiosInstance.get('current_user/')
           .then(res => {
             setUser(res.data.username);
-            localStorage.setItem("username", res.data.username);
             setLoggedIn(true)
-            //localStorage.setItem("userIsLoggedIn", true);
           })
           .catch(error => {
             console.log(error)

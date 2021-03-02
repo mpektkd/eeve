@@ -28,7 +28,6 @@ export default function HeaderLinks(props) {
     localStorage.clear();
   }
   if (localStorage.getItem("isLoggedIn")) {
-    console.log(localStorage.getItem("username"))
     return (
       <List className={classes.list}>
          <ListItem className={classes.listItem}>

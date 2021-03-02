@@ -54,11 +54,15 @@ export default function LoginPage(props) {
         password: e.password
       })
       .then(res => {
-        setLoggedIn(true);
         localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("username", e.username);
         axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
         localStorage.setItem('access_token', res.data.access);
-        localStorage.setItem('refresh_token', res.data.refresh);        
+        localStorage.setItem('refresh_token', res.data.refresh); 
+        const timer = setTimeout(()=> {
+          setLoggedIn(true);
+          console.log("SKASE");
+        }, 800);
        })
     } catch (error) {
       throw error;
