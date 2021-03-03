@@ -36,6 +36,7 @@ const theme = createMuiTheme({
   },
 });
 
+
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   setTimeout(function() {
@@ -43,8 +44,10 @@ export default function LoginPage(props) {
   }, 700);
   const {register, handleSubmit} = useForm();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [authError, setAuthError] = useState(false);
   const classes = useStyles();
   const { ...rest } = props;
+  const usernameProps = ["kwstas"];
 
   const onSubmit = (e) => {
   
@@ -59,10 +62,14 @@ export default function LoginPage(props) {
         axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
         localStorage.setItem('access_token', res.data.access);
         localStorage.setItem('refresh_token', res.data.refresh); 
+        console.log("iam here");
         const timer = setTimeout(()=> {
           setLoggedIn(true);
           console.log("SKASE");
         }, 800);
+       })
+       .catch(error => {
+         setAuthError(true);
        })
     } catch (error) {
       throw error;
@@ -71,6 +78,66 @@ export default function LoginPage(props) {
     
   }
 
+  let textfieldUsername;
+  if (authError) {
+    textfieldUsername = <TextField
+    error
+    margin="normal"
+    inputRef={register}
+    required
+    fullWidth
+    name="username"
+    label="Username"
+    type="username"
+    id="username"
+    autoComplete="username"
+  />;
+  } else {
+    textfieldUsername = <TextField
+        margin="normal"
+        inputRef={register}
+        required
+        fullWidth
+        name="username"
+        label="Username"
+        type="username"
+        id="username"
+        autoComplete="username"
+        autoFocus
+      />;
+  }
+
+  let textfieldPassword;
+  if (authError) {
+    textfieldPassword = <TextField
+    error
+    margin="normal"
+    inputRef={register}
+    required
+    fullWidth
+    name="password"
+    label="Password"
+    type="password"
+    id="password"
+    autoComplete="current-password"
+    autoFocus
+    helperText = "Incorrect username or passowrd"
+
+  />;
+  } else {
+    textfieldPassword = <TextField
+        margin="normal"
+        inputRef={register}
+        required
+        fullWidth
+        name="password"
+        label="Password"
+        type="password"
+        id="password"
+        autoComplete="current-password"
+      />;
+  }
+  
 
   return (
     <div>
@@ -126,29 +193,9 @@ export default function LoginPage(props) {
                     </div>
                   </CardHeader>
                   <CardBody>
-                    <TextField
-                      margin="normal"
-                      inputRef={register}
-                      required
-                      fullWidth
-                      id="username"
-                      label="Username"
-                      name="username"
-                      autoComplete="username"
-                      autoFocus
-                    />
-                    <ThemeProvider theme = { theme }>
-                    <TextField
-                      margin="normal"
-                      inputRef={register}
-                      required
-                      fullWidth
-                      name="password"
-                      label="Password"
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                    />
+                  <ThemeProvider theme = { theme }>
+                    { textfieldUsername }
+                    { textfieldPassword }
                     </ThemeProvider>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
