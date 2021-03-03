@@ -57,6 +57,7 @@ export default function LoginPage(props) {
         password: e.password
       })
       .then(res => {
+        setAuthError(false);
         localStorage.setItem("isLoggedIn", true);
         localStorage.setItem("username", e.username);
         axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
