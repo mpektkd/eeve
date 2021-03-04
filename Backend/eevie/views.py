@@ -26,12 +26,12 @@ def SessionsPerPoint(request, pk, date_from, date_to):
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00+00:00"
 
-    station = Station.objects.all().filter(id=int(pk))
+    point = Point.objects.all().filter(id=int(pk))
 
-    if station == None:
+    if point == None:
         return Response({'status': 'Failed'})
 
-    sessions = station.sessions.all()
+    sessions = point.sessions.all()
 
     sesh = [] 
     index = 1
@@ -50,14 +50,16 @@ def SessionsPerPoint(request, pk, date_from, date_to):
 
     serializer = {}
 
-    serializer['Point'] = station.id
-    serializer['PointOperator'] = station.operators.title
+    serializer['Point'] = point.id
+    serializer['PointOperator'] = point.operators.all().first().title
     serializer['RequestTimesamp'] = datetime.datetime.now()
     serializer['PeriodFrom'] = date_from
     serializer['PeriodTo'] = date_to
     serializer['NumberOfChargingSessions'] = sessions.count()
-    
+    serializer['ChargingSessionsList'] = sesh
     return Response(serializer)
+
+
 
 class UserViewSet(APIView): 
     authentication_classes = ()
