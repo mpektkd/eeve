@@ -241,10 +241,9 @@ class SessionsTestCase(TestCase):
         for i in data["_items"]:
             s = Session.create(**i)
             s.save()
-
         
     def test_sessions(self):
-        print(Session.objects.filter(connectionTime__range=['2017-05-14','2020-06-27']))
+        print(Session.objects.filter(connectionTime__range=['2017-05-14 00:00:00+00:00','2020-06-27 00:00:00+00:00']))
 
 
 class UsersTestCase(TestCase):

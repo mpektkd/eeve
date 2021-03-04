@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import CryptPasswordHasher
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE, DO_NOTHING, PROTECT
@@ -58,8 +59,6 @@ class Card(models.Model):
 
  # To represent class Car
 
- # Filled by reference 
-
 # Filled by reference
 class Brands(models.Model):
     id = models.CharField(max_length=100 ,primary_key=True)
@@ -75,7 +74,6 @@ class Brands(models.Model):
             name = kwargs['name']
         )
         return brand
-
 
 class Ports(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -399,6 +397,8 @@ class Station(models.Model):
                 powerKW = i['PowerKW'],
                 quantity = i['Quantity']
             )
+            if i['Level'] is not None:
+                point.protocol = i['Level']['Title']
             #print(point)
 
             port = Ports.objects.get(id=i['ConnectionTypeID'])
@@ -474,6 +474,7 @@ class Point(models.Model):
     status_type = models.ManyToManyField(StatusType, blank=True) #One status type to many connections
     station = models.ForeignKey(Station, related_name="points", on_delete=models.DO_NOTHING, null=True)
     ports = models.ManyToManyField(Ports, related_name="exist_at")
+    protocol = models.CharField(max_length=20, default="Level 2 : Medium (Over 2kW)")
 
     def __str__(self):
         return f"{self.quantity} connections with ports {self.ports.all()} and current type {self.current_type.all()}."
@@ -514,6 +515,15 @@ class UserComments(models.Model):
     checkinStatus = models.ManyToManyField(CheckinStatus)
 
 class Session(models.Model):
+    CASH = 'Cash'
+    DEBIT = 'Debit Card'
+    CREDIT = 'Credit'
+    PAYMENT_OPTIONS = [
+        (CASH, 'PayinCash'),
+        (DEBIT, 'PaywithCard'),
+        (CREDIT, 'Payattheendofmonth')
+    ]
+
     id = models.AutoField(primary_key=True)
     provider = models.ForeignKey(Provider, related_name="hasmade", on_delete=models.DO_NOTHING, null=True)
     customer = models.ForeignKey(User, related_name="sessions", on_delete=models.CASCADE)  
@@ -524,7 +534,8 @@ class Session(models.Model):
     disconnectTime = models.DateTimeField(null=True)
     doneChargingTime = models.DateTimeField(null=True)
     kWhDelivered = models.FloatField(null=True)
-    
+    payment = models.CharField(max_length=10, choices=PAYMENT_OPTIONS, default=CASH,)
+
     def __str__(self):
         return f"Charged with {self.provider.name} , transfered totally {self.kWhDelivered} KWh."
     
@@ -542,12 +553,15 @@ class Session(models.Model):
         random_provider = random.choice(random_station.providers.all())
         random_point = random.choice(random_station.points.all())
 
+        #random_paymentOpt = random.choice(['Credit','Debit Card','Cash'])
+
         session = cls.objects.create(
             customer = random_user,
             vehicle = random_vehicle,
             provider = random_provider,
             station = random_station,
             point = random_point,
+            #payment = random_paymentOpt,
             connectionTime = kwargs['connectionTime'],
             disconnectTime = kwargs['disconnectTime'],
             doneChargingTime = kwargs['doneChargingTime'],

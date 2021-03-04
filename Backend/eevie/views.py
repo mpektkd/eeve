@@ -4,7 +4,7 @@ from rest_framework import viewsets,status,permissions
 from rest_framework.authentication import TokenAuthentication,SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from django.http import HttpResponse
+from django.http import HttpResponse, response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -12,7 +12,7 @@ from django.shortcuts import get_object_or_404
 from django.db import connection
 from eevie.serializers import *
 from eevie.models import *
-import json
+import json,datetime
 from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 
@@ -21,10 +21,45 @@ def current_user(request):
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
 
-class UserViewSet(viewsets.ModelViewSet):
+@api_view(['GET'])
+def SessionsPerPoint(request, pk, date_from, date_to):
+    date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00+00:00"
+    date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00+00:00"
+
+    station = Station.objects.all().filter(id=int(pk))
+
+    if station == None:
+        return Response({'status': 'Failed'})
+
+    sessions = station.sessions.all()
+
+    sesh = [] 
+    index = 1
+    for i in sessions:
+        temp = {}
+        temp['SessionIndex'] = index
+        temp['SessionID'] = i.id
+        temp['StartedOn'] = i.connectionTime
+        temp['FinishedOn'] = i.disconnectTime
+        temp['Protocol'] = i.point.protocol
+        temp['EnergyDelivered'] = i.kWhDelivered
+        temp['Payment'] = i.payment
+        temp['VehicleType'] = i.vehicle.car.type
+        index += 1
+        sesh.append(temp)
+
+    serializer = {}
+
+    serializer['Point'] = station.id
+    serializer['PointOperator'] = station.operators.title
+    serializer['RequestTimesamp'] = datetime.datetime.now()
+    serializer['PeriodFrom'] = date_from
+    serializer['PeriodTo'] = date_to
+    serializer['NumberOfChargingSessions'] = sessions.count()
     
-    serializer_class = UserSerializer
-    queryset = User.objects.all()   
+    return Response(serializer)
+
+class UserViewSet(APIView): 
     authentication_classes = ()
     permission_classes = (permissions.AllowAny,)
 
