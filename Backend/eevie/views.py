@@ -15,6 +15,8 @@ from eevie.models import *
 import json,datetime
 from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
+from django.db.models import Count, Sum
+
 
 @api_view(['GET'])
 def current_user(request):
@@ -31,7 +33,7 @@ def SessionsPerPoint(request, pk, date_from, date_to):
     if point == None:
         return Response({'status': 'Failed'})
 
-    sessions = point.sessions.all()
+    sessions = point.sessions.all().filter(connectionTime__range=[date_from,date_to])
 
     sesh = [] 
     index = 1
@@ -59,6 +61,34 @@ def SessionsPerPoint(request, pk, date_from, date_to):
     serializer['ChargingSessionsList'] = sesh
     return Response(serializer)
 
+@api_view(['GET'])
+def SessionsPerStation(request, pk, data_from, data_to):
+
+    date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00+00:00"
+    date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00+00:00"
+
+    station = Station.objects.get(id=int(pk))
+
+    if station == None:
+        return Response({'status': 'Failed'})
+
+    sessions = station.sessions.all().filter(connectionTime__range=[date_from,date_to])
+
+    station_info = {}
+    station_info['StationID'] = station.id
+    if station.operators.all().first() is not None:
+        station_info['Operator'] = station.operators.all().first().title
+    else:
+        station_info['Operator'] = None
+    station_info['RequestTimestamp'] = datetime.datetime.now()
+    station_info['PeriodFrom'] = date_from
+    station_info['PeriodTo'] = date_to
+    station_info['TotalEnergyDelivered']=sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum']
+    station_info['NumberOfChargingSessions'] = sessions.count()
+    station_info['NumberOfActivePoints'] = len(sessions.values('point').annotate(Count('point__id')))
+    station_info['SessionsSummaryList'] = list(sessions.values('point__id').annotate(PointSessions=Count('point'), EnergyDelivered = Sum('kWhDelivered')).order_by('-PointSessions'))
+
+    return Response(station_info)
 
 
 class UserViewSet(APIView): 
@@ -108,3 +138,6 @@ class HealthCheckView(APIView):
             if one != 1:
                 raise Response({'status':'failed'})
         return Response({'status':'OK'})
+
+
+        

@@ -360,7 +360,7 @@ class Station(models.Model):
     generalComments = models.CharField(max_length=1000, null=True, blank=True) 
     
     def __str__(self):
-        return f"Station with  {self.ports.all()} at {self.addressInfo}."
+        return f"Station with  {self.id} at {self.addressInfo}."
 
 # kwargs is data
     @classmethod

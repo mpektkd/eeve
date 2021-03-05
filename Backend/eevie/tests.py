@@ -3,8 +3,8 @@ from django.test import TestCase
 from eevie.models import *
 from django.contrib.auth.models import User
 import pathlib
-import json
-
+import json,datetime
+from django.db.models import Count, Sum
 # Create your tests here.
 
 class BrandsTestCase(TestCase):
@@ -140,7 +140,7 @@ class StatusTypeTestCase(TestCase):
 
 class AddressInfoTestCase(TestCase):
     def setUp(self):
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json'
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
         f = open(fpath)
         data = json.load(f)
         for i in data:
@@ -205,7 +205,7 @@ class StationTestCase(TestCase):
         usageTypes = UsageTypeTestCase()
         usageTypes.setUp()
 
-        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json'
+        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
         g = open(gpath)
         data = json.load(g)
         for i in data:
@@ -235,7 +235,7 @@ class SessionsTestCase(TestCase):
         users = UsersTestCase()
         users.setUp()
 
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/sessions2.json'
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/sessions2.json' #Data/sessions2.json
         f = open(fpath)
         data = json.load(f)
         for i in data["_items"]:
@@ -243,7 +243,39 @@ class SessionsTestCase(TestCase):
             s.save()
         
     def test_sessions(self):
-        print(Session.objects.filter(connectionTime__range=['2017-05-14 00:00:00+00:00','2020-06-27 00:00:00+00:00']))
+        # pk=134483
+        # station = Station.objects.get(id=int(pk))
+        stations = Station.objects.all()
+
+        for station in stations:
+
+            print(station)
+            date_from = '2019-9-01 16:56:18.00+00:00'
+            date_to = '2020-8-03 22:02:13.00+00:00'
+            sessions = station.sessions.all().filter(connectionTime__range=[date_from,date_to])
+            # sessions = Session.objects.filter(connectionTime__range=[date_from,date_to])
+            
+
+            station_info = {}
+            station_info['StationID'] = station.id
+            if station.operators.all().first() is not None:
+                station_info['Operator'] = station.operators.all().first().title
+            else:
+                station_info['Operator'] = None
+            station_info['RequestTimestamp'] = datetime.datetime.now()
+            station_info['PeriodFrom'] = date_from
+            station_info['PeriodTo'] = date_to
+            station_info['TotalEnergyDelivered']=sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum']
+            station_info['NumberOfChargingSessions'] = sessions.count()
+            station_info['NumberOfActivePoints'] = len(sessions.values('point').annotate(Count('point__id')))
+            station_info['SessionsSummaryList'] = list(sessions.values('point__id').annotate(PointSessions=Count('point'), EnergyDelivered = Sum('kWhDelivered')).order_by('-PointSessions'))
+            print("----------------Info--------------------------")
+            print(station_info)
+            print(f"sessions: {sessions.count()}")
+
+
+
+
 
 
 class UsersTestCase(TestCase):

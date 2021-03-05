@@ -1,0 +1,357 @@
+[
+    {
+      "DataProvider": {
+        "WebsiteURL": "http://openchargemap.org",
+        "Comments": null,
+        "DataProviderStatusType": {
+          "IsProviderEnabled": true,
+          "ID": 1,
+          "Title": "Manual Data Entry"
+        },
+        "IsRestrictedEdit": false,
+        "IsOpenDataLicensed": true,
+        "IsApprovedImport": true,
+        "License": "Licensed under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+        "DateLastImported": null,
+        "ID": 1,
+        "Title": "Open Charge Map Contributors"
+      },
+      "OperatorInfo": {
+        "WebsiteURL": "http://www.fortisis.eu",
+        "Comments": "Operator based on Greence and Cyprus",
+        "PhonePrimaryContact": "+30.215.54.09.814 (Greece)",
+        "PhoneSecondaryContact": "+357.22.31.63.18 (Cyprus)",
+        "IsPrivateIndividual": false,
+        "AddressInfo": null,
+        "BookingURL": null,
+        "ContactEmail": "info@fortisis.eu",
+        "FaultReportEmail": "info@fortisis.eu",
+        "IsRestrictedEdit": false,
+        "ID": 85,
+        "Title": "FORTISIS"
+      },
+      "UsageType": {
+        "IsPayAtLocation": null,
+        "IsMembershipRequired": null,
+        "IsAccessKeyRequired": null,
+        "ID": 1,
+        "Title": "Public"
+      },
+      "StatusType": {
+        "IsOperational": true,
+        "IsUserSelectable": true,
+        "ID": 50,
+        "Title": "Operational"
+      },
+      "SubmissionStatus": {
+        "IsLive": true,
+        "ID": 200,
+        "Title": "Submission Published"
+      },
+      "UserComments": null,
+      "PercentageSimilarity": null,
+      "MediaItems": [
+        {
+          "ID": 26276,
+          "ChargePointID": 172222,
+          "ItemURL": "https://s3-ap-southeast-2.amazonaws.com/openchargemap/images/GR/OCM172222/OCM-172222.orig.2021012220354049.jpg",
+          "ItemThumbnailURL": "https://s3-ap-southeast-2.amazonaws.com/openchargemap/images/GR/OCM172222/OCM-172222.thmb.2021012220354049.jpg",
+          "Comment": "",
+          "IsEnabled": true,
+          "IsVideo": false,
+          "IsFeaturedItem": false,
+          "IsExternalResource": false,
+          "MetadataValue": null,
+          "User": {
+            "ID": 18761,
+            "IdentityProvider": null,
+            "Identifier": null,
+            "CurrentSessionToken": null,
+            "Username": "EVentusiast",
+            "Profile": null,
+            "Location": null,
+            "WebsiteURL": null,
+            "ReputationPoints": 217,
+            "Permissions": null,
+            "PermissionsRequested": null,
+            "DateCreated": null,
+            "DateLastLogin": null,
+            "IsProfilePublic": null,
+            "IsEmergencyChargingProvider": null,
+            "IsPublicChargingProvider": null,
+            "Latitude": null,
+            "Longitude": null,
+            "EmailAddress": null,
+            "EmailHash": null,
+            "ProfileImageURL": "https://www.gravatar.com/avatar/ecf1c48c0c636de1136e6bb7916972ec?s=80&d=robohash",
+            "IsCurrentSessionTokenValid": null,
+            "APIKey": null,
+            "SyncedSettings": null
+          },
+          "DateCreated": "2021-01-22T20:36:00Z"
+        }
+      ],
+      "IsRecentlyVerified": true,
+      "DateLastVerified": "2021-01-22T20:18:00Z",
+      "ID": 172222,
+      "UUID": "D928BA2A-8724-4E7C-953A-91EBD9F1D3F4",
+      "ParentChargePointID": null,
+      "DataProviderID": 1,
+      "DataProvidersReference": null,
+      "OperatorID": 85,
+      "OperatorsReference": null,
+      "UsageTypeID": 1,
+      "UsageCost": null,
+      "AddressInfo": {
+        "ID": 172581,
+        "Title": "EMM. VENERIS NISSAN",
+        "AddressLine1": "62 Μαρτύρων 506",
+        "AddressLine2": null,
+        "Town": "Heraklion Regional Unit",
+        "StateOrProvince": "Heraklion Regional Unit",
+        "Postcode": "713 03",
+        "CountryID": 90,
+        "Country": {
+          "ISOCode": "GR",
+          "ContinentCode": "EU",
+          "ID": 90,
+          "Title": "Greece"
+        },
+        "Latitude": 35.33322771756217,
+        "Longitude": 25.096858620675675,
+        "ContactTelephone1": null,
+        "ContactTelephone2": null,
+        "ContactEmail": null,
+        "AccessComments": null,
+        "RelatedURL": null,
+        "Distance": null,
+        "DistanceUnit": 0
+      },
+      "Connections": [
+        {
+          "ID": 263275,
+          "ConnectionTypeID": 25,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2 Type 2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
+          },
+          "Reference": null,
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 2,
+          "Level": {
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
+          },
+          "Amps": 32,
+          "Voltage": 400,
+          "PowerKW": 22.0,
+          "CurrentTypeID": 20,
+          "CurrentType": {
+            "Description": "Alternating Current - Three Phase",
+            "ID": 20,
+            "Title": "AC (Three-Phase)"
+          },
+          "Quantity": 2,
+          "Comments": null
+        }
+      ],
+      "NumberOfPoints": 2,
+      "GeneralComments": null,
+      "DatePlanned": null,
+      "DateLastConfirmed": null,
+      "StatusTypeID": 50,
+      "DateLastStatusUpdate": "2021-01-23T19:37:00Z",
+      "MetadataValues": null,
+      "DataQualityLevel": 1,
+      "DateCreated": "2021-01-22T20:18:00Z",
+      "SubmissionStatusTypeID": 200
+    },
+    {
+      "DataProvider": {
+        "WebsiteURL": "http://openchargemap.org",
+        "Comments": null,
+        "DataProviderStatusType": {
+          "IsProviderEnabled": true,
+          "ID": 1,
+          "Title": "Manual Data Entry"
+        },
+        "IsRestrictedEdit": false,
+        "IsOpenDataLicensed": true,
+        "IsApprovedImport": true,
+        "License": "Licensed under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+        "DateLastImported": null,
+        "ID": 1,
+        "Title": "Open Charge Map Contributors"
+      },
+      "OperatorInfo": {
+        "WebsiteURL": "http://www.fortisis.eu",
+        "Comments": "Operator based on Greence and Cyprus",
+        "PhonePrimaryContact": "+30.215.54.09.814 (Greece)",
+        "PhoneSecondaryContact": "+357.22.31.63.18 (Cyprus)",
+        "IsPrivateIndividual": false,
+        "AddressInfo": null,
+        "BookingURL": null,
+        "ContactEmail": "info@fortisis.eu",
+        "FaultReportEmail": "info@fortisis.eu",
+        "IsRestrictedEdit": false,
+        "ID": 85,
+        "Title": "FORTISIS"
+      },
+      "UsageType": {
+        "IsPayAtLocation": null,
+        "IsMembershipRequired": null,
+        "IsAccessKeyRequired": null,
+        "ID": 1,
+        "Title": "Public"
+      },
+      "StatusType": {
+        "IsOperational": true,
+        "IsUserSelectable": true,
+        "ID": 50,
+        "Title": "Operational"
+      },
+      "SubmissionStatus": {
+        "IsLive": true,
+        "ID": 200,
+        "Title": "Submission Published"
+      },
+      "UserComments": null,
+      "PercentageSimilarity": null,
+      "MediaItems": [
+        {
+          "ID": 26275,
+          "ChargePointID": 172220,
+          "ItemURL": "https://s3-ap-southeast-2.amazonaws.com/openchargemap/images/GR/OCM172220/OCM-172220.orig.2021012219573176.png",
+          "ItemThumbnailURL": "https://s3-ap-southeast-2.amazonaws.com/openchargemap/images/GR/OCM172220/OCM-172220.thmb.2021012219573176.png",
+          "Comment": "",
+          "IsEnabled": true,
+          "IsVideo": false,
+          "IsFeaturedItem": false,
+          "IsExternalResource": false,
+          "MetadataValue": null,
+          "User": {
+            "ID": 18761,
+            "IdentityProvider": null,
+            "Identifier": null,
+            "CurrentSessionToken": null,
+            "Username": "EVentusiast",
+            "Profile": null,
+            "Location": null,
+            "WebsiteURL": null,
+            "ReputationPoints": 217,
+            "Permissions": null,
+            "PermissionsRequested": null,
+            "DateCreated": null,
+            "DateLastLogin": null,
+            "IsProfilePublic": null,
+            "IsEmergencyChargingProvider": null,
+            "IsPublicChargingProvider": null,
+            "Latitude": null,
+            "Longitude": null,
+            "EmailAddress": null,
+            "EmailHash": null,
+            "ProfileImageURL": "https://www.gravatar.com/avatar/ecf1c48c0c636de1136e6bb7916972ec?s=80&d=robohash",
+            "IsCurrentSessionTokenValid": null,
+            "APIKey": null,
+            "SyncedSettings": null
+          },
+          "DateCreated": "2021-01-22T19:58:00Z"
+        }
+      ],
+      "IsRecentlyVerified": true,
+      "DateLastVerified": "2021-01-22T19:57:00Z",
+      "ID": 172220,
+      "UUID": "40EB83D1-F8BE-4D6B-85D0-A1B204BDE662",
+      "ParentChargePointID": null,
+      "DataProviderID": 1,
+      "DataProvidersReference": null,
+      "OperatorID": 85,
+      "OperatorsReference": null,
+      "UsageTypeID": 1,
+      "UsageCost": null,
+      "AddressInfo": {
+        "ID": 172579,
+        "Title": "Regional Unit of Argolida",
+        "AddressLine1": "Nafplio - Kios ",
+        "AddressLine2": null,
+        "Town": "Nafplio",
+        "StateOrProvince": "Peloponnese",
+        "Postcode": "21100",
+        "CountryID": 90,
+        "Country": {
+          "ISOCode": "GR",
+          "ContinentCode": "EU",
+          "ID": 90,
+          "Title": "Greece"
+        },
+        "Latitude": 37.57719795930727,
+        "Longitude": 22.799642317728512,
+        "ContactTelephone1": null,
+        "ContactTelephone2": null,
+        "ContactEmail": null,
+        "AccessComments": null,
+        "RelatedURL": "https://www.ppel.gov.gr",
+        "Distance": null,
+        "DistanceUnit": 0
+      },
+      "Connections": [
+        {
+          "ID": 263271,
+          "ConnectionTypeID": 25,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2 Type 2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
+          },
+          "Reference": null,
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 2,
+          "Level": {
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
+          },
+          "Amps": 32,
+          "Voltage": 400,
+          "PowerKW": 22.0,
+          "CurrentTypeID": 20,
+          "CurrentType": {
+            "Description": "Alternating Current - Three Phase",
+            "ID": 20,
+            "Title": "AC (Three-Phase)"
+          },
+          "Quantity": 2,
+          "Comments": null
+        }
+      ],
+      "NumberOfPoints": 1,
+      "GeneralComments": null,
+      "DatePlanned": null,
+      "DateLastConfirmed": null,
+      "StatusTypeID": 50,
+      "DateLastStatusUpdate": "2021-01-23T19:37:00Z",
+      "MetadataValues": null,
+      "DataQualityLevel": 1,
+      "DateCreated": "2021-01-22T19:57:00Z"
+     }
+  ]
