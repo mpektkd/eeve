@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -45,8 +46,10 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
   return (
     <div>
+      { !localStorage.getItem("isLoggedIn") && <Redirect to = "/login-page"/>}
       <Header
         color="transparent"
         brand="eevie"
@@ -69,7 +72,7 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Μαύρος Πι</h3>
+                    <h3 className={classes.title}> { localStorage.getItem("username") } </h3>
                   </div>
                 </div>
               </GridItem>
@@ -91,16 +94,8 @@ export default function ProfilePage(props) {
                       tabContent: (
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={6}>
-                            <img
-                              alt="..."
-                              src={studio1}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={studio2}
-                              className={navImageClasses}
-                            />
+                            <p>kwstas</p>
+                            <p>kwstas2</p>
                           </GridItem>
                           <GridItem xs={12} sm={12} md={4}>
                             <img
