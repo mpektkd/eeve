@@ -80,7 +80,7 @@ def SessionsPerStation(request, pk, data_from, data_to):
         station_info['Operator'] = station.operators.all().first().title
     else:
         station_info['Operator'] = None
-    station_info['RequestTimestamp'] = datetime.datetime.now()
+    station_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
     station_info['PeriodFrom'] = date_from
     station_info['PeriodTo'] = date_to
     station_info['TotalEnergyDelivered']=sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum']
