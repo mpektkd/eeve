@@ -94,8 +94,16 @@ export default function ProfilePage(props) {
                       tabContent: (
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={6}>
-                            <p>kwstas</p>
-                            <p>kwstas2</p>
+                            <img
+                              alt="..."
+                              src={studio1}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={studio2}
+                              className={navImageClasses}
+                            />
                           </GridItem>
                           <GridItem xs={12} sm={12} md={4}>
                             <img
