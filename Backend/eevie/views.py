@@ -28,38 +28,43 @@ def SessionsPerPoint(request, pk, date_from, date_to):
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00+00:00"
 
-    point = Point.objects.all().filter(id=int(pk))
+    try:
+        point = Point.objects.get(id=int(pk))
+    except Point.DoesNotExist:
+        return Response({'Point': ['Not Found']}, status=status.HTTP_400_BAD_REQUEST)
 
-    if point == None:
-        return Response({'status': 'Failed'})
+    sessions = point.points.all().filter(connectionTime__range=[date_from,date_to])
 
-    sessions = point.sessions.all().filter(connectionTime__range=[date_from,date_to])
+    point_info = {}
 
-    sesh = [] 
+    point_info['Point'] = point.id
+    first = point.station.operators.all().first()
+    if first is not None:
+        point_info['PointOperator'] = first.title
+    else:
+        point_info['PointOperator'] = "Unknown"
+    point_info['RequestTimesamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
+    point_info['PeriodFrom'] = date_from
+    point_info['PeriodTo'] = date_to
+    point_info['NumberOfChargingSessions'] = point.points.count()
+
+    sessionslist = [] 
     index = 1
     for i in sessions:
         temp = {}
         temp['SessionIndex'] = index
         temp['SessionID'] = i.id
-        temp['StartedOn'] = i.connectionTime
-        temp['FinishedOn'] = i.disconnectTime
+        temp['StartedOn'] = i.connectionTime.strftime("%Y-%m-%d %H:%M:%S")
+        temp['FinishedOn'] = i.disconnectTime.strftime("%Y-%m-%d %H:%M:%S")
         temp['Protocol'] = i.point.protocol
         temp['EnergyDelivered'] = i.kWhDelivered
         temp['Payment'] = i.payment
         temp['VehicleType'] = i.vehicle.car.type
         index += 1
-        sesh.append(temp)
+        sessionslist.append(temp.copy())
 
-    serializer = {}
-
-    serializer['Point'] = point.id
-    serializer['PointOperator'] = point.operators.all().first().title
-    serializer['RequestTimesamp'] = datetime.datetime.now()
-    serializer['PeriodFrom'] = date_from
-    serializer['PeriodTo'] = date_to
-    serializer['NumberOfChargingSessions'] = sessions.count()
-    serializer['ChargingSessionsList'] = sesh
-    return Response(serializer)
+    point_info['ChargingSessionsList'] = sessionslist[:]
+    return Response(point_info, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def SessionsPerStation(request, pk, data_from, data_to):
@@ -67,10 +72,10 @@ def SessionsPerStation(request, pk, data_from, data_to):
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00+00:00"
 
-    station = Station.objects.get(id=int(pk))
-
-    if station == None:
-        return Response({'status': 'Failed'})
+    try:
+        station = Station.objects.get(id=int(pk))
+    except Station.DoesNotExist:
+        return Response({'Station': ['Not Found']}, status=status.HTTP_400_BAD_REQUEST)
 
     sessions = station.sessions.all().filter(connectionTime__range=[date_from,date_to])
 
@@ -88,7 +93,7 @@ def SessionsPerStation(request, pk, data_from, data_to):
     station_info['NumberOfActivePoints'] = len(sessions.values('point').annotate(Count('point__id')))
     station_info['SessionsSummaryList'] = list(sessions.values('point__id').annotate(PointSessions=Count('point'), EnergyDelivered = Sum('kWhDelivered')).order_by('-PointSessions'))
 
-    return Response(station_info)
+    return Response(station_info, status=status.HTTP_200_OK)
 
 
 class UserViewSet(APIView): 

@@ -99,7 +99,7 @@ class CarBaseTestCase(TestCase):
 
     def test_cars(self):
         car = CarBase.objects.get(id='8b51a06f-676a-46aa-9074-4d3364ea1cca')
-        #print(car)
+        #print(car)B
         carCount = CarBase.objects.all().count()
 
         #for i in car._meta.get_fields():
@@ -245,38 +245,81 @@ class SessionsTestCase(TestCase):
             s.save()
         
     def test_sessions(self):
-        # pk=134483
-        # station = Station.objects.get(id=int(pk))
-        stations = Station.objects.all()
+        
+        date_from = '2019-9-01 16:56:18.00+00:00'
+        date_to = '2020-8-03 22:02:13.00+00:00'
+        try:
 
-        for station in stations:
+            # points = [Point.objects.get(id=263271)]
+            points = Point.objects.all()
 
-            print(station)
-            date_from = '2019-9-01 16:56:18.00+00:00'
-            date_to = '2020-8-03 22:02:13.00+00:00'
-            sessions = station.sessions.all().filter(connectionTime__range=[date_from,date_to])
-            # sessions = Session.objects.filter(connectionTime__range=[date_from,date_to])
-            
-            station_info = {}
-            station_info['StationID'] = station.id
-            if station.operators.all().first() is not None:
-                station_info['Operator'] = station.operators.all().first().title
-            else:
-                station_info['Operator'] = None
-            station_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
-            # station_info['RequestTimestamp'] = strftime("%Y-%m-%d %H:%M:%S", localtime(timezone('Europe/Athens')))
-            station_info['PeriodFrom'] = date_from
-            station_info['PeriodTo'] = date_to
-            station_info['TotalEnergyDelivered']=sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum']
-            station_info['NumberOfChargingSessions'] = sessions.count()
-            station_info['NumberOfActivePoints'] = len(sessions.values('point').annotate(Count('point__id')))
-            station_info['SessionsSummaryList'] = list(sessions.values('point__id').annotate(PointSessions=Count('point'), EnergyDelivered = Sum('kWhDelivered')).order_by('-PointSessions'))
-            print("----------------Info--------------------------")
-            print(station_info)
-            print(f"sessions: {sessions.count()}")
+            for point in points:
+                if point == None:
+                    return Response({'status': 'Failed'})
+
+                sessions = point.points.all().filter(connectionTime__range=[date_from,date_to])
+
+                point_info = {}
+
+                point_info['Point'] = point.id
+                first = point.station.operators.all().first()
+                if first is not None:
+                    point_info['PointOperator'] = first.title
+                else:
+                    point_info['PointOperator'] = "Unknown"
+                point_info['RequestTimesamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
+                point_info['PeriodFrom'] = date_from
+                point_info['PeriodTo'] = date_to
+                point_info['NumberOfChargingSessions'] = point.points.count()
+
+                sessionslist = [] 
+                index = 1
+                for i in sessions:
+                    temp = {}
+                    temp['SessionIndex'] = index
+                    temp['SessionID'] = i.id
+                    temp['StartedOn'] = i.connectionTime.strftime("%Y-%m-%d %H:%M:%S")
+                    temp['FinishedOn'] = i.disconnectTime.strftime("%Y-%m-%d %H:%M:%S")
+                    temp['Protocol'] = i.point.protocol
+                    temp['EnergyDelivered'] = i.kWhDelivered
+                    temp['Payment'] = i.payment
+                    temp['VehicleType'] = i.vehicle.car.type
+                    index += 1
+                    sessionslist.append(temp.copy())
+
+                point_info['ChargingSessionsList'] = sessionslist[:]
+
+                print("----------------Info--------------------------")
+                print(point_info)
+                print(f"sessions: {sessions.count()}")
 
 
+            # stations = Station.objects.all()
+            # stations = [Station.objects.get(id=172220)]
+            # for station in stations:
 
+            #     sessions = station.sessions.all().filter(connectionTime__range=[date_from,date_to])
+                
+            #     station_info = {}
+            #     station_info['StationID'] = station.id
+            #     if station.operators.all().first() is not None:
+            #         station_info['Operator'] = station.operators.all().first().title
+            #     else:
+            #         station_info['Operator'] = "Unknown"
+            #     # station_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens'))
+            #     station_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
+            #     station_info['PeriodFrom'] = date_from
+            #     station_info['PeriodTo'] = date_to
+            #     station_info['TotalEnergyDelivered']=sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum']
+            #     station_info['NumberOfChargingSessions'] = sessions.count()
+            #     station_info['NumberOfActivePoints'] = len(sessions.values('point').annotate(Count('point__id')))
+            #     station_info['SessionsSummaryList'] = list(sessions.values('point__id').annotate(PointSessions=Count('point'), EnergyDelivered = Sum('kWhDelivered')).order_by('-PointSessions'))
+            #     print("----------------Info--------------------------")
+            #     print(station_info)
+            #     print(f"sessions: {sessions.count()}")
+
+        except (Point.DoesNotExist, Station.DoesNotExist) as e:
+            return
 
 
 
