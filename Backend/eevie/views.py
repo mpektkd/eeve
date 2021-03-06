@@ -25,8 +25,8 @@ def current_user(request):
 
 @api_view(['GET'])
 def SessionsPerPoint(request, pk, date_from, date_to):
-    date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00+00:00"
-    date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00+00:00"
+    date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00" ##ισως χρειαστε να αλλαξω το date_from[4:6] με το μηδενικο
+    date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
     try:
         point = Point.objects.get(id=int(pk))
@@ -69,8 +69,8 @@ def SessionsPerPoint(request, pk, date_from, date_to):
 @api_view(['GET'])
 def SessionsPerStation(request, pk, data_from, data_to):
 
-    date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00+00:00"
-    date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00+00:00"
+    date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
+    date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
     try:
         station = Station.objects.get(id=int(pk))
