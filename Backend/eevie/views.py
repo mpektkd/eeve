@@ -44,8 +44,8 @@ def SessionsPerPoint(request, pk, date_from, date_to):
     else:
         point_info['PointOperator'] = "Unknown"
     point_info['RequestTimesamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
-    point_info['PeriodFrom'] = date_from
-    point_info['PeriodTo'] = date_to
+    point_info['PeriodFrom'] = date_from[:-9]
+    point_info['PeriodTo'] = date_to[:-9]
     point_info['NumberOfChargingSessions'] = point.points.count()
 
     sessionslist = [] 
@@ -84,16 +84,64 @@ def SessionsPerStation(request, pk, data_from, data_to):
     if station.operators.all().first() is not None:
         station_info['Operator'] = station.operators.all().first().title
     else:
-        station_info['Operator'] = None
+        station_info['Operator'] = "Unknown"
     station_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
-    station_info['PeriodFrom'] = date_from
-    station_info['PeriodTo'] = date_to
+    station_info['PeriodFrom'] = date_from[:-9]
+    station_info['PeriodTo'] = date_to[:-9]
     station_info['TotalEnergyDelivered']=sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum']
     station_info['NumberOfChargingSessions'] = sessions.count()
     station_info['NumberOfActivePoints'] = len(sessions.values('point').annotate(Count('point__id')))
     station_info['SessionsSummaryList'] = list(sessions.values('point__id').annotate(PointSessions=Count('point'), EnergyDelivered = Sum('kWhDelivered')).order_by('-PointSessions'))
 
     return Response(station_info, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def SessionsPerEV(request, pk, data_from, data_to):
+    
+    date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
+    date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
+
+    try:
+        vehicle = Car.objects.get(id=int(pk))
+    except Car.DoesNotExist:
+        return Response({'Car': ['Not Found']}, status=status.HTTP_400_BAD_REQUEST)
+
+    sessions = vehicle.vehicle.all().filter(connectionTime__range=[date_from,date_to])
+
+    ev_info = {}
+    ev_info['VehicleID'] = vehicle.id
+    ev_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
+    ev_info['PeriodFrom'] = date_from[:-9]
+    ev_info['PeriodTo'] = date_to[:-9]
+    kWh = sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum'] #average consumption ??
+    if kWh is not None:
+        ev_info['TotalEnergyConsumed']=kWh
+    else:
+        ev_info['TotalEnergyConsumed']=0
+    ev_info['NumberOfVisitedPoints'] = len(sessions.values('point').annotate(Count('point__id')))
+    ev_info['NumberOfVehicleChargingSessions'] = sessions.count()
+
+    sessionslist = [] 
+    index = 1
+    for i in sessions:
+        temp = {}
+        temp['SessionIndex'] = index
+        temp['SessionID'] = i.id
+        temp['EnergyProvider'] = i.provider.name
+        temp['StartedOn'] = i.connectionTime.strftime("%Y-%m-%d %H:%M:%S")
+        temp['FinishedOn'] = i.disconnectTime.strftime("%Y-%m-%d %H:%M:%S")
+        temp['EnergyDelivered'] = i.kWhDelivered
+        temp['PricePolicyRef'] = i.payment
+        temp['CostPerKWh'] = i.provider.costPerkWh
+        temp['SessionCost'] = i.kWhDelivered*i.provider.costPerkWh
+        index += 1
+        sessionslist.append(temp.copy())
+
+    
+    ev_info['VehicleChargingSessionsList'] = sessionslist[:]
+
+    return Response(ev_info, status=status.HTTP_200_OK)
+
 
 
 class UserViewSet(APIView): 
