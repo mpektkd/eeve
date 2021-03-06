@@ -131,7 +131,7 @@ def SessionsPerEV(request, pk, data_from, data_to):
         temp['StartedOn'] = i.connectionTime.strftime("%Y-%m-%d %H:%M:%S")
         temp['FinishedOn'] = i.disconnectTime.strftime("%Y-%m-%d %H:%M:%S")
         temp['EnergyDelivered'] = i.kWhDelivered
-        temp['PricePolicyRef'] = i.payment
+        temp['PricePolicyRef'] = i.payment #have to change
         temp['CostPerKWh'] = i.provider.costPerkWh
         temp['SessionCost'] = i.kWhDelivered*i.provider.costPerkWh
         index += 1
@@ -142,7 +142,46 @@ def SessionsPerEV(request, pk, data_from, data_to):
 
     return Response(ev_info, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def SessionsPerProvider(request, pk, data_from, data_to):
+    date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
+    date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
+    try:
+        provider = Provider.objects.get(id=int(pk))
+    except Provider.DoesNotExist:
+        return Response({'provider': ['Not Found']}, status=status.HTTP_400_BAD_REQUEST)
+
+    sessions = provider.hasmade.all().filter(connectionTime__range=[date_from,date_to])
+
+    provider_info = {}
+    provider_info['ProviderID'] = provider.id
+    provider_info['ProviderName'] = provider.name
+    provider_info['CostPerKWh'] = provider.costPerkWh
+    
+    sessionslist = [] 
+    for session in sessions:
+
+        temp = {}
+        temp['StationID'] = session.station.id
+        temp['SessionID'] = session.id
+        temp['VehicleID'] = session.vehicle.id
+        temp['StartedOn'] = session.connectionTime.strftime("%Y-%m-%d %H:%M:%S")
+        temp['FinishedOn'] = session.disconnectTime.strftime("%Y-%m-%d %H:%M:%S")
+        temp['EnergyDelivered'] = session.kWhDelivered
+        temp['PricePolicyRef'] = session.payment #have to change
+        temp['TotalCost'] = session.kWhDelivered*provider.costPerkWh
+
+        sessionslist.append(temp.copy())
+
+    provider_info['ProviderChargingSessionsList'] = sessionslist[:]
+
+    return Response(provider_info, status=status.HTTP_200_OK)
+
+
+
+
+    
 
 class UserViewSet(APIView): 
     authentication_classes = ()

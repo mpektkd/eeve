@@ -317,48 +317,82 @@ class SessionsTestCase(TestCase):
             #     print("----------------Info--------------------------")
             #     print(station_info)
             #     print(f"sessions: {sessions.count()}")
-            vehicles = [Car.objects.get(id=int(1))]
+            # vehicles = [Car.objects.get(id=int(1))]
             # vehicles = Car.objects.all()
 
-            for vehicle in vehicles:
-                sessions = vehicle.vehicle.all().filter(connectionTime__range=[date_from,date_to])
+            # for vehicle in vehicles:
+            #     sessions = vehicle.vehicle.all().filter(connectionTime__range=[date_from,date_to])
 
-                ev_info = {}
-                ev_info['VehicleID'] = vehicle.id
-                ev_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
-                ev_info['PeriodFrom'] = date_from[:-9]
-                ev_info['PeriodTo'] = date_to[:-9]
-                kWh = sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum'] #average consumption ??
-                if kWh is not None:
-                    ev_info['TotalEnergyConsumed']=kWh
-                else:
-                    ev_info['TotalEnergyConsumed']=0
-                ev_info['NumberOfVisitedPoints'] = len(sessions.values('point').annotate(Count('point__id')))
-                ev_info['NumberOfVehicleChargingSessions'] = sessions.count()
+            #     ev_info = {}
+            #     ev_info['VehicleID'] = vehicle.id
+            #     ev_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
+            #     ev_info['PeriodFrom'] = date_from[:-9]
+            #     ev_info['PeriodTo'] = date_to[:-9]
+            #     kWh = sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum'] #average consumption ??
+            #     if kWh is not None:
+            #         ev_info['TotalEnergyConsumed']=kWh
+            #     else:
+            #         ev_info['TotalEnergyConsumed']=0
+            #     ev_info['NumberOfVisitedPoints'] = len(sessions.values('point').annotate(Count('point__id')))
+            #     ev_info['NumberOfVehicleChargingSessions'] = sessions.count()
 
-                sessionslist = [] 
-                index = 1
-                for i in sessions:
-                    temp = {}
-                    temp['SessionIndex'] = index
-                    temp['SessionID'] = i.id
-                    temp['EnergyProvider'] = i.provider.name
-                    temp['StartedOn'] = i.connectionTime.strftime("%Y-%m-%d %H:%M:%S")
-                    temp['FinishedOn'] = i.disconnectTime.strftime("%Y-%m-%d %H:%M:%S")
-                    temp['EnergyDelivered'] = i.kWhDelivered
-                    temp['PricePolicyRef'] = i.payment
-                    temp['CostPerKWh'] = i.provider.costPerkWh
-                    temp['SessionCost'] = i.kWhDelivered*i.provider.costPerkWh
-                    index += 1
-                    sessionslist.append(temp.copy())
+            #     sessionslist = [] 
+            #     index = 1
+            #     for i in sessions:
+            #         temp = {}
+            #         temp['SessionIndex'] = index
+            #         temp['SessionID'] = i.id
+            #         temp['EnergyProvider'] = i.provider.name
+            #         temp['StartedOn'] = i.connectionTime.strftime("%Y-%m-%d %H:%M:%S")
+            #         temp['FinishedOn'] = i.disconnectTime.strftime("%Y-%m-%d %H:%M:%S")
+            #         temp['EnergyDelivered'] = i.kWhDelivered
+            #         temp['PricePolicyRef'] = i.payment
+            #         temp['CostPerKWh'] = i.provider.costPerkWh
+            #         temp['SessionCost'] = i.kWhDelivered*i.provider.costPerkWh
+            #         index += 1
+            #         sessionslist.append(temp.copy())
 
                 
-                ev_info['VehicleChargingSessionsList'] = sessionslist[:]
+            #     ev_info['VehicleChargingSessionsList'] = sessionslist[:]
+            #     print("----------------Info--------------------------")
+            #     print(ev_info)
+            #     print(f"sessions: {sessions.count()}")
+
+
+            # providers = [Provider.objects.get(id=int(1))]
+            providers = Provider.objects.all()
+
+            for provider in providers:
+
+                sessions = provider.hasmade.all().filter(connectionTime__range=[date_from,date_to])
+
+                provider_info = {}
+                provider_info['ProviderID'] = provider.id
+                provider_info['ProviderName'] = provider.name
+                provider_info['CostPerKWh'] = provider.costPerkWh
+                
+                sessionslist = [] 
+                for session in sessions:
+
+                    temp = {}
+                    temp['StationID'] = session.station.id
+                    temp['SessionID'] = session.id
+                    temp['VehicleID'] = session.vehicle.id
+                    temp['StartedOn'] = session.connectionTime.strftime("%Y-%m-%d %H:%M:%S")
+                    temp['FinishedOn'] = session.disconnectTime.strftime("%Y-%m-%d %H:%M:%S")
+                    temp['EnergyDelivered'] = session.kWhDelivered
+                    temp['PricePolicyRef'] = session.payment #have to change
+                    temp['TotalCost'] = session.kWhDelivered*provider.costPerkWh
+
+                    sessionslist.append(temp.copy())
+
+                provider_info['ProviderChargingSessionsList'] = sessionslist[:]
+
                 print("----------------Info--------------------------")
-                print(ev_info)
+                print(provider_info)
                 print(f"sessions: {sessions.count()}")
 
-        except (Point.DoesNotExist, Station.DoesNotExist, Car.DoesNotExist) as e:
+        except (Point.DoesNotExist, Station.DoesNotExist, Car.DoesNotExist, Provider.DoesNotExist) as e:
             print('Not Found')
             return
 
