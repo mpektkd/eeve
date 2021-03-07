@@ -1,4 +1,4 @@
 Frontend/
 .bak/
-Backend/eevie/__pycache__/
-Backend/eevie/migrations/
+eevie/__pycache__/
+eevie/migrations/

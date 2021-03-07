@@ -19,7 +19,7 @@ urlpatterns = [
     path('refreshtoken/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('healthcheck/', views.HealthCheckView.as_view(), name='healthcheck'),
     path('users/', views.UserViewSet.as_view()),
-    re_path(r'^SessionsPerPoint/<int:pk>/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to', views.SessionsPerPoint),
+    re_path(r'^SessionsPerPoint/(?P<pk>\d+)/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to/$', views.SessionsPerPoint),
     re_path(r'^SessionsPerPoint/<int:pk>/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to', views.SessionsPerStation),
     # path(r'^SessionsPerStation/<int:stationsID>/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/$', )
     #path('users/', views.UserViewSet.as_view())/$
