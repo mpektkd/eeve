@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'eevie',
     'corsheaders',
-    'django_crontab',
+    # 'django_crontab',
 ]
 
 MIDDLEWARE = [
