@@ -18,7 +18,6 @@ format_port = {
     "tesla_suc": "Tesla Supercharger"
 }
 
-
  # Customer
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -42,10 +41,18 @@ class MonthlyBill(models.Model):
     customer = models.ForeignKey(User, related_name="monthlybills", on_delete=models.CASCADE, null=True) # Many to One relationship with Customers
     monthly_total = models.FloatField()
     start_date = models.DateField()
-    end_date = models.DateField()
+    end_date = models.DateField(null=True, default=None)
 
     def __str__(self):
         return f"Monthly bill {self.start_date} to {self.end_date}."
+
+    def get_current(user):
+        MonthlyBill.objects.filter(customer = user, end_date=None)
+
+    @property
+    def update(self, price):
+        self.monthly_total += price
+        self.save()
 
  # Stored cards for customer
 class Card(models.Model):
@@ -527,9 +534,9 @@ class Session(models.Model):
     id = models.AutoField(primary_key=True)
     provider = models.ForeignKey(Provider, related_name="hasmade", on_delete=models.DO_NOTHING, null=True)
     customer = models.ForeignKey(User, related_name="sessions", on_delete=models.CASCADE)  
-    vehicle = models.ForeignKey(Car, related_name="vehicle", on_delete=models.CASCADE, null=True)
-    station = models.ForeignKey(Station, related_name="sessions", on_delete=models.CASCADE, null=True)
-    point = models.ForeignKey(Point, related_name="points", on_delete=models.CASCADE, null=True)
+    vehicle = models.ForeignKey(Car, related_name="vehicle", on_delete=models.DO_NOTHING, null=True)
+    station = models.ForeignKey(Station, related_name="sessions", on_delete=models.DO_NOTHING, null=True)
+    point = models.ForeignKey(Point, related_name="points", on_delete=models.DO_NOTHING, null=True)
     connectionTime = models.DateTimeField(null=True)
     disconnectTime = models.DateTimeField(null=True)
     doneChargingTime = models.DateTimeField(null=True)
@@ -553,7 +560,7 @@ class Session(models.Model):
         random_provider = random.choice(random_station.providers.all())
         random_point = random.choice(random_station.points.all())
 
-        #random_paymentOpt = random.choice(['Credit','Debit Card','Cash'])
+        random_paymentOpt = random.choice(['Credit','Debit Card','Cash'])
 
         session = cls.objects.create(
             customer = random_user,
@@ -561,7 +568,7 @@ class Session(models.Model):
             provider = random_provider,
             station = random_station,
             point = random_point,
-            #payment = random_paymentOpt,
+            payment = random_paymentOpt,
             connectionTime = kwargs['connectionTime'],
             disconnectTime = kwargs['disconnectTime'],
             doneChargingTime = kwargs['doneChargingTime'],
@@ -577,8 +584,26 @@ class Session(models.Model):
         
         session.userInputs.set(userinputs)
 
+        if session.paymentOpt == 'Credit':
+            is_paid=False
+        else:
+            is_paid=True
+        b = Bill.objects.create(customer = random_user,
+                                total = session.price,
+                                is_paid = is_paid)
+
+        if is_paid==False:
+            m = MonthlyBill.get_current(random_user)
+            m.update(session.price)
+            
         return session
         
+    @property
+    def price(self):
+        return (self.kWhDelivered)*(self.provider.costPerkWh)
+
+
+
 class UserInput(models.Model):
     session = models.ForeignKey(Session, related_name="userInputs", on_delete=models.CASCADE, null=True)
     customer = models.ForeignKey(User, related_name="inputs", on_delete=models.CASCADE, null=True)

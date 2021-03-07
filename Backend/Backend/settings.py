@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'eevie',
     'corsheaders',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -170,3 +171,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://192.168.1.9:3000',
     'http://192.168.1.16:3000'
 )
+
+CRONJOBS = [
+    ('* * 1 * *', 'eevie.cron.closeMonthlyBills')
+]
