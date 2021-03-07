@@ -138,7 +138,6 @@ def SessionsPerEV(request, pk, date_from, date_to):
         index += 1
         sessionslist.append(temp.copy())
 
-    
     ev_info['VehicleChargingSessionsList'] = sessionslist[:]
 
     return Response(ev_info, status=status.HTTP_200_OK)
@@ -178,8 +177,6 @@ def SessionsPerProvider(request, pk, date_from, date_to):
     provider_info['ProviderChargingSessionsList'] = sessionslist[:]
 
     return Response(provider_info, status=status.HTTP_200_OK)
-
-
 
 
 class UserViewSet(APIView): 
