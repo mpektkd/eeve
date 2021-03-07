@@ -20,8 +20,9 @@ urlpatterns = [
     path('healthcheck/', views.HealthCheckView.as_view(), name='healthcheck'),
     path('users/', views.UserViewSet.as_view()),
     re_path(r'^SessionsPerPoint/(?P<pk>\d+)/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to/$', views.SessionsPerPoint),
-    re_path(r'^SessionsPerPoint/<int:pk>/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to', views.SessionsPerStation),
-    # path(r'^SessionsPerStation/<int:stationsID>/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/$', )
+    re_path(r'^SessionsPerStation/(?P<pk>\d+)/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to', views.SessionsPerStation),
+    re_path(r'^SessionsPerEV/(?P<pk>\d+)/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to', views.SessionsPerEV),
+    re_path(r'^SessionsPerProvider/(?P<pk>\d+)/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to', views.SessionsPerProvider),
     #path('users/', views.UserViewSet.as_view())/$
     # path('article/', views.ArticleList.as_view()), #URL ./article/ is will be called
     # path('detail/<int:pk>/', views.ArticleDetail.as_view()), #URL ./detail/ is will be called with a primary key (pk)

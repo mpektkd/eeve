@@ -482,7 +482,7 @@ class Point(models.Model):
     protocol = models.CharField(max_length=20, default="Level 2 : Medium (Over 2kW)")
 
     def __str__(self):
-        return f"{self.quantity} connections with ports {self.ports.all()} and current type {self.current_type.all()}."
+        return f"{self.id} connections with ports {self.ports.all()} and current type {self.current_type.all()}."
 
  # Filled by stations.create
 class MediaTypes(models.Model):
@@ -542,7 +542,7 @@ class Session(models.Model):
     payment = models.CharField(max_length=10, choices=PAYMENT_OPTIONS, default=CASH,)
 
     def __str__(self):
-        return f"Charged with {self.provider.name} , transfered totally {self.kWhDelivered} KWh."
+        return f"Session with ID {self.id} Charged with {self.provider.name} , transfered totally {self.kWhDelivered} KWh."
     
     @classmethod
     def create(cls, **kwargs):
