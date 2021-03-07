@@ -27,3 +27,4 @@ urlpatterns = [
     # path('detail/<int:pk>/', views.ArticleDetail.as_view()), #URL ./detail/ is will be called with a primary key (pk)
     # path('generic/article/<int:pk>/', views.GenericAPIView.as_view()), #URL ./detail/ is will be called with a primary key (pk)
 ]
+#SessionsPerPoint/263271/2019901/2020803
