@@ -1,9 +1,10 @@
-from eevie.models import *
-from django.contrib.auth.models import User
+import django
 import pathlib
 import json,datetime
+from eevie.models import *
+from django.contrib.auth.models import User
 
-def setUpBrands(self):
+def setUpBrands():
         fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
         f = open(fpath)
         data = json.load(f)
@@ -12,7 +13,7 @@ def setUpBrands(self):
             b.save()
         f.close()
 
-def setUpCurrentType(self):
+def setUpCurrentType():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
     f = open(fpath)
     data = json.load(f)
@@ -22,7 +23,7 @@ def setUpCurrentType(self):
     f.close()
 
 
-def setUpPorts(self):
+def setUpPorts():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
     f = open(fpath)
     data = json.load(f)
@@ -32,7 +33,7 @@ def setUpPorts(self):
     f.close()
 
 
-def setUpAC(self):
+def setUpAC():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
     f = open(fpath)
     data = json.load(f)
@@ -40,7 +41,7 @@ def setUpAC(self):
         ac = ACcharger.create(**i['ac_charger'])
         ac.save()
 
-def setUpDC(self):
+def setUpDC():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
     f = open(fpath)
     data = json.load(f)
@@ -51,7 +52,7 @@ def setUpDC(self):
         dc.save()
     f.close()
 
-def setUpCarBase(self):
+def setUpCarBase():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
     f = open(fpath)
     data = json.load(f)
@@ -61,7 +62,7 @@ def setUpCarBase(self):
     f.close()
 
 
-def setUpUsageTypes(self):
+def setUpUsageTypes():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
     f = open(fpath)
     data = json.load(f)
@@ -70,7 +71,7 @@ def setUpUsageTypes(self):
         u.save()
     f.close()
 
-def setUpStatusTypes(self):
+def setUpStatusTypes():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
     f = open(fpath)
     data = json.load(f)
@@ -79,7 +80,7 @@ def setUpStatusTypes(self):
         u.save()
     f.close()
 
-def setUpAddressInfo(self):
+def setUpAddressInfo():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
     f = open(fpath)
     data = json.load(f)
@@ -89,7 +90,7 @@ def setUpAddressInfo(self):
             a.save()
     f.close()
 
-def setUpCheckinStatus(self):
+def setUpCheckinStatus():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
     f = open(fpath)
     data = json.load(f)
@@ -98,7 +99,7 @@ def setUpCheckinStatus(self):
         cst.save()
     f.close()
 
-def setUpStation(self):
+def setUpStation():
     gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
     g = open(gpath)
     data = json.load(g)
@@ -109,7 +110,7 @@ def setUpStation(self):
     g.close()
 
 
-def setUpUsers(self):
+def setUpUsers():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/users.json'
     f = open(fpath)
     data = json.load(f)
@@ -135,7 +136,7 @@ def setUpUsers(self):
     
     Car.create()
 
-def setUpSessions(self):
+def setUpSessions():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/sessions2.json' #Data/sessions2.json
     f = open(fpath)
     data = json.load(f)
@@ -143,3 +144,18 @@ def setUpSessions(self):
         s = Session.create(**i)
         s.save()
     f.close()
+
+
+setUpBrands()
+setUpCurrentType()
+setUpPorts()
+setUpAC()
+setUpDC()
+setUpCarBase()
+setUpUsageTypes()
+setUpStatusTypes()
+setUpAddressInfo()
+setUpCheckinStatus()
+setUpUsers()
+setUpStation()
+setUpSessions()

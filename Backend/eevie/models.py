@@ -5,7 +5,8 @@ from django.db.models.deletion import CASCADE, DO_NOTHING, PROTECT
 from django.db.models.fields import CharField, IntegerField, related
 from django.core.validators import MaxValueValidator, RegexValidator
 from django.utils import tree
-import random
+import random,calendar
+from datetime import datetime
 
 from . import validators
 
@@ -17,6 +18,7 @@ format_port = {
     "tesla_ccs": "CCS",
     "tesla_suc": "Tesla Supercharger"
 }
+
 
  # Customer
 class Customer(models.Model):
@@ -39,20 +41,16 @@ class Bill(models.Model):
  # Monthly Bill expires every 1st of month
 class MonthlyBill(models.Model):
     customer = models.ForeignKey(User, related_name="monthlybills", on_delete=models.CASCADE, null=True) # Many to One relationship with Customers
-    monthly_total = models.FloatField()
+    monthly_total = models.FloatField(default=0)
     start_date = models.DateField()
     end_date = models.DateField(null=True, default=None)
 
     def __str__(self):
-        return f"Monthly bill {self.start_date} to {self.end_date}."
+        return f"Monthly bill {self.start_date} to {self.end_date} belongs to {self.customer.username}."
 
     def get_current(user):
-        MonthlyBill.objects.filter(customer = user, end_date=None)
-
-    @property
-    def update(self, price):
-        self.monthly_total += price
-        self.save()
+        m = MonthlyBill.objects.get_or_create(customer = user, end_date=None)
+        return m.first()
 
  # Stored cards for customer
 class Card(models.Model):
@@ -584,18 +582,26 @@ class Session(models.Model):
         
         session.userInputs.set(userinputs)
 
-        if session.paymentOpt == 'Credit':
+        if random_paymentOpt == 'Credit':
             is_paid=False
         else:
             is_paid=True
         b = Bill.objects.create(customer = random_user,
                                 total = session.price,
                                 is_paid = is_paid)
-
         if is_paid==False:
-            m = MonthlyBill.get_current(random_user)
-            m.update(session.price)
-            
+            time = session.connectionTime
+            time = time[0:6]
+            date = datetime.strptime(time,'%Y-%m')
+            lastday = calendar.monthrange(date.year,date.month)[1]
+            start_date = str(date.year) + '-' + str(date.month) +'-01'
+            end_date = str(date.year) + '-' + str(date.month) + '-' + str(lastday)
+            m = MonthlyBill.objects.get_or_create(start_date = start_date, end_date = end_date , customer = random_user)
+            if m[1]:
+                m[0].save()
+            m[0].monthly_total = m[0].monthly_total+session.price
+            m[0].save()
+
         return session
         
     @property
