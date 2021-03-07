@@ -13,6 +13,7 @@ from django.db import connection
 from eevie.serializers import *
 from eevie.models import *
 import json,datetime
+from pytz import timezone
 from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 from django.db.models import Count, Sum
@@ -67,7 +68,7 @@ def SessionsPerPoint(request, pk, date_from, date_to):
     return Response(point_info, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def SessionsPerStation(request, pk, data_from, data_to):
+def SessionsPerStation(request, pk, date_from, date_to):
 
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
@@ -96,7 +97,7 @@ def SessionsPerStation(request, pk, data_from, data_to):
     return Response(station_info, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def SessionsPerEV(request, pk, data_from, data_to):
+def SessionsPerEV(request, pk, date_from, date_to):
     
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
@@ -143,7 +144,7 @@ def SessionsPerEV(request, pk, data_from, data_to):
     return Response(ev_info, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-def SessionsPerProvider(request, pk, data_from, data_to):
+def SessionsPerProvider(request, pk, date_from, date_to):
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
@@ -180,8 +181,6 @@ def SessionsPerProvider(request, pk, data_from, data_to):
 
 
 
-
-    
 
 class UserViewSet(APIView): 
     authentication_classes = ()
