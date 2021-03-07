@@ -19,7 +19,7 @@ urlpatterns = [
     path('refreshtoken/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('healthcheck/', views.HealthCheckView.as_view(), name='healthcheck'),
     path('users/', views.UserViewSet.as_view()),
-    re_path(r'^SessionsPerPoint/<int:pk>/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to', views.SessionsPerPoint),
+    re_path(r'^SessionsPerPoint/(?P<pk>\d+)/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to/$', views.SessionsPerPoint),
     re_path(r'^SessionsPerPoint/<int:pk>/(?P<date_from>[0-9]{8})_from/(?P<date_to>[0-9]{8})_to', views.SessionsPerStation),
     # path(r'^SessionsPerStation/<int:stationsID>/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})/$', )
     #path('users/', views.UserViewSet.as_view())/$
@@ -27,4 +27,4 @@ urlpatterns = [
     # path('detail/<int:pk>/', views.ArticleDetail.as_view()), #URL ./detail/ is will be called with a primary key (pk)
     # path('generic/article/<int:pk>/', views.GenericAPIView.as_view()), #URL ./detail/ is will be called with a primary key (pk)
 ]
-#SessionsPerPoint/263271/2019901/2020803
+#SessionsPerPoint/263271/20190901_from/20200803_to
