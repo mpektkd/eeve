@@ -99,6 +99,15 @@ def setUpCheckinStatus():
         cst.save()
     f.close()
 
+def setUpProviders():
+    fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/providers.json'
+    f = open(fpath)
+    data = json.load(f)
+    for i in data:
+        p = Provider.objects.create(**i)
+        p.save()
+    f.close()
+
 def setUpStation():
     gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
     g = open(gpath)
@@ -111,7 +120,7 @@ def setUpStation():
 
 
 def setUpUsers():
-    fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/users.json'
+    fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/userslarge.json'
     f = open(fpath)
     data = json.load(f)
     for i in data:
@@ -157,5 +166,6 @@ setUpStatusTypes()
 setUpAddressInfo()
 setUpCheckinStatus()
 setUpUsers()
+setUpProviders()
 setUpStation()
 setUpSessions()
