@@ -31,7 +31,7 @@ class CurrentUser(APIView):
 
 @api_view(['GET'])
 @renderer_classes([JSONRenderer,CSVRenderer])
-def SessionsPerPoint(request, pk, date_from, date_to, format):
+def SessionsPerPoint(request, pk, date_from, date_to):
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00" ##ισως χρειαστε να αλλαξω το date_from[4:6] με το μηδενικο
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
@@ -72,16 +72,10 @@ def SessionsPerPoint(request, pk, date_from, date_to, format):
 
     point_info['ChargingSessionsList'] = sessionslist[:]
 
-    # format = request.GET.get('format', None)
-    # if format == 'csv':
-    #     response = HttpResponse(content_type='text/csv')
-    #     response['Content-Disposition'] = 'attachment; filename="data.csv"'
-    #     pdObj = pd.read_json(point_info)
-    #     print(pdObj)
-
     return Response(point_info, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
+@renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerStation(request, pk, date_from, date_to):
 
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
@@ -111,6 +105,7 @@ def SessionsPerStation(request, pk, date_from, date_to):
     return Response(station_info, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
+@renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerEV(request, pk, date_from, date_to):
     
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
@@ -157,6 +152,7 @@ def SessionsPerEV(request, pk, date_from, date_to):
     return Response(ev_info, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
+@renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerProvider(request, pk, date_from, date_to):
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
