@@ -5,9 +5,10 @@ from rest_framework.authentication import TokenAuthentication,SessionAuthenticat
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.http import HttpResponse, response
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, renderer_classes
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_csv.renderers import JSONRenderer,CSVRenderer
 from django.shortcuts import get_object_or_404
 from django.db import connection
 from eevie.serializers import *
@@ -17,6 +18,8 @@ from pytz import timezone
 from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 from django.db.models import Count, Sum
+import pandas as pd
+import csv
 
 
 class CurrentUser(APIView):
@@ -27,7 +30,8 @@ class CurrentUser(APIView):
         return Response(serializer.data)
 
 @api_view(['GET'])
-def SessionsPerPoint(request, pk, date_from, date_to):
+@renderer_classes([JSONRenderer,CSVRenderer])
+def SessionsPerPoint(request, pk, date_from, date_to, format):
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00" ##ισως χρειαστε να αλλαξω το date_from[4:6] με το μηδενικο
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
@@ -67,6 +71,14 @@ def SessionsPerPoint(request, pk, date_from, date_to):
         sessionslist.append(temp.copy())
 
     point_info['ChargingSessionsList'] = sessionslist[:]
+
+    # format = request.GET.get('format', None)
+    # if format == 'csv':
+    #     response = HttpResponse(content_type='text/csv')
+    #     response['Content-Disposition'] = 'attachment; filename="data.csv"'
+    #     pdObj = pd.read_json(point_info)
+    #     print(pdObj)
+
     return Response(point_info, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
