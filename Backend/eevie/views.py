@@ -19,10 +19,12 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Count, Sum
 
 
-@api_view(['GET'])
-def current_user(request):
-    serializer = UserSerializer(request.user)
-    return Response(serializer.data)
+class CurrentUser(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self,request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
 
 @api_view(['GET'])
 def SessionsPerPoint(request, pk, date_from, date_to):
@@ -47,7 +49,7 @@ def SessionsPerPoint(request, pk, date_from, date_to):
     point_info['RequestTimesamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
     point_info['PeriodFrom'] = date_from[:-9]
     point_info['PeriodTo'] = date_to[:-9]
-    point_info['NumberOfChargingSessions'] = point.points.count()
+    point_info['NumberOfChargingSessions'] = sessions.count()
 
     sessionslist = [] 
     index = 1
