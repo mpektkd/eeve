@@ -247,7 +247,7 @@ class ResetSessions(APIView):
 
         Session.objects.all().delete()
         u = User.get_or_create(username = 'admin', password = 'petrol4ever', is_staff=True, is_superuser=True)
-        if not u[0]:
+        if not u[1]:
             u[0].delete()
             User.create(username = 'admin', password = 'petrol4ever', is_staff=True, is_superuser=True).save()
         else:
