@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.utils.functional import empty
 from rest_framework import viewsets,status,permissions
 from rest_framework.authentication import TokenAuthentication,SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from django.http import HttpResponse, response
 from rest_framework.decorators import api_view, permission_classes, renderer_classes
@@ -13,6 +14,7 @@ from django.shortcuts import get_object_or_404
 from django.db import connection
 from eevie.serializers import *
 from eevie.models import *
+from eevie.fill_db import setUpSessions
 import json,datetime
 from pytz import timezone
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -20,14 +22,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Count, Sum
 import pandas as pd
 import csv
-
-
-class CurrentUser(APIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self,request):
-        serializer = UserSerializer(request.user)
-        return Response(serializer.data)
 
 @api_view(['GET'])
 @renderer_classes([JSONRenderer,CSVRenderer])
@@ -237,5 +231,86 @@ class HealthCheckView(APIView):
                 raise Response({'status':'failed'})
         return Response({'status':'OK'})
 
+class CurrentUser(APIView):
+    permission_classes = (IsAuthenticated,)
 
+    def get(self,request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
+class ResetSessions(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self,request):
+        if not request.user.is_superuser:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        Session.objects.all().delete()
+        u = User.get_or_create(username = 'admin', password = 'petrol4ever', is_staff=True, is_superuser=True)
+        if not u[0]:
+            u[0].delete()
+            User.create(username = 'admin', password = 'petrol4ever', is_staff=True, is_superuser=True).save()
+        else:
+            u[0].save()
         
+        if not (Session.objects.all()):
+            return Response({'status': 'failed'})
+        return Response({'status' : 'OK'})
+            
+
+class RefillSessions(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self,request):
+        if not request.user.is_superuser:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        if not (Session.objects.all()):
+            setUpSessions()
+        else:
+            return Response({'status': 'AlreadyFilled'})
+
+        if not (Session.objects.all()):
+            return Response({'status' : 'Failed'})
+        return Response({'status':'SessionsFilled'})
+
+class InspectUser(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self,request, *args, **kwargs):
+        if not request.user.is_superuser:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        username = kwargs.get('username', None)
+
+        if username:
+            user = get_object_or_404(User, username=username)
+            return Response(InspectUserSerializer(user).data, status=status.HTTP_200_OK)
+        else:
+            return Response({'status':'failed', 'message':'NoUserProvided'},status=status.HTTP_404_NOT_FOUND)
+
+
+class UserMod(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        username = kwargs.get('username', None)
+        password = kwargs.get('password', None)
+
+        if (not username) or (not password):
+            return Response({'message':'No username or password provided'},status=status.HTTP_404_NOT_FOUND)
+
+        if User.objects.filter(username=username).exists():
+            u = User.objects.get(username=username)
+            print(password)
+            u.set_password(password)
+            u.save()
+            return Response({'message':'Password successfully changed.'}, status=status.HTTP_200_OK)
+        
+        else:
+            u = User.objects.create(username=username)
+            u.set_password(password)
+            u.save()
+            return Response({'message':'User successfully created'}, status=status.HTTP_200_OK)

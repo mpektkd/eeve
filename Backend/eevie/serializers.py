@@ -21,6 +21,12 @@ class UserSerializer(serializers.ModelSerializer):
         Customer.objects.create(user=instance,has_expired_bills=False)
         return instance
 
+class InspectUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+        extra_kwargs = {'password': {'write_only': True}}
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
