@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react components for routing our app without refresh
@@ -29,35 +29,43 @@ import SectionExamples from "./Sections/SectionExamples.js";
 import SectionDownload from "./Sections/SectionDownload.js";
 
 import styles from "assets/jss/material-kit-react/views/components.js";
-import {
-  withGoogleMap,
-  withScriptjs,
-  GoogleMap,
-  Marker,
-  InfoWindow
-} from "react-google-maps";
-import mapStyles from "./mapStyles";
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import * as parkDate from "./data/skateboard-parks.json";
+import evStation from "assets/img/logo.png";
+
+
 
 
 
 const useStyles = makeStyles(styles);
 
-function Map() {
-    return (
-      <GoogleMap
-        defaultZoom={10}
-        defaultCenter={{ lat: 45.4211, lng: -75.6903 }}
-        defaultOptions={{ styles: mapStyles }}
-      >
-      </GoogleMap>
-    );
-  }
 
-  const MapWrapped = withScriptjs(withGoogleMap(Map));
-
-export default function Components(props) {
+export default function Map (props) {
   const classes = useStyles();
   const { ...rest } = props;
+  const [viewPort, setViewPort] = useState ({
+    latitude: 45.4211,
+    longitude: -75.6903,
+    width: "100vw",
+    height: "100vh",
+    zoom: 10
+  });
+  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
+  const [selectedPark, setSelectedPark] = useState(null);
+
+  useEffect(() => {
+    const listener = e => {
+      if (e.key === "Escape") {
+        setSelectedPark(null);
+      }
+    };
+    window.addEventListener("keydown", listener);
+
+    return () => {
+      window.removeEventListener("keydown", listener);
+    };
+  }, []);
   return (
     <div>
       <Header
@@ -72,13 +80,52 @@ export default function Components(props) {
 
       <div className={classNames(classes.main)}>
         <div style={{ width: "100vw", height: "100vh" }}>
-      <MapWrapped
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBGTgwWi7-D6Jumc7LHb47BKJp6dTWPwH4`}
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `100%` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
-    </div>
+            <ReactMapGL
+            {...viewPort}
+            mapboxApiAccessToken={"pk.eyJ1Ijoic2hlZXJvIiwiYSI6ImNrbTFpcDVkbzJ4YjIycHAzaTJvbWtyOXYifQ.kjOwXg39LGtrcvUyJcqdSQ"}
+            mapStyle= "mapbox://styles/sheero/ckm1kpvfa96u817pnkcqpvj8z"
+            onViewportChange={viewPort => {
+            setViewPort(viewPort);
+            }}
+      >
+            {parkDate.features.map(park => (
+          <Marker
+            key={park.properties.PARK_ID}
+            latitude={park.geometry.coordinates[1]}
+            longitude={park.geometry.coordinates[0]}
+          >
+            <button
+              className="marker-btn"
+              onClick={e => {
+                e.preventDefault();
+                setSelectedPark(park);
+              }}
+            >
+              <img
+                 alt="..."
+                 src={evStation}
+                 className={navImageClasses}
+                    />
+            </button>
+          </Marker>
+        ))}
+
+        {selectedPark ? (
+          <Popup
+            latitude={selectedPark.geometry.coordinates[1]}
+            longitude={selectedPark.geometry.coordinates[0]}
+            onClose={() => {
+              setSelectedPark(null);
+            }}
+          >
+            <div>
+              <h2>{selectedPark.properties.NAME}</h2>
+              <p>{selectedPark.properties.DESCRIPTIO}</p>
+            </div>
+          </Popup>
+        ) : null}
+           </ReactMapGL>
+        </div>
       </div>
       <Footer />
     </div>
