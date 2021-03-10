@@ -80,15 +80,15 @@ def setUpStatusTypes():
         u.save()
     f.close()
 
-def setUpAddressInfo():
-    fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
-    f = open(fpath)
-    data = json.load(f)
-    for i in data:
-        a = AddressInfo.create(**i['AddressInfo'])
-        if a != None:
-            a.save()
-    f.close()
+# def setUpAddressInfo():
+#     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
+#     f = open(fpath)
+#     data = json.load(f)
+#     for i in data:
+#         a = AddressInfo.create(**i['AddressInfo'])
+#         if a != None:
+#             a.save()
+#     f.close()
 
 def setUpCheckinStatus():
     fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/reference2.json'
@@ -163,7 +163,7 @@ def setUpSessions():
 # setUpCarBase()
 # setUpUsageTypes()
 # setUpStatusTypes()
-# setUpAddressInfo()
+# # setUpAddressInfo()
 # setUpCheckinStatus()
 # setUpUsers()
 # setUpProviders()

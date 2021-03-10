@@ -458,14 +458,12 @@ class Station(models.Model):
     
     @classmethod
     def update(cls, **kwargs):
-
-        i = kwargs['ID']
-        j = kwargs['AddressInfo']['ID']
+        i = kwargs["ID"]
+        j = kwargs["AddressInfo"]["ID"]
 
         station = Station.objects.get(id=int(i))
         address = AddressInfo.objects.get(id=int(j))
-        # print(address)
-        station.update(addressInfo=address)
+        station.addressInfo=address
         station.save()
 
     @property
