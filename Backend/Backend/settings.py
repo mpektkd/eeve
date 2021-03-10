@@ -33,7 +33,8 @@ ALLOWED_HOSTS = [
     '192.168.1.9',
     '0.0.0.0',
     '127.0.0.1',
-    'localhost'
+    'localhost',
+    '192.168.2.4'
 ]
 
 
@@ -143,7 +144,6 @@ DATE_INPUT_FORMATS = ['%d-%m-%Y']
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.IsAdminUser'
     ),
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -170,7 +170,8 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://0.0.0.0:3000',
     'http://192.168.1.9:3000',
-    'http://192.168.1.16:3000'
+    'http://192.168.1.16:3000',
+    
 )
 
 CRONJOBS = [

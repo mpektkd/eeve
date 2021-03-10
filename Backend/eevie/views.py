@@ -1,15 +1,18 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.utils.functional import empty
+from django.http import HttpResponse, response
 from rest_framework import viewsets,status,permissions
 from rest_framework.authentication import TokenAuthentication,SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.renderers import MultiPartRenderer
 from rest_framework.response import Response
-from django.http import HttpResponse, response
-from rest_framework.decorators import api_view, permission_classes, renderer_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes, renderer_classes
 from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_csv.renderers import JSONRenderer,CSVRenderer
+from rest_framework_simplejwt.tokens import RefreshToken
 from django.shortcuts import get_object_or_404
 from django.db import connection
 from eevie.serializers import *
@@ -17,15 +20,14 @@ from eevie.models import *
 from eevie.fill_db import setUpSessions
 import json,datetime
 from pytz import timezone
-from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 from django.db.models import Count, Sum
-import pandas as pd
 import csv
 
 @api_view(['GET'])
 @renderer_classes([JSONRenderer,CSVRenderer])
-def SessionsPerPoint(request, pk, date_from, date_to):
+def SessionsPerPoint(request, pk, date_from, date_to):        
+        
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00" ##ισως χρειαστε να αλλαξω το date_from[4:6] με το μηδενικο
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
@@ -199,7 +201,7 @@ class ObtainTokenPairWithUsernameView(TokenObtainPairView):     #refresh and acc
     serializer_class = MyTokenObtainPairSerializer
 
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = ()
 
     def post(self, request):
@@ -207,7 +209,7 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
             refresh_token = request.data["refresh"]
             token = RefreshToken(refresh_token)
             token.blacklist()
-            return Response(status=status.HTTP_205_RESET_CONTENT)
+            return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -314,3 +316,22 @@ class UserMod(APIView):
             u.set_password(password)
             u.save()
             return Response({'message':'User successfully created'}, status=status.HTTP_200_OK)
+
+class SessionsUpd(APIView):
+    parser_classes = [MultiPartParser]
+
+    def post(self, request):
+        file = request.FILES['file']
+        reader = csv.reader(file)
+        i = True
+        for row in reader:
+            if i:
+                i = False
+                continue
+            provider = get_object_or_404(Provider, id = row[0])
+            user = get_object_or_404(User, id = row[1])
+            vehicle = get_object_or_404(Car, id=row[2])
+            station = get_object_or_404(Station, id=row[3])
+            Session.objects.create(
+
+            )

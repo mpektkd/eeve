@@ -370,6 +370,10 @@ class Station(models.Model):
 # kwargs is data
     @classmethod
     def create(cls,**kwargs):
+        addressI = AddressInfo.create(**kwargs['AddressInfo'])
+        if addressI != None:
+                addressI.save()
+
         check = Station.objects.filter(id = kwargs['ID'])
         if check:
             return None
@@ -378,6 +382,7 @@ class Station(models.Model):
             id = kwargs['ID'],
             generalComments = kwargs['GeneralComments'],
             usageCost = kwargs['UsageCost'],
+            addressInfo= addressI
             )
 
         station.providers.add(random.choice(Provider.objects.all()))
@@ -429,12 +434,6 @@ class Station(models.Model):
             statustype = StatusType.objects.get(id=kwargs['StatusTypeID'])
             station.statusType.add(statustype)
 
-        addressInfo = AddressInfo.create(**kwargs['AddressInfo'])
-        if addressInfo != None:
-                addressInfo.save()
-        
-        station.addressInfo = addressInfo
-
         if kwargs['UserComments'] != None:
             for i in kwargs['UserComments']:
                 ucomm = UserComments.objects.create(
@@ -456,6 +455,18 @@ class Station(models.Model):
                     m[0].save()
 
         return station
+    
+    @classmethod
+    def update(cls, **kwargs):
+
+        i = kwargs['ID']
+        j = kwargs['AddressInfo']['ID']
+
+        station = Station.objects.get(id=int(i))
+        address = AddressInfo.objects.get(id=int(j))
+        # print(address)
+        station.update(addressInfo=address)
+        station.save()
 
     @property
     def rating(self):
