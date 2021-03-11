@@ -83,7 +83,7 @@ export default function Map (props) {
             <ReactMapGL
             {...viewPort}
             mapboxApiAccessToken={"pk.eyJ1Ijoic2hlZXJvIiwiYSI6ImNrbTFpcDVkbzJ4YjIycHAzaTJvbWtyOXYifQ.kjOwXg39LGtrcvUyJcqdSQ"}
-            mapStyle= "mapbox://styles/sheero/ckm1kpvfa96u817pnkcqpvj8z"
+            mapStyle= "mapbox://styles/mapbox/dark-v10"
             onViewportChange={viewPort => {
             setViewPort(viewPort);
             }}
@@ -95,6 +95,7 @@ export default function Map (props) {
             longitude={park.geometry.coordinates[0]}
           >
             <button
+              style = { { backgroundColor: "transparent", border: "none" } }
               className="marker-btn"
               onClick={e => {
                 e.preventDefault();
