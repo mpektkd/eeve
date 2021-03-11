@@ -77,10 +77,17 @@ class BillSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brands
+        fields = ['name']
+
 class CarSerializer(serializers.ModelSerializer):
+    brandName = ReadOnlyField(source='brand.name')
+
     class Meta:
         model = CarBase
-        fields = '__all__'
+        fields = ['id','brandName','model']
 
 class MyCarSerializer(serializers.ModelSerializer):
     car = CarSerializer()
