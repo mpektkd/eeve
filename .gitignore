@@ -1,5 +1,5 @@
 Frontend/
 .bak/
 eevie/__pycache__/
-eevie/migrations/
+migrations/
 __pycache__/
