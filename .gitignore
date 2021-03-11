@@ -2,3 +2,4 @@ Frontend/
 .bak/
 eevie/__pycache__/
 eevie/migrations/
+__pycache__/
