@@ -203,11 +203,11 @@ class CarBase(models.Model):
 
 class Car(models.Model):
     id = models.AutoField(primary_key=True)
-    car = models.ForeignKey(CarBase, on_delete=models.DO_NOTHING, null=True)
+    car = models.ForeignKey(CarBase, related_name="carbase",on_delete=models.DO_NOTHING, null=True)
     customer = models.ForeignKey(User, related_name="cars", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"Car with ID: {self.id} belongs to {self.customer.username}."
+        return f"Car: {self.id} belongs to {self.customer.id}."
 
     @classmethod
     def create(cls, **kwargs):
@@ -365,7 +365,7 @@ class Station(models.Model):
     generalComments = models.CharField(max_length=1000, null=True, blank=True) 
     
     def __str__(self):
-        return f"Station with  {self.id} at {self.addressInfo}."
+        return f"Station: {self.id}, Provider:{self.providers.all().first().name}"
 
 # kwargs is data
     @classmethod
@@ -491,7 +491,7 @@ class Point(models.Model):
     protocol = models.CharField(max_length=20, default="Level 2 : Medium (Over 2kW)")
 
     def __str__(self):
-        return f"{self.id} connections with ports {self.ports.all()} and current type {self.current_type.all()}."
+        return f"Point: {self.id}"
 
  # Filled by stations.create
 class MediaTypes(models.Model):

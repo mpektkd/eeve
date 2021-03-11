@@ -26,7 +26,8 @@ urlpatterns = [
     path('admin/resetsessions/', views.ResetSessions.as_view()),
     path('admin/refillsessions/', views.RefillSessions.as_view()),
     path('admin/users/<str:username>/', views.InspectUser.as_view()),
-    path('admin/usermod/<str:username>/<str:password>/', views.UserMod.as_view())
+    path('admin/usermod/<str:username>/<str:password>/', views.UserMod.as_view()),
+    path('admin/system/sessionsupd/', views.SessionsUpd.as_view())
     #path('users/', views.UserViewSet.as_view())/$
     # path('article/', views.ArticleList.as_view()), #URL ./article/ is will be called
     # path('detail/<int:pk>/', views.ArticleDetail.as_view()), #URL ./detail/ is will be called with a primary key (pk)

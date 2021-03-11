@@ -17,12 +17,12 @@ from django.shortcuts import get_object_or_404
 from django.db import connection
 from eevie.serializers import *
 from eevie.models import *
-from eevie.fill_db import setUpSessions
+from fill_db import setUpSessions
 import json,datetime
 from pytz import timezone
 # Create your views here.
 from django.db.models import Count, Sum
-import csv
+import codecs, csv
 
 @api_view(['GET'])
 @renderer_classes([JSONRenderer,CSVRenderer])
@@ -316,22 +316,19 @@ class UserMod(APIView):
             u.set_password(password)
             u.save()
             return Response({'message':'User successfully created'}, status=status.HTTP_200_OK)
-
 class SessionsUpd(APIView):
-    parser_classes = [MultiPartParser]
+    # parser_classes = [MultiPartParser]
 
     def post(self, request):
-        file = request.FILES['file']
-        reader = csv.reader(file)
-        i = True
-        for row in reader:
-            if i:
-                i = False
-                continue
-            provider = get_object_or_404(Provider, id = row[0])
-            user = get_object_or_404(User, id = row[1])
-            vehicle = get_object_or_404(Car, id=row[2])
-            station = get_object_or_404(Station, id=row[3])
+        data = csv.DictReader(codecs.iterdecode(request.FILES['data_file'], 'utf-8'))
+        # print(data)
+        for row in data:
+            provider = get_object_or_404(Provider, id = row['ProviderID'])
+            user = get_object_or_404(User, id = row['UserID'])
+            vehicle = get_object_or_404(Car, id=row['VehicleID'])
+            station = get_object_or_404(Station, id=row['StationID'])
+            point = get_object_or_404(Point, id=row['PointID'])
             Session.objects.create(
 
             )
+        return Response({'message':'Sessions Successfully Added'}, status=status.HTTP_200_OK)
