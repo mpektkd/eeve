@@ -1,4 +1,14 @@
 Frontend/
 .bak/
 front-end/node_modules/
-.DS_Store/
+.env.local/
+../.DS_Store
+.DS_Store
+.env.local
+build/
+src/.DS_Store
+src/assets/.DS_Store
+src/assets/img/.DS_Store
+src/views/.DS_Store
+src/views/Map/.DS_Store
+src/views/Map/data/

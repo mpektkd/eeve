@@ -65,6 +65,7 @@ export default function HeaderLinks(props) {
   
          <ListItem className={classes.listItem}>
           <CustomDropdown
+            dropDownCar = {false}
             noLiPadding
             buttonText="Options"
             buttonProps={{

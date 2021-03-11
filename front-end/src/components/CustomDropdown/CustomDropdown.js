@@ -37,6 +37,14 @@ export default function CustomDropdown(props) {
       props.onClick(param);
     }
   };
+  const handleItemClick = param => {
+    localStorage.setItem("carForSignUp", param.id)
+    setAnchorEl(null);
+    if (props && props.onClick) {
+      props.onClick(param);
+    }
+  };
+
   const handleCloseAway = event => {
     if (anchorEl.contains(event.target)) {
       return;
@@ -45,6 +53,7 @@ export default function CustomDropdown(props) {
   };
   const classes = useStyles();
   const {
+    dropDownCar,
     buttonText,
     buttonIcon,
     dropdownList,
@@ -80,6 +89,104 @@ export default function CustomDropdown(props) {
       icon = null;
       break;
   }
+  if (dropDownCar) {
+    return (
+      <div>
+        <div>
+          <Button
+            aria-label="Notifications"
+            aria-owns={anchorEl ? "menu-list" : null}
+            aria-haspopup="true"
+            {...buttonProps}
+            onClick={handleClick}
+          >
+            {icon}
+            {buttonText !== undefined ? buttonText : null}
+            {caret ? <b className={caretClasses} /> : null}
+          </Button>
+        </div>
+        <Popper
+          open={Boolean(anchorEl)}
+          anchorEl={anchorEl}
+          transition
+          disablePortal
+          placement={
+            dropup
+              ? left
+                ? "top-start"
+                : "top"
+              : left
+              ? "bottom-start"
+              : "bottom"
+          }
+          className={classNames({
+            [classes.popperClose]: !anchorEl,
+            [classes.popperResponsive]: true
+          })}
+        >
+          {() => (
+            <Grow
+              in={Boolean(anchorEl)}
+              id="menu-list"
+              style={
+                dropup
+                  ? { transformOrigin: "0 100% 0" }
+                  : { transformOrigin: "0 0 0" }
+              }
+            >
+              <Paper className={classes.dropdown2}>
+                <ClickAwayListener onClickAway={handleCloseAway}>
+                  <MenuList role="menu" className={classes.menuList}>
+                    {dropdownHeader !== undefined ? (
+                      <MenuItem
+                        onClick={() => handleClose(dropdownHeader)}
+                        className={classes.dropdownHeader}
+                      >
+                        {dropdownHeader}
+                      </MenuItem>
+                    ) : null}
+                    {dropdownList.map((prop, key) => {
+                      if (prop.divider) {
+                        return (
+                          <Divider
+                            key={key}
+                            onClick={() => handleClose("divider")}
+                            className={classes.dropdownDividerItem}
+                          />
+                        );
+                      }
+                      if (dropDownCar) {
+                        return (
+                          <MenuItem
+                            key={key}
+                            onClick={() => handleItemClick(prop)}
+                            className={dropdownItem}
+                          >
+                            {prop.name}
+                          </MenuItem>
+                        );
+                      }
+                      else 
+                      return (
+                        <MenuItem
+                          key={key}
+                          onClick={() => handleClose(prop)}
+                          className={dropdownItem}
+                        >
+                          {prop}
+                        </MenuItem>
+                      );
+                    })}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      </div>
+    );
+  }
+  else {
   return (
     <div>
       <div>
@@ -145,6 +252,18 @@ export default function CustomDropdown(props) {
                         />
                       );
                     }
+                    if (dropDownCar) {
+                      return (
+                        <MenuItem
+                          key={key}
+                          onClick={() => handleItemClick(prop)}
+                          className={dropdownItem}
+                        >
+                          {prop.name}
+                        </MenuItem>
+                      );
+                    }
+                    else 
                     return (
                       <MenuItem
                         key={key}
@@ -163,6 +282,7 @@ export default function CustomDropdown(props) {
       </Popper>
     </div>
   );
+  }
 }
 
 CustomDropdown.defaultProps = {
@@ -171,6 +291,7 @@ CustomDropdown.defaultProps = {
 };
 
 CustomDropdown.propTypes = {
+  dropDownCar: PropTypes.bool,
   hoverColor: PropTypes.oneOf([
     "black",
     "primary",

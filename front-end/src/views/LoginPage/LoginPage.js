@@ -50,7 +50,6 @@ export default function LoginPage(props) {
   const usernameProps = ["kwstas"];
 
   const onSubmit = (e) => {
-  
     try {
       const response = axiosInstance.post('login/', {
         username: e.username,
@@ -63,10 +62,8 @@ export default function LoginPage(props) {
         axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
         localStorage.setItem('access_token', res.data.access);
         localStorage.setItem('refresh_token', res.data.refresh); 
-        console.log("iam here");
         const timer = setTimeout(()=> {
           setLoggedIn(true);
-          console.log("SKASE");
         }, 800);
        })
        .catch(error => {
