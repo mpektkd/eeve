@@ -467,17 +467,22 @@ class Station(models.Model):
         station.save()
 
     @property
+    def getID(self):
+        return self.id
+
+    @property
     def rating(self):
         count=0
         rating=0
-        allComms = UserComments.objects.select_related('rating').filter(station__id=self.id)
+        allComms = UserComments.objects.select_related('station').filter(station__id=self.id)
         
         for i in allComms:
             if i.rating != None:
                 rating += i.rating
                 count += 1
-        
-        return rating/count
+        if count==0:
+            return (0,0)
+        return (rating/count, count)
 
 class Point(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -486,7 +491,7 @@ class Point(models.Model):
     powerKW = models.FloatField(null=True)
     quantity = models.IntegerField(null=True)
     status_type = models.ManyToManyField(StatusType, blank=True) #One status type to many connections
-    station = models.ForeignKey(Station, related_name="points", on_delete=models.DO_NOTHING, null=True)
+    station = models.ForeignKey(Station, related_name="comments", on_delete=models.DO_NOTHING, null=True)
     ports = models.ManyToManyField(Ports, related_name="exist_at")
     protocol = models.CharField(max_length=20, default="Level 2 : Medium (Over 2kW)")
 

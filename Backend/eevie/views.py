@@ -4,7 +4,7 @@ from django.utils.functional import empty
 from django.http import HttpResponse, response
 from rest_framework import viewsets,status,permissions
 from rest_framework.authentication import TokenAuthentication,SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.renderers import MultiPartRenderer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes, renderer_classes
@@ -185,19 +185,35 @@ def SessionsPerProvider(request, pk, date_from, date_to):
     return Response(provider_info, status=status.HTTP_200_OK)
 
 
-class UserViewSet(APIView): 
+class UserView(APIView): 
     authentication_classes = ()
     permission_classes = (permissions.AllowAny,)
 
     def post(self,request,format=None):
         serializer = UserSerializer(data=request.data)
+        print(request.data['username'])
         if serializer.is_valid():
             serializer.save()
+            car = CarBase.objects.filter(id=request.data['car_id'])
+            user = User.objects.filter(username=request.data['username'])
+            if not user:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            if car:
+                Car.objects.create(car=car.first(), customer=user.first())
+                
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class DeleteMe(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self,request):
+        request.user.delete()
+        return Response({'message':'User successfully deleted.'}, status=status.HTTP_200_OK)
+
 class ObtainTokenPairWithUsernameView(TokenObtainPairView):     #refresh and access token
     permission_classes = (permissions.AllowAny,)
+    authentication_classes = []
     serializer_class = MyTokenObtainPairSerializer
 
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
@@ -316,6 +332,7 @@ class UserMod(APIView):
             u.set_password(password)
             u.save()
             return Response({'message':'User successfully created'}, status=status.HTTP_200_OK)
+
 class SessionsUpd(APIView):
     # parser_classes = [MultiPartParser]
 
@@ -332,3 +349,30 @@ class SessionsUpd(APIView):
 
             )
         return Response({'message':'Sessions Successfully Added'}, status=status.HTTP_200_OK)
+
+ 
+class GetCars(APIView):
+    permission_classes=(AllowAny,)
+
+    def get(self,request):
+        cars = CarBase.objects.all()
+        
+        serialized = CarSerializer(cars, many=True)
+
+        return Response(serialized.data)
+
+class MyCars(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self,request):
+        serializer = MyCarSerializer(request.user.cars,many=True)
+
+        return Response(serializer.data)
+
+class MyBills(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self,request):
+        serializer = BillSerializer(request.user.bills,many=True)
+
+        return Response(serializer.data)

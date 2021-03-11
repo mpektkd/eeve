@@ -77,3 +77,14 @@ class BillSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 
+class CarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CarBase
+        fields = '__all__'
+
+class MyCarSerializer(serializers.ModelSerializer):
+    car = CarSerializer()
+    
+    class Meta:
+        model = Car
+        fields = '__all__'
