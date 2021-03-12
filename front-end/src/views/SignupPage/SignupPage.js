@@ -91,7 +91,7 @@ export default function LoginPage(props) {
       .catch(error => {
         console.log(error)
       })
-  });
+  }, []);
 
 
   const onSubmit = (e) => {
