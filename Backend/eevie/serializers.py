@@ -48,7 +48,6 @@ class CustomerSerializer(serializers.ModelSerializer):
        return data
 
     def create(self, validated_data):
-        print("OMG")
         user_data = validated_data.pop('user')
         password = user_data.pop('password')
         user = User(**user_data)
@@ -61,7 +60,6 @@ class CustomerSerializer(serializers.ModelSerializer):
         return customer
 
     def update(self, instance, validated_data):
-        print("LOCO")
         user_data = validated_data.pop('user')
         user = UserSerializer()
         super(CustomerSerializer,self).update(instance,validated_data)
@@ -76,6 +74,12 @@ class BillSerializer(serializers.ModelSerializer):
         model=Bill
         fields='__all__'
 
+class MonthlyBillSerializer(serializers.ModelSerializer):
+    customer = ReadOnlyField(source='customer.id')
+
+    class Meta:
+        model=MonthlyBill
+        fields='__all__'
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:

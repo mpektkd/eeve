@@ -391,6 +391,7 @@ class MyCars(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self,request):
+        
         serializer = MyCarSerializer(request.user.cars,many=True)
 
         return Response(serializer.data)
@@ -399,6 +400,18 @@ class MyBills(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self,request):
+
         serializer = BillSerializer(request.user.bills,many=True)
 
         return Response(serializer.data)
+
+
+class MyMonthlyBills(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self,request):
+
+        serializer = MonthlyBillSerializer(request.user.monthlybills,many=True)
+
+        return Response(serializer.data)
+
