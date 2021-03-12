@@ -401,7 +401,7 @@ class MyBills(APIView):
 
     def get(self,request):
 
-        serializer = BillSerializer(request.user.bills.filter(is_paid=False),many=True)
+        serializer = BillSerializer(request.user.bills,many=True)
 
         return Response(serializer.data)
 
@@ -410,7 +410,9 @@ class MyMonthlyBills(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self,request):
-
+        
+        user = request.user
+        customer = user.customer
         serializer = MonthlyBillSerializer(request.user.monthlybills.filter(),many=True)
 
         return Response(serializer.data)
@@ -489,7 +491,7 @@ class getStations(APIView):
 
     def get(self, request):
 
-        points = Station.objects.all()
-        serializer = PointSerializer(points, many=True)
+        stations = Station.objects.all()
+        serializer = PointSerializer(stations, many=True)
     
         return Response(serializer.data, status=status.HTTP_200_OK)

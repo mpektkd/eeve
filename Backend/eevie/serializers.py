@@ -144,12 +144,13 @@ class StationSerializer(serializers.ModelSerializer):
 
     addressInfo = AddressSerializer()
     providers = ProviderSerializer(many=True)
-    comments = PointSerializer(many=True)
+    # comments = PointSerializer(many=True)
     # comments.ports = PortSerializer(many=True)
 
     class Meta:
         model=Station
         fields='__all__'
+        depth = 1
 
 # class PointSerializer(serializers.ModelSerializer):
 
