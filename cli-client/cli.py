@@ -1,5 +1,8 @@
 import argparse
 import textwrap
+import json
+import requests
+import os
 
 def msg(name=None):                                                            
     return "General Usage:ev_group13 SCOPE --param1 value1 [--param2 value2 ...]--format fff --apikey kkk\n"
@@ -31,9 +34,9 @@ healthcheck = subparser.add_parser('healthcheck', parents = [parent_parser],usag
 resetsessions = subparser.add_parser('resetsessions',parents = [parent_parser],usage = "ev_group13 resetsessions --format fff --apikey kkk\n")
 login = subparser.add_parser('login',parents = [parent_parser],usage = "ev_group13 login --username USERNAME --passw PASSWORD --format fff --apikey kkk\n")
 logout = subparser.add_parser('logout',parents = [parent_parser],usage = "ev_group13 logout --format fff --apikey kkk\n")
-SessionsPerPoint = subparser.add_parser('SessionsPerPoint',parents = [parent_parser],usage = "ev_group13 SessionsPerPoint --point POINT --datefrom DATEFROM --dateto DATETO --format fff --apikey kkk\n")
-SessionsPerStation = subparser.add_parser('SessionsPerStation',parents = [parent_parser],usage = "ev_group13 SessionsPerStation --station STATION --datefrom DATEFROM --dateto DATETO --format fff --apikey kkk\n")
-SessionsPerEV = subparser.add_parser('SessionsPerEV',parents = [parent_parser],usage = "ev_group13 SessionsPerEV --ev EV --datefrom DATEFROM --dateto DATETO --format fff --apikey kkk\n")
+SessionsPerPoint = subparser.add_parser('SessionsPerPoint',parents = [parent_parser],usage = "ev_group13 SessionsPerPoint --point POINT --datefrom YYMMDD --dateto YYMMDD --format fff --apikey kkk\n")
+SessionsPerStation = subparser.add_parser('SessionsPerStation',parents = [parent_parser],usage = "ev_group13 SessionsPerStation --station STATION --datefrom YYMMDD --dateto YYMMDD --format fff --apikey kkk\n")
+SessionsPerEV = subparser.add_parser('SessionsPerEV',parents = [parent_parser],usage = "ev_group13 SessionsPerEV --ev EV --datefrom YYMMDD --dateto YYMMDD --format fff --apikey kkk\n")
 SessionsPerProvider = subparser.add_parser('SessionsPerProvider',parents = [parent_parser],usage = "ev_group13 SessionsPerProvider --provider PROVIDER --datefrom DATEFROM --dateto DATETO --format fff --format fff --apikey kkk\n")
 Admin = subparser.add_parser('Admin',parents = [parent_parser],usage="ev_group13 Admin --MainParameter --Subparameters --format fff --apikey kkk\n")
 
@@ -44,9 +47,10 @@ login_required = login.add_argument_group('login required arguments')
 login_required.add_argument('--username', type=str, required=True)
 login_required.add_argument('--passw', type=str, required=True)
 
-SessionsPerPoint.add_argument('--point', type=str, required=True)
-SessionsPerPoint.add_argument('--datefrom', type=str, required=True)
-SessionsPerPoint.add_argument('--dateto', type=str, required=True)
+SessionsPerPoint_required = SessionsPerPoint.add_argument_group('SessionsPerpoint required arguments')
+SessionsPerPoint_required.add_argument('--point', type=str, required=True)
+SessionsPerPoint_required.add_argument('--datefrom', type=str, required=True)
+SessionsPerPoint_required.add_argument('--dateto', type=str, required=True)
 
 SessionsPerStation.add_argument('--station',type=str,required=True)
 SessionsPerStation.add_argument('--datefrom', type=str, required=True)
@@ -76,21 +80,50 @@ args = parser.parse_args()
 
 
 if args.command == 'healthcheck':
-    print("healthcheckapi")
+    print(requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/healthcheck/").json())
 elif args.command == 'resetsessions':
     print('resetsessionsapi')
+    if args.format == 'csv': print('csv')
+    else: print('json')
 elif args.command == 'login':
-    print("loginapi\nToken must be saved at {HOME}/softeng20bAPI.token")
+    params = {
+    "username": args.username,
+    "password": args.passw
+    }
+    if os.path.exists("softeng20bAPI.token"):
+        print("You are already logged in!")
+    else:
+        f = open("softeng20bAPI.token","w")
+        json_object = requests.post("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/login/",json=params).json()
+        f.write(json.dumps(json_object))
+        
+    
 elif args.command == 'logout':
-    print("logoutapi\nsession token must be deleted")
+    f = open("softeng20bAPI.token")
+    token_value = json.load(f) 
+    header = {"Authorization" : "JWT " + token_value["access"] }
+    r = requests.post("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/logout/",headers=header,json=token_value)
+    if r.ok:
+        print("Bye")
+        os.remove("softeng20bAPI.token")
+    else:
+        print(str(r.status_code)+" " + r.reason)      
 elif args.command == 'SessionsPerPoint':
     print("/sessionsperpoint")
+    if args.format == 'csv': print('csv')
+    else: print('json')
 elif args.command == 'SessionsPerStation':
     print("/sessionsperstation")
+    if args.format == 'csv': print('csv')
+    else: print('json')
 elif args.command == 'SessionsPerEV':
     print("/sessionsperEV")
+    if args.format == 'csv': print('csv')
+    else: print('json')
 elif args.command == 'SessionsPerProvider':
     print("/sessionsperProvider")
+    if args.format == 'csv': print('csv')
+    else: print('json')
 elif args.command == 'Admin':
     usermod = args.usermod and args.username and args.passw  and (not(args.users or args.sessionsupd or args.source or args.healthcheck or args.resetsessions))
     users = args.users and args.username and (not(args.usermod or args.passw or args.sessionsupd or args.source or args.healthcheck or args.resetsessions))
@@ -98,11 +131,26 @@ elif args.command == 'Admin':
     healthcheck = args.healthcheck and (not(args.usermod or args.username or args.passw or args.users or args.sessionsupd or args.source or args.resetsessions))
     resetsessions = args.resetsessions and (not(args.usermod or args.username or args.passw or args.users or args.sessionsupd or args.source or args.healthcheck))
     
-    if usermod: print ("/usermod")
-    elif users: print ("/users")
-    elif sessionupd: print ("/sessionsupd")
-    elif healthcheck: print ("/healthcheck")
-    elif resetsessions: print ("resetsessions")
+    if usermod: 
+        print ("/usermod")
+        if args.format == 'csv': print('csv')
+        else: print('json')
+    elif users:
+        print ("/users")
+        if args.format == 'csv': print('csv')
+        else: print('json')
+    elif sessionupd: 
+        print ("/sessionsupd")
+        if args.format == 'csv': print('csv')
+        else: print('json')
+    elif healthcheck: 
+        print ("/healthcheck")
+        if args.format == 'csv': print('csv')
+        else: print('json')
+    elif resetsessions: 
+        print ("resetsessions")
+        if args.format == 'csv': print('csv')
+        else: print('json')
     else: print('Not correct usage')
     
 
