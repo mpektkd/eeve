@@ -2,8 +2,7 @@ import argparse
 import textwrap
 
 def msg(name=None):                                                            
-    return "ev_group13 SCOPE --param1 value1 [--param2 value2 ...]--format fff --apikeykkk\n"
-
+    return "General Usage:ev_group13 SCOPE --param1 value1 [--param2 value2 ...]--format fff --apikeykkk\n"
 
 parent_parser = argparse.ArgumentParser(add_help =False)
 requirednames =parent_parser.add_argument_group('always required arguments:')
@@ -28,14 +27,14 @@ parser = argparse.ArgumentParser(usage=msg(),parents = [parent_parser])
 
 # SCOPE        
 subparser = parser.add_subparsers(dest='command',help='SCOPE')
-healthcheck = subparser.add_parser('healthcheck', parents = [parent_parser],usage="ev_group13 healthcheck -format fff --apikeykkk\n")
+healthcheck = subparser.add_parser('healthcheck', parents = [parent_parser],usage="ev_group13 healthcheck --format fff --apikeykkk\n")
 resetsessions = subparser.add_parser('resetsessions',parents = [parent_parser],usage = "ev_group13 resetsessions --format fff --apikeykkk\n")
-login = subparser.add_parser('login',parents = [parent_parser])
-logout = subparser.add_parser('logout',parents = [parent_parser])
-SessionsPerPoint = subparser.add_parser('SessionsPerPoint',parents = [parent_parser])
-SessionsPerStation = subparser.add_parser('SessionsPerStation',parents = [parent_parser])
-SessionsPerEV = subparser.add_parser('SessionsPerEV',parents = [parent_parser])
-SessionsPerProvider = subparser.add_parser('SessionsPerProvider',parents = [parent_parser])
+login = subparser.add_parser('login',parents = [parent_parser],usage = "ev_group13 login --username Username --passw Password --format fff --apikeykkk\n")
+logout = subparser.add_parser('logout',parents = [parent_parser],usage = "ev_group13 logout --format fff --apikeykkk\n")
+SessionsPerPoint = subparser.add_parser('SessionsPerPoint',parents = [parent_parser],usage = "ev_group13 SessionsPerPoint --point Point --datefrom DateFrom --dateto DateTo --format fff --apikeykkk\n")
+SessionsPerStation = subparser.add_parser('SessionsPerStation',parents = [parent_parser],usage = "ev_group13 SessionsPerStation --format fff --apikeykkk\n")
+SessionsPerEV = subparser.add_parser('SessionsPerEV',parents = [parent_parser],usage = "ev_group13 resetsessions --format fff --apikeykkk\n")
+SessionsPerProvider = subparser.add_parser('SessionsPerProvider',parents = [parent_parser],usage = "ev_group13 resetsessions --format fff --apikeykkk\n")
 Admin = subparser.add_parser('Admin',parents = [parent_parser],usage="ev_group13 Admin --MainParameter --Subparameters --format fff --apikeykkk\n")
 
 
