@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework import fields
 from rest_framework.fields import ReadOnlyField
 from rest_framework_jwt.settings import api_settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -66,7 +67,6 @@ class CustomerSerializer(serializers.ModelSerializer):
         super(UserSerializer,user).update(instance.user,user_data)
         return instance
 
-    
 class BillSerializer(serializers.ModelSerializer):
     customer = ReadOnlyField(source='customer.id')
 

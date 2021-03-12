@@ -1,0 +1,456 @@
+Station: 21206, Provider:ERON
+	Point: 23072	
+
+Station: 21208, Provider:ERON
+	Point: 23074	Point: 23090	Point: 23091	
+
+Station: 21219, Provider:ERON
+	Point: 23078	
+
+Station: 21227, Provider:DEI
+	Point: 23082	Point: 23083	
+
+Station: 21228, Provider:DEI
+	Point: 23084	Point: 23085	
+
+Station: 21229, Provider:DEI
+	Point: 23086	Point: 23087	
+
+Station: 21230, Provider:DEI
+	Point: 23088	Point: 23089	
+
+Station: 91568, Provider:DEI
+	Point: 129805	
+
+Station: 91569, Provider:PROTERGIA
+	Point: 129806	
+
+Station: 91570, Provider:ERON
+	Point: 129807	
+
+Station: 107519, Provider:PROTERGIA
+	Point: 151696	
+
+Station: 108413, Provider:ERON
+	Point: 153289	
+
+Station: 108414, Provider:DEI
+	Point: 153290	
+
+Station: 113318, Provider:DEI
+	Point: 159557	
+
+Station: 113319, Provider:PROTERGIA
+	Point: 159558	
+
+Station: 113320, Provider:ERON
+	Point: 159559	
+
+Station: 113418, Provider:PROTERGIA
+	Point: 159772	
+
+Station: 113419, Provider:PROTERGIA
+	Point: 159773	
+
+Station: 113478, Provider:ERON
+	Point: 159879	
+
+Station: 113500, Provider:DEI
+	Point: 159920	
+
+Station: 113502, Provider:PROTERGIA
+	Point: 159922	
+
+Station: 113581, Provider:ERON
+	Point: 160060	
+
+Station: 113582, Provider:DEI
+	Point: 160061	
+
+Station: 113583, Provider:DEI
+	Point: 160062	
+
+Station: 113608, Provider:ERON
+	Point: 160104	
+
+Station: 113609, Provider:PROTERGIA
+	Point: 160105	
+
+Station: 113610, Provider:DEI
+	Point: 160106	Point: 160107	
+
+Station: 113611, Provider:ERON
+	Point: 160108	
+
+Station: 113614, Provider:PROTERGIA
+	Point: 160115	
+
+Station: 113615, Provider:ERON
+	Point: 160116	
+
+Station: 113799, Provider:PROTERGIA
+	Point: 160369	
+
+Station: 114209, Provider:PROTERGIA
+	Point: 160781	
+
+Station: 114210, Provider:PROTERGIA
+	Point: 160782	
+
+Station: 114213, Provider:ERON
+	Point: 160786	
+
+Station: 114214, Provider:ERON
+	Point: 160788	
+
+Station: 114215, Provider:ERON
+	Point: 160789	
+
+Station: 114216, Provider:DEI
+	Point: 160790	
+
+Station: 114217, Provider:PROTERGIA
+	Point: 160791	
+
+Station: 114218, Provider:ERON
+	Point: 160792	
+
+Station: 114219, Provider:ERON
+	Point: 160793	
+
+Station: 114220, Provider:ERON
+	Point: 160794	
+
+Station: 114291, Provider:DEI
+	Point: 160874	
+
+Station: 114292, Provider:ERON
+	Point: 160875	
+
+Station: 114293, Provider:DEI
+	Point: 160876	
+
+Station: 114294, Provider:DEI
+	Point: 160877	
+
+Station: 114335, Provider:PROTERGIA
+	Point: 160930	
+
+Station: 114337, Provider:PROTERGIA
+	Point: 160934	
+
+Station: 114339, Provider:ERON
+	Point: 160938	
+
+Station: 114341, Provider:DEI
+	Point: 160942	
+
+Station: 114344, Provider:PROTERGIA
+	Point: 160949	
+
+Station: 114348, Provider:DEI
+	Point: 160959	
+
+Station: 114352, Provider:ERON
+	Point: 160972	
+
+Station: 114353, Provider:PROTERGIA
+	Point: 160973	
+
+Station: 114354, Provider:DEI
+	Point: 160974	
+
+Station: 114355, Provider:ERON
+	Point: 160976	
+
+Station: 115203, Provider:PROTERGIA
+	Point: 162174	
+
+Station: 118685, Provider:ERON
+	Point: 167859	Point: 186969	
+
+Station: 121564, Provider:DEI
+	Point: 171291	
+
+Station: 125082, Provider:DEI
+	Point: 175312	
+
+Station: 125083, Provider:ERON
+	Point: 175313	
+
+Station: 125912, Provider:PROTERGIA
+	Point: 176481	
+
+Station: 125913, Provider:PROTERGIA
+	Point: 176482	
+
+Station: 126757, Provider:ERON
+	Point: 177552	
+
+Station: 126758, Provider:ERON
+	Point: 177553	
+
+Station: 127241, Provider:ERON
+	Point: 178172	
+
+Station: 128254, Provider:PROTERGIA
+	Point: 179528	
+
+Station: 128261, Provider:DEI
+	Point: 179536	
+
+Station: 128262, Provider:DEI
+	Point: 179537	
+
+Station: 128817, Provider:PROTERGIA
+	Point: 180235	Point: 180251	
+
+Station: 131251, Provider:DEI
+	Point: 183776	
+
+Station: 131522, Provider:ERON
+	Point: 184087	
+
+Station: 131901, Provider:PROTERGIA
+	Point: 184575	
+
+Station: 131902, Provider:PROTERGIA
+	Point: 184576	
+
+Station: 133478, Provider:DEI
+	Point: 186839	
+
+Station: 133609, Provider:ERON
+	Point: 187009	
+
+Station: 134004, Provider:PROTERGIA
+	Point: 187500	Point: 187501	
+
+Station: 134063, Provider:ERON
+	Point: 187590	
+
+Station: 134483, Provider:DEI
+	Point: 188212	
+
+Station: 134484, Provider:ERON
+	Point: 188213	
+
+Station: 134534, Provider:ERON
+	Point: 188304	Point: 188305	Point: 188306	
+
+Station: 134744, Provider:ERON
+	Point: 188528	
+
+Station: 135471, Provider:PROTERGIA
+	Point: 189807	
+
+Station: 135503, Provider:PROTERGIA
+	Point: 189846	
+
+Station: 135504, Provider:PROTERGIA
+	Point: 189847	
+
+Station: 146213, Provider:DEI
+	Point: 203168	
+
+Station: 146214, Provider:PROTERGIA
+	Point: 203169	
+
+Station: 146215, Provider:PROTERGIA
+	Point: 203170	
+
+Station: 146216, Provider:ERON
+	Point: 203171	
+
+Station: 146217, Provider:PROTERGIA
+	Point: 203172	
+
+Station: 146218, Provider:DEI
+	Point: 203173	
+
+Station: 146335, Provider:ERON
+	Point: 203422	
+
+Station: 146547, Provider:PROTERGIA
+	Point: 203766	
+
+Station: 148515, Provider:PROTERGIA
+	Point: 206223	
+
+Station: 149390, Provider:ERON
+	Point: 207420	
+
+Station: 149393, Provider:PROTERGIA
+	Point: 207423	
+
+Station: 149443, Provider:DEI
+	Point: 207486	
+
+Station: 149444, Provider:PROTERGIA
+	Point: 207487	
+
+Station: 149445, Provider:DEI
+	Point: 207488	
+
+Station: 149626, Provider:ERON
+	Point: 207741	
+
+Station: 149627, Provider:DEI
+	Point: 207742	Point: 207743	
+
+Station: 149984, Provider:ERON
+	Point: 208241	Point: 208242	
+
+Station: 155268, Provider:DEI
+	Point: 218636	
+
+Station: 155632, Provider:ERON
+	Point: 219116	
+
+Station: 155961, Provider:DEI
+	Point: 219537	Point: 219538	Point: 219539	Point: 219540	
+
+Station: 157407, Provider:DEI
+	Point: 226723	
+
+Station: 161354, Provider:PROTERGIA
+	Point: 232219	Point: 232220	
+
+Station: 161535, Provider:PROTERGIA
+	Point: 232467	
+
+Station: 161556, Provider:ERON
+	Point: 232495	
+
+Station: 161608, Provider:PROTERGIA
+	Point: 232568	
+
+Station: 161700, Provider:DEI
+	Point: 232681	
+
+Station: 161754, Provider:PROTERGIA
+	Point: 232756	
+
+Station: 161755, Provider:DEI
+	Point: 232757	
+
+Station: 161824, Provider:PROTERGIA
+	Point: 232850	
+
+Station: 162244, Provider:PROTERGIA
+	Point: 233504	
+
+Station: 165292, Provider:DEI
+	Point: 236985	
+
+Station: 165293, Provider:DEI
+	Point: 236986	
+
+Station: 165294, Provider:ERON
+	Point: 236987	
+
+Station: 165295, Provider:ERON
+	Point: 236988	
+
+Station: 165296, Provider:DEI
+	Point: 236989	
+
+Station: 165297, Provider:ERON
+	Point: 236990	
+
+Station: 165298, Provider:DEI
+	Point: 236991	
+
+Station: 165299, Provider:DEI
+	Point: 236992	
+
+Station: 165300, Provider:DEI
+	Point: 236993	Point: 236994	Point: 236995	
+
+Station: 167262, Provider:ERON
+	Point: 253295	
+
+Station: 169753, Provider:ERON
+	Point: 258605	
+
+Station: 171267, Provider:PROTERGIA
+	Point: 261748	
+
+Station: 171268, Provider:PROTERGIA
+	Point: 261749	Point: 261750	Point: 261751	
+
+Station: 171269, Provider:DEI
+	Point: 261752	Point: 261753	Point: 261754	
+
+Station: 171288, Provider:DEI
+	Point: 261788	
+
+Station: 171299, Provider:DEI
+	Point: 261816	Point: 261817	Point: 261818	
+
+Station: 171301, Provider:ERON
+	Point: 261820	Point: 261821	Point: 261822	
+
+Station: 171303, Provider:ERON
+	Point: 261824	Point: 261825	Point: 261826	
+
+Station: 171305, Provider:PROTERGIA
+	Point: 261828	Point: 261829	Point: 261830	
+
+Station: 171330, Provider:PROTERGIA
+	Point: 261875	Point: 261876	Point: 261877	
+
+Station: 171332, Provider:DEI
+	Point: 261881	Point: 261882	Point: 261883	
+
+Station: 171507, Provider:ERON
+	Point: 262256	
+
+Station: 171527, Provider:PROTERGIA
+	Point: 262306	
+
+Station: 171528, Provider:PROTERGIA
+	Point: 262307	
+
+Station: 171529, Provider:PROTERGIA
+	Point: 262308	Point: 262309	Point: 262310	
+
+Station: 171530, Provider:ERON
+	Point: 262311	Point: 262312	Point: 262313	
+
+Station: 171531, Provider:PROTERGIA
+	Point: 262315	Point: 262316	Point: 262317	
+
+Station: 171532, Provider:ERON
+	Point: 262318	
+
+Station: 171533, Provider:ERON
+	Point: 262319	
+
+Station: 171534, Provider:PROTERGIA
+	Point: 262320	
+
+Station: 171535, Provider:ERON
+	Point: 262321	
+
+Station: 171536, Provider:PROTERGIA
+	Point: 262322	
+
+Station: 171537, Provider:DEI
+	Point: 262323	Point: 262324	Point: 262325	
+
+Station: 171538, Provider:PROTERGIA
+	Point: 262326	Point: 262327	Point: 262328	
+
+Station: 171539, Provider:ERON
+	Point: 262329	
+
+Station: 171555, Provider:PROTERGIA
+	Point: 262351	
+
+Station: 172220, Provider:ERON
+	Point: 263271	
+
+Station: 172222, Provider:DEI
+	Point: 263275	
+

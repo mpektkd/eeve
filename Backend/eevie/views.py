@@ -366,7 +366,7 @@ class SessionsUpd(APIView):
                     doneChargingTime=doneChargingTime,
                     kWhDelivered=kWhDelivered
                 )
-            except (Point.DoesNotExist, Station.DoesNotExist, Car.DoesNotExist, Provider.DoesNotExist, User.DoesNotExist) as e:
+            except Exception as e:
                 pass
         count_after = Session.objects.all().count()
         response = {
@@ -391,7 +391,7 @@ class MyCars(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self,request):
-        
+
         serializer = MyCarSerializer(request.user.cars,many=True)
 
         return Response(serializer.data)
@@ -415,3 +415,51 @@ class MyMonthlyBills(APIView):
 
         return Response(serializer.data)
 
+class ChargingSession(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def post(sef, request):
+
+        data = request.data
+        
+        try:
+
+            provider = Provider.objects.get(id=data['ProviderID'])
+            user = request.user
+            vehicle = Car.objects.get(id=data['VehicleID'])
+            station = Station.objects.get(id=data['StationID'])
+            point = Point.objects.get(id=data['PointID'])
+
+            if vehicle.car.ac_charger is not None:
+                if vehicle.car.ac_charger != data['ac_charger']:
+                    return Response({'status': ['Not Combatible AC_Charger']},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                if vehicle.car.ac_charger != data['dc_charger']:
+                    return Response({'status': ['Not Combatible DC_Charger']},status=status.HTTP_400_BAD_REQUEST)
+
+            if data['kWh']:
+                    kWhDelivered=data["kWhDelivered"]
+            else:
+                kWhDelivered=data["amount"]/provider.cost
+
+            if vehicle.car.usable_battery_size <= kWhDelivered:
+                    kWhDelivered = vehicle.car.usable_battery_size
+
+            Session.objects.create(
+                        customer=user,
+                        vehicle=vehicle,
+                        provider=provider,
+                        station=station,
+                        point=point,
+                        payment=data["payment"],
+                        connectionTime=data["connectionTime"],
+                        disconnectTime=data["disconnectTime"],
+                        doneChargingTime=data["doneChargingTime"],
+                        kWhDelivered=kWhDelivered
+                    )
+        except Exception as e:
+
+            return Response({'status': ['Bad ID']}, status=status.HTTP_404_NOT_FOUND)
+        
+        return Response(status=status.HTTP_200_OK)

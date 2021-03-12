@@ -7,7 +7,7 @@ with open("points.txt", "w") as file:
     for station in stations:
         file.write(f"{station}\n\t")
         # print(station.points.all())
-        for point in station.points.all():
+        for point in station.comments.all():
             file.write(f"{point}")
             file.write("\t")
         file.write("\n\n")

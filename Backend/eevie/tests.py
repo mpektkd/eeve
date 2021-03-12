@@ -391,7 +391,7 @@ class SessionsTestCase(TestCase):
             #     print(provider_info)
             #     print(f"sessions: {sessions.count()}")
 
-        except (Point.DoesNotExist, Station.DoesNotExist, Car.DoesNotExist, Provider.DoesNotExist) as e:
+        except Exception as e:
             print('Not Found')
             return
 
