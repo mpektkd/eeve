@@ -2,7 +2,7 @@ import argparse
 import textwrap
 
 def msg(name=None):                                                            
-    return "General Usage:ev_group13 SCOPE --param1 value1 [--param2 value2 ...]--format fff --apikeykkk\n"
+    return "General Usage:ev_group13 SCOPE --param1 value1 [--param2 value2 ...]--format fff --apikey kkk\n"
 
 parent_parser = argparse.ArgumentParser(add_help =False)
 requirednames =parent_parser.add_argument_group('always required arguments:')
@@ -23,19 +23,19 @@ requirednames.add_argument(
         help='API Key',
         type= str
     )
-parser = argparse.ArgumentParser(usage=msg(),parents = [parent_parser])
+parser = argparse.ArgumentParser(usage=msg())
 
 # SCOPE        
 subparser = parser.add_subparsers(dest='command',help='SCOPE')
-healthcheck = subparser.add_parser('healthcheck', parents = [parent_parser],usage="ev_group13 healthcheck --format fff --apikeykkk\n")
-resetsessions = subparser.add_parser('resetsessions',parents = [parent_parser],usage = "ev_group13 resetsessions --format fff --apikeykkk\n")
-login = subparser.add_parser('login',parents = [parent_parser],usage = "ev_group13 login --username Username --passw Password --format fff --apikeykkk\n")
-logout = subparser.add_parser('logout',parents = [parent_parser],usage = "ev_group13 logout --format fff --apikeykkk\n")
-SessionsPerPoint = subparser.add_parser('SessionsPerPoint',parents = [parent_parser],usage = "ev_group13 SessionsPerPoint --point Point --datefrom DateFrom --dateto DateTo --format fff --apikeykkk\n")
-SessionsPerStation = subparser.add_parser('SessionsPerStation',parents = [parent_parser],usage = "ev_group13 SessionsPerStation --format fff --apikeykkk\n")
-SessionsPerEV = subparser.add_parser('SessionsPerEV',parents = [parent_parser],usage = "ev_group13 resetsessions --format fff --apikeykkk\n")
-SessionsPerProvider = subparser.add_parser('SessionsPerProvider',parents = [parent_parser],usage = "ev_group13 resetsessions --format fff --apikeykkk\n")
-Admin = subparser.add_parser('Admin',parents = [parent_parser],usage="ev_group13 Admin --MainParameter --Subparameters --format fff --apikeykkk\n")
+healthcheck = subparser.add_parser('healthcheck', parents = [parent_parser],usage="ev_group13 healthcheck --format fff --apikey kkk\n")
+resetsessions = subparser.add_parser('resetsessions',parents = [parent_parser],usage = "ev_group13 resetsessions --format fff --apikey kkk\n")
+login = subparser.add_parser('login',parents = [parent_parser],usage = "ev_group13 login --username USERNAME --passw PASSWORD --format fff --apikey kkk\n")
+logout = subparser.add_parser('logout',parents = [parent_parser],usage = "ev_group13 logout --format fff --apikey kkk\n")
+SessionsPerPoint = subparser.add_parser('SessionsPerPoint',parents = [parent_parser],usage = "ev_group13 SessionsPerPoint --point POINT --datefrom DATEFROM --dateto DATETO --format fff --apikey kkk\n")
+SessionsPerStation = subparser.add_parser('SessionsPerStation',parents = [parent_parser],usage = "ev_group13 SessionsPerStation --station STATION --datefrom DATEFROM --dateto DATETO --format fff --apikey kkk\n")
+SessionsPerEV = subparser.add_parser('SessionsPerEV',parents = [parent_parser],usage = "ev_group13 SessionsPerEV --ev EV --datefrom DATEFROM --dateto DATETO --format fff --apikey kkk\n")
+SessionsPerProvider = subparser.add_parser('SessionsPerProvider',parents = [parent_parser],usage = "ev_group13 SessionsPerProvider --provider PROVIDER --datefrom DATEFROM --dateto DATETO --format fff --format fff --apikey kkk\n")
+Admin = subparser.add_parser('Admin',parents = [parent_parser],usage="ev_group13 Admin --MainParameter --Subparameters --format fff --apikey kkk\n")
 
 
 #Admin_subparsers = Admin.add_parser(dest='command',help='Main Parameter')
@@ -80,9 +80,9 @@ if args.command == 'healthcheck':
 elif args.command == 'resetsessions':
     print('resetsessionsapi')
 elif args.command == 'login':
-    print("loginapi/nToken must be saved at {HOME}/softeng20bAPI.token")
+    print("loginapi\nToken must be saved at {HOME}/softeng20bAPI.token")
 elif args.command == 'logout':
-    print("logoutapi/nsession token must be deleted")
+    print("logoutapi\nsession token must be deleted")
 elif args.command == 'SessionsPerPoint':
     print("/sessionsperpoint")
 elif args.command == 'SessionsPerStation':
