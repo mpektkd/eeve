@@ -339,30 +339,42 @@ class SessionsUpd(APIView):
     def post(self, request):
         data = csv.DictReader(codecs.iterdecode(request.FILES['data_file'], 'utf-8'))
         # print(data)
+        count_sessions = 0
+        count_before = Session.objects.all().count()
         for row in data:
-            provider = get_object_or_404(Provider, id = row['ProviderID'])
-            user = get_object_or_404(User, id = row['UserID'])
-            vehicle = get_object_or_404(Car, id=row['VehicleID'])
-            station = get_object_or_404(Station, id=row['StationID'])
-            point = get_object_or_404(Point, id=row['PointID'])
-            connectionTime = row['ConnectionTime']
-            disconnectTime = row['DisconnectTime']
-            doneChargingTime = row['DoneChargingTime']
-            kWhDelivered = row['kWhDelivered']
-            payment = row['Payment']
-            Session.objects.create(
-                customer=user,
-                vehicle=vehicle,
-                provider=provider,
-                station=station,
-                point=point,
-                payment=payment,
-                connectionTime=connectionTime,
-                disconnectTime=disconnectTime,
-                doneChargingTime=doneChargingTime,
-                kWhDelivered=kWhDelivered
-            )
-        return Response({'message':'Sessions Successfully Added'}, status=status.HTTP_200_OK)
+            count_sessions+=1
+            try:
+                provider =Provider.objects.get(id=row['ProviderID'])
+                user = User.objects.get(id = row['UserID'])
+                vehicle = Car.objects.get(id=row['VehicleID'])
+                station = Station.objects.get(id=row['StationID'])
+                point = Point.objects.get(id=row['PointID'])
+                connectionTime = row['ConnectionTime']
+                disconnectTime = row['DisconnectTime']
+                doneChargingTime = row['DoneChargingTime']
+                kWhDelivered = row['kWhDelivered']
+                payment = row['Payment']
+                Session.objects.create(
+                    customer=user,
+                    vehicle=vehicle,
+                    provider=provider,
+                    station=station,
+                    point=point,
+                    payment=payment,
+                    connectionTime=connectionTime,
+                    disconnectTime=disconnectTime,
+                    doneChargingTime=doneChargingTime,
+                    kWhDelivered=kWhDelivered
+                )
+            except (Point.DoesNotExist, Station.DoesNotExist, Car.DoesNotExist, Provider.DoesNotExist, User.DoesNotExist) as e:
+                pass
+        count_after = Session.objects.all().count()
+        response = {
+            "SessionsInUploadedFile":count_sessions, 
+            "SessionsImported":count_after-count_before, 
+            "TotalSessionsInDatabase":count_after
+            }
+        return Response(response, status=status.HTTP_200_OK)
 
  
 class GetCars(APIView):
