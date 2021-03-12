@@ -35,6 +35,10 @@ import { Redirect } from "react-router";
 import { isPropertySignature } from "typescript";
 import { SystemUpdate } from "@material-ui/icons";
 import axios from 'axios';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import Alert from '@material-ui/lab/Alert';
+import AlertTitle from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles(styles2);
@@ -52,15 +56,23 @@ export default function LoginPage(props) {
     setCardAnimation("");
   }, 700);
   const {register, handleSubmit} = useForm();
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [authError, setAuthError] = useState(false);
+  const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [signUpSuccessful, setSignUpSuccessful] = useState(false);
+  const [defaultText, setDefaultText] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
+    confirmPassowrd: ""
+  });
+
   const classes = useStyles();
   const classes2 = useStyles();
   const { ...rest } = props;
-  const usernameProps = ["kwstas"];
-  
   var car = {}, carList = [];
-
 
   React.useLayoutEffect ( () => {
     const response = axios.get('http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/cars/')
@@ -83,6 +95,18 @@ export default function LoginPage(props) {
 
 
   const onSubmit = (e) => {
+    if (e.password != e.confirmPassword) {
+      console.log("Passwords do not match!");
+      setPasswordError(true)
+      setDefaultText(e);
+      return;
+    }
+    if (!localStorage.getItem("carForSignUp")) {
+      setAlertOpen(true)
+      console.log("Car not selected");
+      setDefaultText(e);
+      return;
+    }
     try {
       const response = axiosInstance.post('signup/', {
         username: e.username,
@@ -92,18 +116,78 @@ export default function LoginPage(props) {
         email: e.email,
         car_id: localStorage.getItem("carForSignUp")        
       })
-      .then(res => {
-        console.log(res)
-       })
-       .catch(error => {
-         console.log(error)
-       })
-    } catch (error) {
+        .then(res => {
+          setUsernameError(false)
+          setSignUpSuccessful(true)
+          localStorage.removeItem("carForSignUp")
+          console.log(res)
+        })
+        .catch(error => {
+          setDefaultText(e);
+          setPasswordError(false)
+          setUsernameError(true)
+        })
+    } 
+    catch (error) {
       throw error;
     }
   }
  
   function FormTextField (props) {
+    if (!passwordError && !usernameError && props.name == "firstName") {
+      return (
+        <TextField
+        margin="normal"
+        inputRef={register}
+        required
+        fullWidth
+        name= {props.name}
+        label= {props.label}
+        autoFocus
+        type= {props.type}
+        id= {props.id}
+        autoComplete= {props.autoComplete}
+        defaultValue = {defaultText.firstName}
+      />
+      );
+    }
+    else if (usernameError && props.name == "username") {
+      return (
+        <TextField
+        error
+        margin="normal"
+        inputRef={register}
+        required
+        fullWidth
+        name= {props.name}
+        label= {props.label}
+        type= {props.type}
+        id= {props.id}
+        autoComplete= {props.autoComplete}
+        helperText =  { "Username already taken!" }
+        defaultValue = {props.defaultValue}
+      />
+      );
+    }
+    else if (passwordError && (props.name == "password" || props.name == "confirmPassword")) {
+      return (
+        <TextField
+        error
+        margin="normal"
+        inputRef={register}
+        required
+        fullWidth
+        name= {props.name}
+        label= {props.label}
+        type= {props.type}
+        id= {props.id}
+        autoComplete= {props.autoComplete}
+        helperText =  { "Passwords do not match!" }
+        defaultValue = {props.defaultValue}
+      />
+      );
+    }
+    else {
     return (
       <TextField
       margin="normal"
@@ -115,12 +199,23 @@ export default function LoginPage(props) {
       type= {props.type}
       id= {props.id}
       autoComplete= {props.autoComplete}
+      defaultValue = {props.defaultValue}
     />);
+    }
   }
 
+  const handleClose = () => {
+    setAlertOpen(false)
+  };
+  console.log(defaultText);
   return (
     <div>
-      {loggedIn && <Redirect to = {'/'}/>}
+      {signUpSuccessful && <Redirect to = {'/'}/>}
+      {alertOpen && <Dialog onClose = { handleClose } open = { true }>
+        <Alert severity="error">
+          Please Select A Car!
+        </Alert>
+      </Dialog>}
       <Header
         absolute
         color="success"
@@ -173,12 +268,12 @@ export default function LoginPage(props) {
                   </CardHeader>
                   <CardBody>
                   <ThemeProvider theme = { theme }>
-                    <FormTextField label = {"First name"} name = {"firstName"} id = {"firstName"} autoComplete = {"firstName"} type = {"username"}/>
-                    <FormTextField label = {"Last name"} name = {"lastName"} id = {"lastName"} autoComplete = {"lastName"} type = {"username"}/>
-                    <FormTextField label = {"Email"} name = {"email"} id = {"email"} autoComplete = {"email"} type = {"email"}/>
-                    <FormTextField label = {"Username"} name = {"username"} id = {"username"} autoComplete = {"username"} type = {"username"}/>
-                    <FormTextField label = {"Password"} name = {"password"} id = {"password"} autoComplete = {"password"} type = {"password"}/>
-                    <FormTextField label = {"Confirm Password"} name = {"confirmPassword"} id = {"confirmPassword"} autoComplete = {"confirmPassword"} type = {"password"}/>
+                    <FormTextField defaultValue = { defaultText.firstName } label = {"First name"} name = {"firstName"} id = {"firstName"} autoComplete = {"firstName"} type = {"username"}/>
+                    <FormTextField defaultValue = { defaultText.lastName } label = {"Last name"} name = {"lastName"} id = {"lastName"} autoComplete = {"lastName"} type = {"username"}/>
+                    <FormTextField defaultValue = { defaultText.email } label = {"Email"} name = {"email"} id = {"email"} autoComplete = {"email"} type = {"email"}/>
+                    <FormTextField defaultValue = { defaultText.username } label = {"Username"} name = {"username"} id = {"username"} autoComplete = {"username"} type = {"username"}/>
+                    <FormTextField defaultValue = { defaultText.password } label = {"Password"} name = {"password"} id = {"password"} autoComplete = {"password"} type = {"password"}/>
+                    <FormTextField defaultValue = { defaultText.password } label = {"Confirm Password"} name = {"confirmPassword"} id = {"confirmPassword"} autoComplete = {"confirmPassword"} type = {"password"}/>
                     </ThemeProvider>
                     <GridItem>
                       <p>{" "}</p>

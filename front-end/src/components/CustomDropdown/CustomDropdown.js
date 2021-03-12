@@ -24,6 +24,7 @@ const useStyles = makeStyles(styles);
 
 export default function CustomDropdown(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [carSelected, setCarSelected] = React.useState("");
   const handleClick = event => {
     if (anchorEl && anchorEl.contains(event.target)) {
       setAnchorEl(null);
@@ -38,6 +39,7 @@ export default function CustomDropdown(props) {
     }
   };
   const handleItemClick = param => {
+    setCarSelected(param.name)
     localStorage.setItem("carForSignUp", param.id)
     setAnchorEl(null);
     if (props && props.onClick) {
@@ -93,7 +95,7 @@ export default function CustomDropdown(props) {
     return (
       <div>
         <div>
-          <Button
+          {!carSelected && <Button
             aria-label="Notifications"
             aria-owns={anchorEl ? "menu-list" : null}
             aria-haspopup="true"
@@ -103,7 +105,19 @@ export default function CustomDropdown(props) {
             {icon}
             {buttonText !== undefined ? buttonText : null}
             {caret ? <b className={caretClasses} /> : null}
+          </Button>}
+          {
+            carSelected && <Button
+            aria-label="Notifications"
+            aria-owns={anchorEl ? "menu-list" : null}
+            aria-haspopup="true"
+            {...buttonProps}
+            onClick={handleClick}
+          >
+            {icon}
+            { carSelected }
           </Button>
+          }
         </div>
         <Popper
           open={Boolean(anchorEl)}

@@ -40,12 +40,12 @@ import CardFooter from "components/Bill/CardFooter.js";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import DateRange from "@material-ui/icons/DateRange";
 import Table from "components/Table/Table.js";
+import axiosInstance from "../../axiosApi";
 
 import styles2 from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles(styles2);
-
 
 export default function ProfilePage(props) {
   const classes = useStyles();
@@ -58,8 +58,15 @@ export default function ProfilePage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   const bill = {amount: "107.00", date: "Last 24 hours"}
-  console.log(bill);
-
+  React.useLayoutEffect ( () => {
+    const response = axiosInstance.get('user/mycars/')
+      .then(res => {
+        console.log(res)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  });
   function Bill(props) {
     return (<GridItem xs={12} sm={7} md={4}>
       <Card>
@@ -163,33 +170,7 @@ export default function ProfilePage(props) {
                       tabContent: (
                         <GridContainer>
                           <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={work4}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={studio3}
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={work2}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={work1}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={studio1}
-                              className={navImageClasses}
-                            />
+                           <p>this is a car!</p>
                           </GridItem>
                         </GridContainer>
                       )
