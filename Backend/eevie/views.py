@@ -218,7 +218,7 @@ class ObtainTokenPairWithUsernameView(TokenObtainPairView):     #refresh and acc
 
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
-    authentication_classes = ()
+    # authentication_classes = ()
 
     def post(self, request):
         try:
