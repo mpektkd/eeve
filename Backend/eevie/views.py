@@ -36,7 +36,7 @@ def SessionsPerPoint(request, pk, date_from, date_to):
     except Point.DoesNotExist:
         return Response({'Point': ['Not Found']}, status=status.HTTP_400_BAD_REQUEST)
 
-    sessions = point.points.all().filter(connectionTime__range=[date_from,date_to])
+    sessions = point.points.all().filter(connectionTime__range=[date_from,date_to]).order_by('connectionTime')
 
     point_info = {}
 
@@ -82,7 +82,7 @@ def SessionsPerStation(request, pk, date_from, date_to):
     except Station.DoesNotExist:
         return Response({'Station': ['Not Found']}, status=status.HTTP_400_BAD_REQUEST)
 
-    sessions = station.sessions.all().filter(connectionTime__range=[date_from,date_to])
+    sessions = station.sessions.all().filter(connectionTime__range=[date_from,date_to]).order_by('connectionTime')
 
     station_info = {}
     station_info['StationID'] = station.id
@@ -112,7 +112,7 @@ def SessionsPerEV(request, pk, date_from, date_to):
     except Car.DoesNotExist:
         return Response({'Car': ['Not Found']}, status=status.HTTP_400_BAD_REQUEST)
 
-    sessions = vehicle.vehicle.all().filter(connectionTime__range=[date_from,date_to])
+    sessions = vehicle.vehicle.all().filter(connectionTime__range=[date_from,date_to]).order_by('connectionTime')
 
     ev_info = {}
     ev_info['VehicleID'] = vehicle.id
@@ -158,7 +158,7 @@ def SessionsPerProvider(request, pk, date_from, date_to):
     except Provider.DoesNotExist:
         return Response({'provider': ['Not Found']}, status=status.HTTP_400_BAD_REQUEST)
 
-    sessions = provider.hasmade.all().filter(connectionTime__range=[date_from,date_to])
+    sessions = provider.hasmade.all().filter(connectionTime__range=[date_from,date_to]).order_by('connectionTime')
 
     provider_info = {}
     provider_info['ProviderID'] = provider.id
@@ -412,8 +412,35 @@ class MyMonthlyBills(APIView):
     def get(self,request):
         
         user = request.user
-        customer = user.customer
-        serializer = MonthlyBillSerializer(request.user.monthlybills.filter(),many=True)
+        customer_bills = user.customer.has_expired_bills
+
+        if customer_bills:
+            
+            today = datetime.datetime.today()
+            # last_day=calendar.monthrange(today.year,today.month)[1]
+            
+
+            current_start = datetime.datetime(today.year, today.month, 1).strftime('%Y-%m-%d')
+            # current_end = datetime.datetime(today.year, today.month, last_day).strftime('%Y-%m-%d')
+            
+            if today.month == 1:
+                
+                previous_start = datetime.datetime(today.year-1, 12, 1)
+                # prev_last_day=calendar.monthrange(today.year-1,12)[1]
+                # previous_end = datetime.datetime(today.year-1, 12, prev_last_day)
+            
+            else:
+                previous = datetime.datetime(today.year, today.month-1, 1)
+                # prev_last_day=calendar.monthrange(today.year,today.month-1)[1]
+                # previous_end = datetime.datetime(today.year, today.month-1, prev_last_day)
+
+
+            monthly_bills = user.monthlybills.filter(start_date=(current_start, previous_start))
+        
+        else:
+            return Response({'status':'All Bills are Paid'}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = MonthlyBillSerializer(monthly_bills,many=True)
 
         return Response(serializer.data)
 

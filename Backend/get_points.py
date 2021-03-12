@@ -34,6 +34,15 @@ with open("bills.txt", "w") as file:
         # print(station.points.all())
         file.write("\n")
 
+users = User.objects.all()
+
+with open("users.txt", "w") as file:
+
+    for user in users:
+        file.write(f"{user}\n\t")
+        # print(station.points.all())
+        file.write("\n")
+
 # cars = CarBase.objects.all()
 
 # with open("carbase.txt", "w") as file:

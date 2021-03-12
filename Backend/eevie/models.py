@@ -22,11 +22,11 @@ format_port = {
 
  # Customer
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name="customer",on_delete=models.CASCADE)
     has_expired_bills = models.BooleanField()
 
     def __str__(self):
-        return f"Customer with ID:{self.id} and username {self.user.get_username()}"
+        return f"Customer with ID:{self.id} and username {self.user} and has expired {self.has_expired_bills}"
 
  # Individual Bill 
 class Bill(models.Model):

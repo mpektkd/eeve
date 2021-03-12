@@ -16,7 +16,7 @@ Bill with ID:8 belongs to cleynton1u and is_paid is True.
 	
 Bill with ID:9 belongs to nhadaway6 and is_paid is False.
 	
-Bill with ID:10 belongs to jheadford1j and is_paid is False.
+Bill with ID:10 belongs to jheadford1j and is_paid is True.
 	
 Bill with ID:11 belongs to nhadaway6 and is_paid is False.
 	
