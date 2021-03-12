@@ -87,7 +87,7 @@ class CarSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CarBase
-        fields = ['id','brandName','model','release_year']
+        fields = '__all__'
 
 class MyCarSerializer(serializers.ModelSerializer):
     car = CarSerializer()
