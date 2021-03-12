@@ -99,3 +99,63 @@ class MyCarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
         fields = '__all__'
+
+class AddressSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AddressInfo
+        fields = '__all__'
+
+class ProviderSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Provider
+        fields = '__all__'
+
+class PortSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Ports
+        fields = '__all__'
+
+class CurrentTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CurrentType
+        fields = '__all__'
+
+class StatusTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = StatusType
+        fields = '__all__'
+
+class PointSerializer(serializers.ModelSerializer):
+
+    # ports = PortSerializer(many=True)
+    current_type = CurrentTypeSerializer(many=True)
+    status_type = StatusTypeSerializer(many=True)
+
+    class Meta:
+        model = Point
+        fields = '__all__'
+
+class StationSerializer(serializers.ModelSerializer):
+
+    addressInfo = AddressSerializer()
+    providers = ProviderSerializer(many=True)
+    comments = PointSerializer(many=True)
+    # comments.ports = PortSerializer(many=True)
+
+    class Meta:
+        model=Station
+        fields='__all__'
+
+# class PointSerializer(serializers.ModelSerializer):
+
+#     ports = PortSerializer(many=True)
+#     station = StationSerializer()
+
+#     class Meta:
+#         model = Point
+#         fields = '__all__'

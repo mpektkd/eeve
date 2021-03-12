@@ -36,7 +36,12 @@ class Bill(models.Model):
     is_paid = models.BooleanField()
 
     def __str__(self):
-        return f"Bill with ID:{self.id} belongs to {self.customer.get_username()}."
+        return f"Bill with ID:{self.id} belongs to {self.customer.get_username()} and is_paid is {self.is_paid}."
+
+    def payoff(self):
+
+        self.is_paid = True
+        self.save()
 
  # Monthly Bill expires every 1st of month
 class MonthlyBill(models.Model):

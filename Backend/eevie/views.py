@@ -401,7 +401,7 @@ class MyBills(APIView):
 
     def get(self,request):
 
-        serializer = BillSerializer(request.user.bills,many=True)
+        serializer = BillSerializer(request.user.bills.filter(is_paid=False),many=True)
 
         return Response(serializer.data)
 
@@ -411,7 +411,7 @@ class MyMonthlyBills(APIView):
 
     def get(self,request):
 
-        serializer = MonthlyBillSerializer(request.user.monthlybills,many=True)
+        serializer = MonthlyBillSerializer(request.user.monthlybills.filter(),many=True)
 
         return Response(serializer.data)
 
@@ -463,3 +463,33 @@ class ChargingSession(APIView):
             return Response({'status': ['Bad ID']}, status=status.HTTP_404_NOT_FOUND)
         
         return Response(status=status.HTTP_200_OK)
+
+class Payoff(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+
+        id = request.data["BillID"]
+        
+
+        bill = Bill.objects.get(id=id)
+        if bill.is_paid == True:
+
+            return Response({'status':'Bill is Paid'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        bill.payoff()
+
+        return Response(status=status.HTTP_200_OK)
+
+class getStations(APIView):
+
+    permission_classes=(AllowAny,)
+    authentication_classes = ()
+
+    def get(self, request):
+
+        points = Station.objects.all()
+        serializer = PointSerializer(points, many=True)
+    
+        return Response(serializer.data, status=status.HTTP_200_OK)
