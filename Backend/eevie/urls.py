@@ -22,7 +22,7 @@ urlpatterns = [
     path('cars/',views.GetCars.as_view()),
     path('user/mycars/',views.MyCars.as_view()),
     path('user/mybills/', views.MyBills.as_view()),
-    path('user/deleteme',views.DeleteMe.as_view()),
+    path('user/deleteme/',views.DeleteMe.as_view()),
     path('admin/healthcheck/', views.HealthCheckView.as_view(), name='healthcheck'),
     path('admin/resetsessions/', views.ResetSessions.as_view()),
     path('admin/refillsessions/', views.RefillSessions.as_view()),

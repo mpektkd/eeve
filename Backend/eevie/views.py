@@ -345,8 +345,22 @@ class SessionsUpd(APIView):
             vehicle = get_object_or_404(Car, id=row['VehicleID'])
             station = get_object_or_404(Station, id=row['StationID'])
             point = get_object_or_404(Point, id=row['PointID'])
+            connectionTime = row['ConnectionTime']
+            disconnectTime = row['DisconnectTime']
+            doneChargingTime = row['DoneChargingTime']
+            kWhDelivered = row['kWhDelivered']
+            payment = row['Payment']
             Session.objects.create(
-
+                customer=user,
+                vehicle=vehicle,
+                provider=provider,
+                station=station,
+                point=point,
+                payment=payment,
+                connectionTime=connectionTime,
+                disconnectTime=disconnectTime,
+                doneChargingTime=doneChargingTime,
+                kWhDelivered=kWhDelivered
             )
         return Response({'message':'Sessions Successfully Added'}, status=status.HTTP_200_OK)
 
