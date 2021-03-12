@@ -17,6 +17,8 @@ import SectionPills from "./Sections/SectionPills.js";
 import SectionDownload from "./Sections/SectionDownload.js";
 import styles from "assets/jss/material-kit-react/views/components.js";
 import axiosInstance from "../../axiosApi";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
 
 const useStyles = makeStyles(styles);
 
@@ -43,8 +45,15 @@ export default function Components(props) {
       </Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <SectionPills />
-        <SectionDownload />
+        <GridContainer justify="center" align="center" alignItems="center">
+          <GridItem>
+            <SectionPills/>
+          </GridItem>
+          <GridItem>
+            <SectionDownload/>
+          </GridItem>
+        </GridContainer>
+        
       </div>
       <Footer />
     </div>

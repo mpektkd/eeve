@@ -7,9 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
-import Palette from "@material-ui/icons/Palette";
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -19,19 +17,11 @@ import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import profile from "assets/img/faces/christian.jpg";
+import Dialog from '@material-ui/core/Dialog';
 
-import studio1 from "assets/img/examples/studio-1.jpg";
-import studio2 from "assets/img/examples/studio-2.jpg";
-import studio3 from "assets/img/examples/studio-3.jpg";
-import studio4 from "assets/img/examples/studio-4.jpg";
-import studio5 from "assets/img/examples/studio-5.jpg";
-import work1 from "assets/img/examples/olu-eletu.jpg";
-import work2 from "assets/img/examples/clem-onojeghuo.jpg";
-import work3 from "assets/img/examples/cynthia-del-rio.jpg";
-import work4 from "assets/img/examples/mariya-georgieva.jpg";
-import work5 from "assets/img/examples/clem-onojegaw.jpg";
 import Card from "components/Bill/Card.js";
 import CardHeader from "components/Bill/CardHeader.js";
 import CardIcon from "components/Bill/CardIcon.js";
@@ -50,6 +40,10 @@ const useStyles2 = makeStyles(styles2);
 export default function ProfilePage(props) {
   const classes = useStyles();
   const classes2 = useStyles2();
+  const [billList, setBillList] = React.useState([])
+  const [bilLList, setBilLList] = React.useState([])
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [pageNeedsRender, setPageNeedsRender] = React.useState(true)
   const { ...rest } = props;
   const imageClasses = classNames(
     classes.imgRaised,
@@ -57,8 +51,11 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-  const bill = {amount: "107.00", date: "Last 24 hours"}
   React.useLayoutEffect ( () => {
+    if (!pageNeedsRender) {
+      console.log("Page is about to be rendered again!")
+      return;
+    }
     const response = axiosInstance.get('user/mycars/')
       .then(res => {
         console.log(res)
@@ -66,12 +63,50 @@ export default function ProfilePage(props) {
       .catch(error => {
         console.log(error)
       })
-  });
+    const response2 = axiosInstance.get('user/mybills/')
+      .then(res => {
+        let bill = {}
+        let tempBillList = []
+        let tempBilLList = []
+        for (let i = 0; i < res.data.length; i++) {
+          let bilL = []
+          if (!res.data[i].is_paid) {
+            bill.amount = (res.data[i].total).toFixed(2);
+            bill.date = res.data[i].date_created.toString().slice(0,10);
+            bill.id = res.data[i].id;
+            tempBillList.push(bill);
+          }
+          bilL.push(res.data[i].id.toString());
+          bilL.push(res.data[i].date_created.toString().slice(0,10));
+          bilL.push("$"+(res.data[i].total.toFixed(2)).toString());
+          if (res.data[i].is_paid) {
+            bilL.push("paid off");
+          }
+          else {
+            bilL.push("due");
+          }
+          tempBilLList.push(bilL);
+          bill = {}
+        }
+        setBillList(tempBillList)
+        setBilLList(tempBilLList);
+        setPageNeedsRender(false)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, []);
+
+  function pay (props) {
+    setIsLoading(true)
+    console.log(props);
+  }
+
   function Bill(props) {
     return (<GridItem xs={12} sm={7} md={4}>
       <Card>
         <CardHeader color="success" stats icon>
-          <CardIcon color="success">
+          <CardIcon color="success" onClick = {() => pay(props)}>
             Click to pay
           </CardIcon>
           <p className={classes2.cardCategory}>Bill</p>
@@ -86,10 +121,28 @@ export default function ProfilePage(props) {
       </Card>
     </GridItem>);
   }
+  function Timer () {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+      window.location.reload();
 
+    }, 5000);
+    return (null);
+  }
   return (
     <div>
       { !localStorage.getItem("isLoggedIn") && <Redirect to = "/login-page"/>}
+      { isLoading &&     
+        <Dialog open = { true } PaperProps={{
+          style: {
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+          },
+        }}>
+          <CircularProgress style = {{color: "#67ad5b"}} />
+          <Timer></Timer>
+        </Dialog>  
+        }
       <Header
         color="transparent"
         brand="eevie"
@@ -132,8 +185,14 @@ export default function ProfilePage(props) {
                       tabButton: "My bills",
                       tabIcon: AttachMoneyIcon,
                       tabContent: (
-                        <GridContainer>
-                        <Bill props = {bill}></Bill>
+                        <GridContainer style = { {padding: 20}} justify = "center">
+                          {
+                            billList.map((prop, key ) => {
+                              return (
+                                <Bill key = {key} props = { prop }></Bill>
+                              );
+                            })
+                          }
                         </GridContainer>
                       )
                     },
@@ -150,13 +209,8 @@ export default function ProfilePage(props) {
                               <CardBody>
                                 <Table
                                   tableHeaderColor="success"
-                                  tableHead={["Bill ID", "Date", "Amount", "Location"]}
-                                  tableData={[
-                                    ["1", "03/02/2021", "$36,738", "Thiva"],
-                                    ["2", "05/02/2021", "$23,789", "Athens"],
-                                    ["3", "06/02/2021", "$56,142", "Athens"],
-                                    ["4", "10/02/2021", "$38,735", "Athens"]
-                                  ]}
+                                  tableHead={["Bill ID", "Date", "Amount", "State"]}
+                                  tableData={bilLList}
                                 />
                               </CardBody>
                             </Card>

@@ -95,7 +95,7 @@ export default function LoginPage(props) {
 
 
   const onSubmit = (e) => {
-    if (e.password != e.confirmPassword) {
+    if (e.password !== e.confirmPassword) {
       console.log("Passwords do not match!");
       setPasswordError(true)
       setDefaultText(e);
@@ -134,7 +134,7 @@ export default function LoginPage(props) {
   }
  
   function FormTextField (props) {
-    if (!passwordError && !usernameError && props.name == "firstName") {
+    if (!passwordError && !usernameError && props.name === "firstName") {
       return (
         <TextField
         margin="normal"
@@ -151,7 +151,7 @@ export default function LoginPage(props) {
       />
       );
     }
-    else if (usernameError && props.name == "username") {
+    else if (usernameError && props.name === "username") {
       return (
         <TextField
         error
@@ -169,7 +169,7 @@ export default function LoginPage(props) {
       />
       );
     }
-    else if (passwordError && (props.name == "password" || props.name == "confirmPassword")) {
+    else if (passwordError && (props.name === "password" || props.name === "confirmPassword")) {
       return (
         <TextField
         error
