@@ -169,8 +169,8 @@ elif args.command == 'Admin':
         if args.format == 'csv': print('csv')
         else: print('json')
     elif healthcheck: 
-        print ("/healthcheck")
-        if args.format == 'csv': print('csv')
+        r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/healthcheck/").json()
+        print(r["status"])
         else: print('json')
     elif resetsessions: 
         print ("resetsessions")
