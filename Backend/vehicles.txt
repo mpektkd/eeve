@@ -1,209 +1,209 @@
 User: bstannard1
-	d97748b1-e384-4238-a225-d498bccd902c	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 4.0 max power.	
 
 User: lwimp2
-	b8a76fa8-97f1-4f27-8f9f-80f26df230d1	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 55.0.>, <chargingCurve: Charging percentage 56.0 with power 38.0.>, <chargingCurve: Charging percentage 68.0 with power 24.0.>, <chargingCurve: Charging percentage 85.0 with power 16.0.>, <chargingCurve: Charging percentage 100.0 with power 0.0.>]>.	AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>, <Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: cmuggleton3
-	7490520f-fe11-4148-a9b6-3882f06ee082	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>, <Ports: Port with ID: 27 and title Tesla Supercharger.>, <Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 12.0.>, <chargingCurve: Charging percentage 0.0 with power 125.0.>, <chargingCurve: Charging percentage 43.0 with power 140.0.>, <chargingCurve: Charging percentage 80.0 with power 37.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.	
 
 User: ccavell4
-	3b5bb8d1-0f34-4c05-861c-45d19a8883b9	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 95.0.>, <chargingCurve: Charging percentage 75.0 with power 100.0.>, <chargingCurve: Charging percentage 100.0 with power 7.4.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.	
 
 User: mdouse5
-	b8a76fa8-97f1-4f27-8f9f-80f26df230d1	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 55.0.>, <chargingCurve: Charging percentage 56.0 with power 38.0.>, <chargingCurve: Charging percentage 68.0 with power 24.0.>, <chargingCurve: Charging percentage 85.0 with power 16.0.>, <chargingCurve: Charging percentage 100.0 with power 0.0.>]>.	AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>, <Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: nhadaway6
-	430ca2cd-bd4b-482a-8776-85a8c7d3435c	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 11.0.>, <chargingCurve: Charging percentage 0.0 with power 95.0.>, <chargingCurve: Charging percentage 75.0 with power 100.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: ehucke7
-	b97f749b-5361-4116-8103-c208dc601a0b	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.3 max power.	
 
 User: kdyble8
-	c53b5947-23a3-420c-9798-f3846732e41a	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 22.0.>, <chargingCurve: Charging percentage 0.0 with power 42.0.>, <chargingCurve: Charging percentage 75.0 with power 45.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.	
 
 User: emitcham9
-	2eea1ef2-0fd1-481d-adee-68044666614e	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 32.0.>, <chargingCurve: Charging percentage 27.0 with power 34.0.>, <chargingCurve: Charging percentage 80.0 with power 14.0.>, <chargingCurve: Charging percentage 100.0 with power 7.0.>]>.	AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: jmalcolmsona
-	87e73c44-93ba-4687-877c-32a3aa940a09	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 11.0.>, <chargingCurve: Charging percentage 0.0 with power 73.0.>, <chargingCurve: Charging percentage 75.0 with power 77.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: mcoffeeb
-	5bfa9a87-7b35-4e3a-bd3f-dc2ac55e184b	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 6.6.>, <chargingCurve: Charging percentage 0.0 with power 57.0.>, <chargingCurve: Charging percentage 75.0 with power 60.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.	
 
 User: fbugdallc
-	98aacbc9-5a97-4fe4-abcf-4f7bb2910a9f	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.	
 
 User: rbrownfieldd
-	5e1746c9-56a2-4fb9-8a76-b75c95a037ee	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 47.0.>, <chargingCurve: Charging percentage 75.0 with power 50.0.>, <chargingCurve: Charging percentage 100.0 with power 6.6.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.	
 
 User: bdevalle
-	f0132135-9415-4403-818b-cee07f81ceb2	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 10.0.>, <chargingCurve: Charging percentage 80.0 with power 37.0.>, <chargingCurve: Charging percentage 0.0 with power 39.0.>, <chargingCurve: Charging percentage 60.0 with power 40.0.>]>.	AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: dpaylerf
-	45b68c71-cd11-4bd7-a03f-fdaae259635d	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 47.0.>, <chargingCurve: Charging percentage 75.0 with power 50.0.>, <chargingCurve: Charging percentage 100.0 with power 3.6.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.	
 
 User: oswyng
-	a883bb35-270d-4f31-9169-ccf06ae3c0c5	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.3 max power.	
 
 User: wbasnetth
-	78b14a0f-5c62-4885-95ef-2e3f81197260	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 6.6.>, <chargingCurve: Charging percentage 0.0 with power 95.0.>, <chargingCurve: Charging percentage 75.0 with power 100.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.	
 
 User: wmoffati
-	f1b46b0a-b101-4072-a246-0b52f0cc51f5	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 8.0.>, <chargingCurve: Charging percentage 0.0 with power 40.0.>, <chargingCurve: Charging percentage 76.0 with power 44.0.>, <chargingCurve: Charging percentage 81.0 with power 25.0.>, <chargingCurve: Charging percentage 93.0 with power 16.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.	
 
 User: cgandleyj
-	83ec0576-bfb8-400a-9af9-483b2684673c	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 10.0.>, <chargingCurve: Charging percentage 0.0 with power 41.0.>, <chargingCurve: Charging percentage 80.0 with power 47.0.>, <chargingCurve: Charging percentage 90.0 with power 30.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.	
 
 User: aebbettsk
-	92ffd46c-fe26-4805-81ba-fbadce4d524f	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>, <Ports: Port with ID: 27 and title Tesla Supercharger.>, <Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 12.0.>, <chargingCurve: Charging percentage 0.0 with power 125.0.>, <chargingCurve: Charging percentage 43.0 with power 140.0.>, <chargingCurve: Charging percentage 80.0 with power 37.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: shinckleyl
-	7dbad968-7058-4440-9c8f-8f483cdd973a	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 12.0.>, <chargingCurve: Charging percentage 60.0 with power 110.0.>, <chargingCurve: Charging percentage 0.0 with power 180.0.>, <chargingCurve: Charging percentage 40.0 with power 195.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: bgrigoronim
-	0a663bbf-3b87-4e7a-bd7a-3e9c39961a2b	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>, <Ports: Port with ID: 27 and title Tesla Supercharger.>, <Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 12.0.>, <chargingCurve: Charging percentage 0.0 with power 125.0.>, <chargingCurve: Charging percentage 43.0 with power 140.0.>, <chargingCurve: Charging percentage 80.0 with power 37.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: iscotchbrookn
-	de7bac96-33ed-44f2-964e-21a4878e9f00	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 11.0.>, <chargingCurve: Charging percentage 0.0 with power 97.0.>, <chargingCurve: Charging percentage 16.0 with power 97.0.>, <chargingCurve: Charging percentage 17.0 with power 78.0.>, <chargingCurve: Charging percentage 46.0 with power 78.0.>, <chargingCurve: Charging percentage 47.0 with power 52.0.>, <chargingCurve: Charging percentage 68.0 with power 52.0.>, <chargingCurve: Charging percentage 69.0 with power 27.0.>, <chargingCurve: Charging percentage 83.0 with power 27.0.>, <chargingCurve: Charging percentage 84.0 with power 11.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: jginieo
-	2f2b159b-9b03-450f-9818-c139323d1735	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.	
 
 User: ggodridgep
-	eb8d28ec-8df7-40a8-8dd7-badf738f0832	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>, <Ports: Port with ID: 27 and title Tesla Supercharger.>, <Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 12.0.>, <chargingCurve: Charging percentage 0.0 with power 125.0.>, <chargingCurve: Charging percentage 43.0 with power 140.0.>, <chargingCurve: Charging percentage 80.0 with power 37.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 118.0.>, <chargingCurve: Charging percentage 75.0 with power 125.0.>, <chargingCurve: Charging percentage 100.0 with power 22.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 118.0.>, <chargingCurve: Charging percentage 75.0 with power 125.0.>, <chargingCurve: Charging percentage 100.0 with power 22.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.	
 
 User: cdabnerq
-	0aa5220a-6da7-4dc0-a0a1-714bea4fded3	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>, <Ports: Port with ID: 27 and title Tesla Supercharger.>, <Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 12.0.>, <chargingCurve: Charging percentage 0.0 with power 125.0.>, <chargingCurve: Charging percentage 43.0 with power 140.0.>, <chargingCurve: Charging percentage 80.0 with power 37.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.	
 
 User: rbirtonshawr
-	6990914a-6a0d-49d4-87f5-ee86ee33344c	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 11.0.>, <chargingCurve: Charging percentage 0.0 with power 256.0.>, <chargingCurve: Charging percentage 75.0 with power 270.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: cruzickas
-	1c9126d4-24d6-4e9f-a49d-15813fa49728	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 4.0 max power.	
 
 User: rchessont
-	b8a76fa8-97f1-4f27-8f9f-80f26df230d1	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 55.0.>, <chargingCurve: Charging percentage 56.0 with power 38.0.>, <chargingCurve: Charging percentage 68.0 with power 24.0.>, <chargingCurve: Charging percentage 85.0 with power 16.0.>, <chargingCurve: Charging percentage 100.0 with power 0.0.>]>.	AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>, <Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: gkastelu
-	ec3b0af7-67c6-400d-b3c2-aa2f3be24c8a	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.	
 
 User: edennittsv
-	737441e8-6b5f-4185-9b0b-e51585ab6ea8	
+	None	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.	
 
 User: fcarew
-	92ffd46c-fe26-4805-81ba-fbadce4d524f	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>, <Ports: Port with ID: 27 and title Tesla Supercharger.>, <Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 12.0.>, <chargingCurve: Charging percentage 0.0 with power 125.0.>, <chargingCurve: Charging percentage 43.0 with power 140.0.>, <chargingCurve: Charging percentage 80.0 with power 37.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: clorenx
-	1cec7821-632f-4f17-8a58-644b6ab23f44	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 11.0.>, <chargingCurve: Charging percentage 0.0 with power 97.0.>, <chargingCurve: Charging percentage 16.0 with power 97.0.>, <chargingCurve: Charging percentage 17.0 with power 78.0.>, <chargingCurve: Charging percentage 46.0 with power 78.0.>, <chargingCurve: Charging percentage 47.0 with power 52.0.>, <chargingCurve: Charging percentage 68.0 with power 52.0.>, <chargingCurve: Charging percentage 69.0 with power 27.0.>, <chargingCurve: Charging percentage 83.0 with power 27.0.>, <chargingCurve: Charging percentage 84.0 with power 11.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.	
 
 User: mwindy
-	e8773876-6036-4a6c-926e-5490aae58971	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.2 max power.	
 
 User: ceamesz
-	926efa33-4c55-43df-80f3-4b8d2d65a00a	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 11.0.>, <chargingCurve: Charging percentage 0.0 with power 97.0.>, <chargingCurve: Charging percentage 16.0 with power 97.0.>, <chargingCurve: Charging percentage 17.0 with power 78.0.>, <chargingCurve: Charging percentage 46.0 with power 78.0.>, <chargingCurve: Charging percentage 47.0 with power 52.0.>, <chargingCurve: Charging percentage 68.0 with power 52.0.>, <chargingCurve: Charging percentage 69.0 with power 27.0.>, <chargingCurve: Charging percentage 83.0 with power 27.0.>, <chargingCurve: Charging percentage 84.0 with power 11.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.	
 
 User: lplumley10
-	58661a4c-e1f9-4dc2-8d09-3bb42be62554	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 47.0.>, <chargingCurve: Charging percentage 75.0 with power 50.0.>, <chargingCurve: Charging percentage 100.0 with power 7.2.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: vpresser11
-	b3fd3e84-4dd4-4ac0-914f-3c3c582fc600	
+	None	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.	
 
 User: gcalender12
-	4df1d4d6-f001-4d0a-b284-5ffc07e6ade2	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.	
 
 User: ksomerbell13
-	22f521ce-42ca-40d7-bfdb-5d33b1bd9cbe	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 11.0.>, <chargingCurve: Charging percentage 0.0 with power 80.0.>, <chargingCurve: Charging percentage 75.0 with power 85.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: sdrogan14
-	975b064b-626e-4318-b60c-3ce0729743fd	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.	
 
 User: thamson15
-	fc5b3c94-c0eb-4515-af3d-4a4106ffe29f	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 32.0.>, <chargingCurve: Charging percentage 27.0 with power 34.0.>, <chargingCurve: Charging percentage 80.0 with power 14.0.>, <chargingCurve: Charging percentage 100.0 with power 7.0.>]>.	AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: beusden16
-	e3525b59-d3b9-4eef-9a01-1408358c5534	
+	None	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.	
 
 User: arotham17
-	32922583-e434-4ed2-afc1-4d8fde67aeda	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>, <Ports: Port with ID: 27 and title Tesla Supercharger.>, <Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 12.0.>, <chargingCurve: Charging percentage 0.0 with power 125.0.>, <chargingCurve: Charging percentage 43.0 with power 140.0.>, <chargingCurve: Charging percentage 80.0 with power 37.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.	
 
 User: pclemenza18
-	2644bfd3-a593-4276-bb1f-c8965e33797e	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 43.0.>, <chargingCurve: Charging percentage 100.0 with power 6.6.>, <chargingCurve: Charging percentage 75.0 with power 46.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.	
 
 User: ttyrwhitt19
-	5e1746c9-56a2-4fb9-8a76-b75c95a037ee	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 47.0.>, <chargingCurve: Charging percentage 75.0 with power 50.0.>, <chargingCurve: Charging percentage 100.0 with power 6.6.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.	
 
 User: sbuttel1a
-	d8044adf-2538-4d45-b2d8-2b2fd0951766	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 11.0.>, <chargingCurve: Charging percentage 0.0 with power 95.0.>, <chargingCurve: Charging percentage 75.0 with power 100.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: pbeadnall1b
-	9666138c-1d24-4fa8-9083-0ffba09ab1ef	
+	None	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 43.0 max power.	
 
 User: hsuero1c
-	71cc8552-391f-49b0-b106-2202fa222161	
+	None	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: gbyfford1d
-	ffcd3116-4e17-49ff-a926-941c062643ea	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 32.0.>, <chargingCurve: Charging percentage 27.0 with power 34.0.>, <chargingCurve: Charging percentage 80.0 with power 14.0.>, <chargingCurve: Charging percentage 100.0 with power 7.0.>]>.	AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: ldudin1e
-	3b649ae3-935b-425b-b5d6-75c549b96d40	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 10.0.>, <chargingCurve: Charging percentage 0.0 with power 40.0.>, <chargingCurve: Charging percentage 22.0 with power 46.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.	
 
 User: kvondracek1f
-	57184038-ae77-4540-9367-ccb98beb8cc3	
+	None	AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: dbiagi1g
-	6f96c616-e87a-4958-bbe7-b4278be00170	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 11.0.>, <chargingCurve: Charging percentage 0.0 with power 97.0.>, <chargingCurve: Charging percentage 16.0 with power 97.0.>, <chargingCurve: Charging percentage 17.0 with power 78.0.>, <chargingCurve: Charging percentage 46.0 with power 78.0.>, <chargingCurve: Charging percentage 47.0 with power 52.0.>, <chargingCurve: Charging percentage 68.0 with power 52.0.>, <chargingCurve: Charging percentage 69.0 with power 27.0.>, <chargingCurve: Charging percentage 83.0 with power 27.0.>, <chargingCurve: Charging percentage 84.0 with power 11.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: mtreswell1h
-	2ae110f8-8906-4b03-b4bc-83e5577c1cc1	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 6.6.>, <chargingCurve: Charging percentage 0.0 with power 26.0.>, <chargingCurve: Charging percentage 75.0 with power 28.0.>]>.	AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.	
 
 User: dstuckes1i
-	3b649ae3-935b-425b-b5d6-75c549b96d40	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 10.0.>, <chargingCurve: Charging percentage 0.0 with power 40.0.>, <chargingCurve: Charging percentage 22.0 with power 46.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.	
 
 User: jheadford1j
-	8cfce5f4-23b6-470a-87fa-a04095fe0334	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.	
 
 User: jmacmeeking1k
-	c6a6bd26-6a8f-4ab7-baf3-6cfa057044e3	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 118.0.>, <chargingCurve: Charging percentage 75.0 with power 125.0.>, <chargingCurve: Charging percentage 100.0 with power 11.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: dtimlett1l
-	5bfa9a87-7b35-4e3a-bd3f-dc2ac55e184b	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 6.6.>, <chargingCurve: Charging percentage 0.0 with power 57.0.>, <chargingCurve: Charging percentage 75.0 with power 60.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.	
 
 User: lbutting1m
-	4f408d10-82c3-4850-ae2b-141f21d745b3	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.	
 
 User: aboas1n
-	add28704-7b59-474d-bfa6-2338e54ccaef	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 47.0.>, <chargingCurve: Charging percentage 75.0 with power 50.0.>, <chargingCurve: Charging percentage 100.0 with power 6.6.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.	
 
 User: llevey1o
-	ed3fe177-d852-49bd-84ca-8ecd8d7ec3b1	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>, <Ports: Port with ID: 27 and title Tesla Supercharger.>, <Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 22.0.>, <chargingCurve: Charging percentage 0.0 with power 95.0.>, <chargingCurve: Charging percentage 75.0 with power 100.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.	
 
 User: dalp1p
-	d8044adf-2538-4d45-b2d8-2b2fd0951766	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 11.0.>, <chargingCurve: Charging percentage 0.0 with power 95.0.>, <chargingCurve: Charging percentage 75.0 with power 100.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: bwoodyatt1q
-	b8a76fa8-97f1-4f27-8f9f-80f26df230d1	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 55.0.>, <chargingCurve: Charging percentage 56.0 with power 38.0.>, <chargingCurve: Charging percentage 68.0 with power 24.0.>, <chargingCurve: Charging percentage 85.0 with power 16.0.>, <chargingCurve: Charging percentage 100.0 with power 0.0.>]>.	AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>, <Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: nrentilll1r
-	3b5bb8d1-0f34-4c05-861c-45d19a8883b9	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 95.0.>, <chargingCurve: Charging percentage 75.0 with power 100.0.>, <chargingCurve: Charging percentage 100.0 with power 7.4.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.	
 
 User: ylebbon1s
-	7de25a64-e9fa-484f-bf99-d02b02cfb17d	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 12.0.>, <chargingCurve: Charging percentage 60.0 with power 110.0.>, <chargingCurve: Charging percentage 0.0 with power 180.0.>, <chargingCurve: Charging percentage 40.0 with power 195.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: htour1t
-	66cb7bea-24b7-458f-ae3e-11d4a852568b	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 47.0.>, <chargingCurve: Charging percentage 75.0 with power 50.0.>, <chargingCurve: Charging percentage 100.0 with power 7.2.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.	
 
 User: cleynton1u
-	ed3fe177-d852-49bd-84ca-8ecd8d7ec3b1	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>, <Ports: Port with ID: 27 and title Tesla Supercharger.>, <Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 100.0 with power 22.0.>, <chargingCurve: Charging percentage 0.0 with power 95.0.>, <chargingCurve: Charging percentage 75.0 with power 100.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.	
 
 User: rrhoddie1v
-	27d7610e-9a77-498a-b1b5-28d4bc92cbf2	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 137.0.>, <chargingCurve: Charging percentage 70.0 with power 155.0.>, <chargingCurve: Charging percentage 72.0 with power 150.0.>, <chargingCurve: Charging percentage 78.0 with power 120.0.>, <chargingCurve: Charging percentage 82.0 with power 105.0.>, <chargingCurve: Charging percentage 100.0 with power 50.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.	
 
 User: adykes1w
-	8da12395-cf7a-4ccf-886f-e25ade426457	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 100.0.>, <chargingCurve: Charging percentage 30.0 with power 105.0.>, <chargingCurve: Charging percentage 80.0 with power 55.0.>, <chargingCurve: Charging percentage 90.0 with power 37.0.>, <chargingCurve: Charging percentage 100.0 with power 12.0.>]>.	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.	
 
 User: sharewood1x
-	b97f749b-5361-4116-8103-c208dc601a0b	
+	None	AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.3 max power.	
 
 User: mpektkd
 	
@@ -221,8 +221,8 @@ User: mpek
 	
 
 User: Loco
-	a9a177bf-9ce5-4b67-b3ef-51af248b48c2	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 137.0.>, <chargingCurve: Charging percentage 70.0 with power 155.0.>, <chargingCurve: Charging percentage 72.0 with power 150.0.>, <chargingCurve: Charging percentage 78.0 with power 120.0.>, <chargingCurve: Charging percentage 82.0 with power 105.0.>, <chargingCurve: Charging percentage 100.0 with power 50.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 
 User: DikoM
-	a9a177bf-9ce5-4b67-b3ef-51af248b48c2	
+	DC charger with available ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>, <Ports: Port with ID: 33 and title CCS (Type 2).>]> and <QuerySet [<chargingCurve: Charging percentage 0.0 with power 137.0.>, <chargingCurve: Charging percentage 70.0 with power 155.0.>, <chargingCurve: Charging percentage 72.0 with power 150.0.>, <chargingCurve: Charging percentage 78.0 with power 120.0.>, <chargingCurve: Charging percentage 82.0 with power 105.0.>, <chargingCurve: Charging percentage 100.0 with power 50.0.>]>.	AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.	
 

@@ -1,456 +1,456 @@
 Station: 21206, Provider:ERON
-	Point: 23072	
+	Point: 23072, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 21208, Provider:ERON
-	Point: 23074	Point: 23090	Point: 23091	
+	Point: 23074, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 23090, Ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>]>	Point: 23091, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 21219, Provider:ERON
-	Point: 23078	
+	Point: 23078, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 21227, Provider:DEI
-	Point: 23082	Point: 23083	
+	Point: 23082, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	Point: 23083, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 21228, Provider:DEI
-	Point: 23084	Point: 23085	
+	Point: 23084, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	Point: 23085, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 21229, Provider:DEI
-	Point: 23086	Point: 23087	
+	Point: 23086, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	Point: 23087, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 21230, Provider:DEI
-	Point: 23088	Point: 23089	
+	Point: 23088, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	Point: 23089, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 91568, Provider:DEI
-	Point: 129805	
+	Point: 129805, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 91569, Provider:PROTERGIA
-	Point: 129806	
+	Point: 129806, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 91570, Provider:ERON
-	Point: 129807	
+	Point: 129807, Ports: <QuerySet [<Ports: Port with ID: 17 and title CEE 5 Pin.>]>	
 
 Station: 107519, Provider:PROTERGIA
-	Point: 151696	
+	Point: 151696, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 108413, Provider:ERON
-	Point: 153289	
+	Point: 153289, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 108414, Provider:DEI
-	Point: 153290	
+	Point: 153290, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113318, Provider:DEI
-	Point: 159557	
+	Point: 159557, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113319, Provider:PROTERGIA
-	Point: 159558	
+	Point: 159558, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113320, Provider:ERON
-	Point: 159559	
+	Point: 159559, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113418, Provider:PROTERGIA
-	Point: 159772	
+	Point: 159772, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113419, Provider:PROTERGIA
-	Point: 159773	
+	Point: 159773, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113478, Provider:ERON
-	Point: 159879	
+	Point: 159879, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113500, Provider:DEI
-	Point: 159920	
+	Point: 159920, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113502, Provider:PROTERGIA
-	Point: 159922	
+	Point: 159922, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113581, Provider:ERON
-	Point: 160060	
+	Point: 160060, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113582, Provider:DEI
-	Point: 160061	
+	Point: 160061, Ports: <QuerySet [<Ports: Port with ID: 0 and title Unknown.>]>	
 
 Station: 113583, Provider:DEI
-	Point: 160062	
+	Point: 160062, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113608, Provider:ERON
-	Point: 160104	
+	Point: 160104, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113609, Provider:PROTERGIA
-	Point: 160105	
+	Point: 160105, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113610, Provider:DEI
-	Point: 160106	Point: 160107	
+	Point: 160106, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	Point: 160107, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113611, Provider:ERON
-	Point: 160108	
+	Point: 160108, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 113614, Provider:PROTERGIA
-	Point: 160115	
+	Point: 160115, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113615, Provider:ERON
-	Point: 160116	
+	Point: 160116, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 113799, Provider:PROTERGIA
-	Point: 160369	
+	Point: 160369, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114209, Provider:PROTERGIA
-	Point: 160781	
+	Point: 160781, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 114210, Provider:PROTERGIA
-	Point: 160782	
+	Point: 160782, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 114213, Provider:ERON
-	Point: 160786	
+	Point: 160786, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114214, Provider:ERON
-	Point: 160788	
+	Point: 160788, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114215, Provider:ERON
-	Point: 160789	
+	Point: 160789, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 114216, Provider:DEI
-	Point: 160790	
+	Point: 160790, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 114217, Provider:PROTERGIA
-	Point: 160791	
+	Point: 160791, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114218, Provider:ERON
-	Point: 160792	
+	Point: 160792, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114219, Provider:ERON
-	Point: 160793	
+	Point: 160793, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114220, Provider:ERON
-	Point: 160794	
+	Point: 160794, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114291, Provider:DEI
-	Point: 160874	
+	Point: 160874, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114292, Provider:ERON
-	Point: 160875	
+	Point: 160875, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114293, Provider:DEI
-	Point: 160876	
+	Point: 160876, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114294, Provider:DEI
-	Point: 160877	
+	Point: 160877, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114335, Provider:PROTERGIA
-	Point: 160930	
+	Point: 160930, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114337, Provider:PROTERGIA
-	Point: 160934	
+	Point: 160934, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114339, Provider:ERON
-	Point: 160938	
+	Point: 160938, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114341, Provider:DEI
-	Point: 160942	
+	Point: 160942, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114344, Provider:PROTERGIA
-	Point: 160949	
+	Point: 160949, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114348, Provider:DEI
-	Point: 160959	
+	Point: 160959, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114352, Provider:ERON
-	Point: 160972	
+	Point: 160972, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 114353, Provider:PROTERGIA
-	Point: 160973	
+	Point: 160973, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114354, Provider:DEI
-	Point: 160974	
+	Point: 160974, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 114355, Provider:ERON
-	Point: 160976	
+	Point: 160976, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 115203, Provider:PROTERGIA
-	Point: 162174	
+	Point: 162174, Ports: <QuerySet [<Ports: Port with ID: 1041 and title Three Phase 5-Pin (AS/NZ 3123).>]>	
 
 Station: 118685, Provider:ERON
-	Point: 167859	Point: 186969	
+	Point: 167859, Ports: <QuerySet [<Ports: Port with ID: 13 and title Europlug 2-Pin (CEE 7/16).>]>	Point: 186969, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 121564, Provider:DEI
-	Point: 171291	
+	Point: 171291, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 125082, Provider:DEI
-	Point: 175312	
+	Point: 175312, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 125083, Provider:ERON
-	Point: 175313	
+	Point: 175313, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 125912, Provider:PROTERGIA
-	Point: 176481	
+	Point: 176481, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 125913, Provider:PROTERGIA
-	Point: 176482	
+	Point: 176482, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 126757, Provider:ERON
-	Point: 177552	
+	Point: 177552, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 126758, Provider:ERON
-	Point: 177553	
+	Point: 177553, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 127241, Provider:ERON
-	Point: 178172	
+	Point: 178172, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 128254, Provider:PROTERGIA
-	Point: 179528	
+	Point: 179528, Ports: <QuerySet [<Ports: Port with ID: 13 and title Europlug 2-Pin (CEE 7/16).>]>	
 
 Station: 128261, Provider:DEI
-	Point: 179536	
+	Point: 179536, Ports: <QuerySet [<Ports: Port with ID: 13 and title Europlug 2-Pin (CEE 7/16).>]>	
 
 Station: 128262, Provider:DEI
-	Point: 179537	
+	Point: 179537, Ports: <QuerySet [<Ports: Port with ID: 13 and title Europlug 2-Pin (CEE 7/16).>]>	
 
 Station: 128817, Provider:PROTERGIA
-	Point: 180235	Point: 180251	
+	Point: 180235, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	Point: 180251, Ports: <QuerySet [<Ports: Port with ID: 17 and title CEE 5 Pin.>]>	
 
 Station: 131251, Provider:DEI
-	Point: 183776	
+	Point: 183776, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 131522, Provider:ERON
-	Point: 184087	
+	Point: 184087, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 131901, Provider:PROTERGIA
-	Point: 184575	
+	Point: 184575, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 131902, Provider:PROTERGIA
-	Point: 184576	
+	Point: 184576, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 133478, Provider:DEI
-	Point: 186839	
+	Point: 186839, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 133609, Provider:ERON
-	Point: 187009	
+	Point: 187009, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 134004, Provider:PROTERGIA
-	Point: 187500	Point: 187501	
+	Point: 187500, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 187501, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	
 
 Station: 134063, Provider:ERON
-	Point: 187590	
+	Point: 187590, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 134483, Provider:DEI
-	Point: 188212	
+	Point: 188212, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 134484, Provider:ERON
-	Point: 188213	
+	Point: 188213, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 134534, Provider:ERON
-	Point: 188304	Point: 188305	Point: 188306	
+	Point: 188304, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 188305, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	Point: 188306, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	
 
 Station: 134744, Provider:ERON
-	Point: 188528	
+	Point: 188528, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 135471, Provider:PROTERGIA
-	Point: 189807	
+	Point: 189807, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 135503, Provider:PROTERGIA
-	Point: 189846	
+	Point: 189846, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 135504, Provider:PROTERGIA
-	Point: 189847	
+	Point: 189847, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 146213, Provider:DEI
-	Point: 203168	
+	Point: 203168, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 146214, Provider:PROTERGIA
-	Point: 203169	
+	Point: 203169, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 146215, Provider:PROTERGIA
-	Point: 203170	
+	Point: 203170, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 146216, Provider:ERON
-	Point: 203171	
+	Point: 203171, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 146217, Provider:PROTERGIA
-	Point: 203172	
+	Point: 203172, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 146218, Provider:DEI
-	Point: 203173	
+	Point: 203173, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 146335, Provider:ERON
-	Point: 203422	
+	Point: 203422, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 146547, Provider:PROTERGIA
-	Point: 203766	
+	Point: 203766, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 148515, Provider:PROTERGIA
-	Point: 206223	
+	Point: 206223, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 149390, Provider:ERON
-	Point: 207420	
+	Point: 207420, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 149393, Provider:PROTERGIA
-	Point: 207423	
+	Point: 207423, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 149443, Provider:DEI
-	Point: 207486	
+	Point: 207486, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 149444, Provider:PROTERGIA
-	Point: 207487	
+	Point: 207487, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 149445, Provider:DEI
-	Point: 207488	
+	Point: 207488, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 149626, Provider:ERON
-	Point: 207741	
+	Point: 207741, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 149627, Provider:DEI
-	Point: 207742	Point: 207743	
+	Point: 207742, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 207743, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	
 
 Station: 149984, Provider:ERON
-	Point: 208241	Point: 208242	
+	Point: 208241, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	Point: 208242, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 155268, Provider:DEI
-	Point: 218636	
+	Point: 218636, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 155632, Provider:ERON
-	Point: 219116	
+	Point: 219116, Ports: <QuerySet [<Ports: Port with ID: 0 and title Unknown.>]>	
 
 Station: 155961, Provider:DEI
-	Point: 219537	Point: 219538	Point: 219539	Point: 219540	
+	Point: 219537, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	Point: 219538, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	Point: 219539, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	Point: 219540, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 157407, Provider:DEI
-	Point: 226723	
+	Point: 226723, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 161354, Provider:PROTERGIA
-	Point: 232219	Point: 232220	
+	Point: 232219, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 232220, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	
 
 Station: 161535, Provider:PROTERGIA
-	Point: 232467	
+	Point: 232467, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 161556, Provider:ERON
-	Point: 232495	
+	Point: 232495, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 161608, Provider:PROTERGIA
-	Point: 232568	
+	Point: 232568, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 161700, Provider:DEI
-	Point: 232681	
+	Point: 232681, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 161754, Provider:PROTERGIA
-	Point: 232756	
+	Point: 232756, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 161755, Provider:DEI
-	Point: 232757	
+	Point: 232757, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 161824, Provider:PROTERGIA
-	Point: 232850	
+	Point: 232850, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 162244, Provider:PROTERGIA
-	Point: 233504	
+	Point: 233504, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 165292, Provider:DEI
-	Point: 236985	
+	Point: 236985, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 165293, Provider:DEI
-	Point: 236986	
+	Point: 236986, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 165294, Provider:ERON
-	Point: 236987	
+	Point: 236987, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 165295, Provider:ERON
-	Point: 236988	
+	Point: 236988, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 165296, Provider:DEI
-	Point: 236989	
+	Point: 236989, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 165297, Provider:ERON
-	Point: 236990	
+	Point: 236990, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 165298, Provider:DEI
-	Point: 236991	
+	Point: 236991, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 165299, Provider:DEI
-	Point: 236992	
+	Point: 236992, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 165300, Provider:DEI
-	Point: 236993	Point: 236994	Point: 236995	
+	Point: 236993, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 236994, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 236995, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 167262, Provider:ERON
-	Point: 253295	
+	Point: 253295, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 169753, Provider:ERON
-	Point: 258605	
+	Point: 258605, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 171267, Provider:PROTERGIA
-	Point: 261748	
+	Point: 261748, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 171268, Provider:PROTERGIA
-	Point: 261749	Point: 261750	Point: 261751	
+	Point: 261749, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	Point: 261750, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 261751, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	
 
 Station: 171269, Provider:DEI
-	Point: 261752	Point: 261753	Point: 261754	
+	Point: 261752, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	Point: 261753, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 261754, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	
 
 Station: 171288, Provider:DEI
-	Point: 261788	
+	Point: 261788, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 171299, Provider:DEI
-	Point: 261816	Point: 261817	Point: 261818	
+	Point: 261816, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 261817, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 261818, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 171301, Provider:ERON
-	Point: 261820	Point: 261821	Point: 261822	
+	Point: 261820, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 261821, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 261822, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 171303, Provider:ERON
-	Point: 261824	Point: 261825	Point: 261826	
+	Point: 261824, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 261825, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 261826, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 171305, Provider:PROTERGIA
-	Point: 261828	Point: 261829	Point: 261830	
+	Point: 261828, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 261829, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 261830, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 171330, Provider:PROTERGIA
-	Point: 261875	Point: 261876	Point: 261877	
+	Point: 261875, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 261876, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 261877, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 171332, Provider:DEI
-	Point: 261881	Point: 261882	Point: 261883	
+	Point: 261881, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 261882, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 261883, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 171507, Provider:ERON
-	Point: 262256	
+	Point: 262256, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 171527, Provider:PROTERGIA
-	Point: 262306	
+	Point: 262306, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	
 
 Station: 171528, Provider:PROTERGIA
-	Point: 262307	
+	Point: 262307, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 171529, Provider:PROTERGIA
-	Point: 262308	Point: 262309	Point: 262310	
+	Point: 262308, Ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>]>	Point: 262309, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 262310, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 171530, Provider:ERON
-	Point: 262311	Point: 262312	Point: 262313	
+	Point: 262311, Ports: <QuerySet [<Ports: Port with ID: 32 and title CCS (Type 1).>]>	Point: 262312, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 262313, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 171531, Provider:PROTERGIA
-	Point: 262315	Point: 262316	Point: 262317	
+	Point: 262315, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 262316, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 262317, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 171532, Provider:ERON
-	Point: 262318	
+	Point: 262318, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	
 
 Station: 171533, Provider:ERON
-	Point: 262319	
+	Point: 262319, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	
 
 Station: 171534, Provider:PROTERGIA
-	Point: 262320	
+	Point: 262320, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	
 
 Station: 171535, Provider:ERON
-	Point: 262321	
+	Point: 262321, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 171536, Provider:PROTERGIA
-	Point: 262322	
+	Point: 262322, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 171537, Provider:DEI
-	Point: 262323	Point: 262324	Point: 262325	
+	Point: 262323, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 262324, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 262325, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 171538, Provider:PROTERGIA
-	Point: 262326	Point: 262327	Point: 262328	
+	Point: 262326, Ports: <QuerySet [<Ports: Port with ID: 2 and title CHAdeMO.>]>	Point: 262327, Ports: <QuerySet [<Ports: Port with ID: 33 and title CCS (Type 2).>]>	Point: 262328, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 171539, Provider:ERON
-	Point: 262329	
+	Point: 262329, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 171555, Provider:PROTERGIA
-	Point: 262351	
+	Point: 262351, Ports: <QuerySet [<Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]>	
 
 Station: 172220, Provider:ERON
-	Point: 263271	
+	Point: 263271, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 
 Station: 172222, Provider:DEI
-	Point: 263275	
+	Point: 263275, Ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>]>	
 

@@ -513,7 +513,7 @@ class Point(models.Model):
     protocol = models.CharField(max_length=20, default="Level 2 : Medium (Over 2kW)")
 
     def __str__(self):
-        return f"Point: {self.id}"
+        return f"Point: {self.id}, Ports: {self.ports.all()}"
 
  # Filled by stations.create
 class MediaTypes(models.Model):

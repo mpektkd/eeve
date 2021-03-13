@@ -423,45 +423,44 @@ class ChargingSession(APIView):
 
         data = request.data
         
-        try:
 
-            provider = Provider.objects.get(id=data['ProviderID'])
-            user = request.user
-            vehicle = Car.objects.get(id=data['VehicleID'])
-            station = Station.objects.get(id=data['StationID'])
-            point = Point.objects.get(id=data['PointID'])
+        provider = get_object_or_404(Provider,id=data['ProviderID'])
+        station = get_object_or_404(provider.providers.all(), id=data['StationID'])
+        point = get_object_or_404(station.comments, id=data['PointID'])
+        user = request.user
+        vehicle = get_object_or_404(user.cars, id=data['VehicleID'])
 
-            if vehicle.car.ac_charger is not None:
-                if vehicle.car.ac_charger != data['ac_charger']:
-                    return Response({'status': ['Not Combatible AC_Charger']},status=status.HTTP_400_BAD_REQUEST)
-            else:
-                if vehicle.car.ac_charger != data['dc_charger']:
-                    return Response({'status': ['Not Combatible DC_Charger']},status=status.HTTP_400_BAD_REQUEST)
+        if data['accharger']:
 
-            if data['kWh']:
-                    kWhDelivered=data["kWhDelivered"]
-            else:
-                kWhDelivered=data["amount"]/provider.cost
+            charger = vehicle.car.ac_charger
 
-            if vehicle.car.usable_battery_size <= kWhDelivered:
-                    kWhDelivered = vehicle.car.usable_battery_size
+        else:
 
-            Session.objects.create(
-                        customer=user,
-                        vehicle=vehicle,
-                        provider=provider,
-                        station=station,
-                        point=point,
-                        payment=data["payment"],
-                        connectionTime=data["connectionTime"],
-                        disconnectTime=data["disconnectTime"],
-                        doneChargingTime=data["doneChargingTime"],
-                        kWhDelivered=kWhDelivered
-                    )
-        except Exception as e:
+            charger = vehicle.car.dc_charger
 
-            return Response({'status': ['Bad ID']}, status=status.HTTP_404_NOT_FOUND)
-        
+        get_object_or_404(charger.ports, id=data['PortID'])
+
+        if data["kWh"]:
+            kWhDelivered=data["kWhDelivered"]
+        else:
+            kWhDelivered=data["amount"]/provider.costPerkWh
+        if vehicle.car.usable_battery_size <= kWhDelivered:
+                kWhDelivered = vehicle.car.usable_battery_size
+
+        Session.objects.create(
+                    customer=user,
+                    vehicle=vehicle,
+                    provider=provider,
+                    station=station,
+                    point=point,
+                    payment=data["payment"],
+                    connectionTime=data["connectionTime"],
+                    disconnectTime=data["disconnectTime"],
+                    doneChargingTime=data["doneChargingTime"],
+                    kWhDelivered=kWhDelivered
+                )
+
+    
         return Response(status=status.HTTP_200_OK)
 
 class MonthlyPayoff(APIView):
