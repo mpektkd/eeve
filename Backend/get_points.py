@@ -1,47 +1,58 @@
 from eevie.models import *
 
-stations = Station.objects.all()
+# stations = Station.objects.all()
 
-with open("points.txt", "w") as file:
+# with open("points.txt", "w") as file:
 
-    for station in stations:
-        file.write(f"{station}\n\t")
-        # print(station.points.all())
-        for point in station.comments.all():
-            file.write(f"{point}")
-            file.write("\t")
-        file.write("\n\n")
+#     for station in stations:
+#         file.write(f"{station}\n\t")
+#         # print(station.points.all())
+#         for point in station.comments.all():
+#             file.write(f"{point}")
+#             file.write("\t")
+#         file.write("\n\n")
 
-# users = [User.objects.get(id=71)]
-users = User.objects.all()
+# # users = [User.objects.get(id=71)]
+# users = User.objects.all()
 
-with open("vehicles.txt", "w") as file:
+# with open("vehicles.txt", "w") as file:
 
-    for user in users:
-        file.write(f"User: {user.username}\n\t")
-        # print(station.points.all())
-        for car in user.cars.all():
-            file.write(f"{car.car.id}")
-            file.write("\t")
-        file.write("\n\n")
+#     for user in users:
+#         file.write(f"User: {user.username}\n\t")
+#         # print(station.points.all())
+#         for car in user.cars.all():
+#             file.write(f"{car.car.id}")
+#             file.write("\t")
+#         file.write("\n\n")
 
-bills = Bill.objects.all()
+# bills = Bill.objects.all()
 
-with open("bills.txt", "w") as file:
+# with open("bills.txt", "w") as file:
+
+#     for bill in bills:
+#         file.write(f"{bill}\n\t")
+#         # print(station.points.all())
+#         file.write("\n")
+bills = MonthlyBill.objects.all()
+
+with open("monthlybills.txt", "w") as file:
 
     for bill in bills:
         file.write(f"{bill}\n\t")
         # print(station.points.all())
         file.write("\n")
+# users = User.objects.all()
 
-users = User.objects.all()
+# with open("users.txt", "w") as file:
 
-with open("users.txt", "w") as file:
+#     for user in users:
+#         try:
+#             file.write(f"{user.customer}\n\t")
+#             # print(station.points.all())
+#             file.write("\n")
+#         except:
+#             pass
 
-    for user in users:
-        file.write(f"{user}\n\t")
-        # print(station.points.all())
-        file.write("\n")
 
 # cars = CarBase.objects.all()
 

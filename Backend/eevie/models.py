@@ -26,7 +26,14 @@ class Customer(models.Model):
     has_expired_bills = models.BooleanField()
 
     def __str__(self):
-        return f"Customer with ID:{self.id} and username {self.user} and has expired {self.has_expired_bills}"
+        return f"Customer with ID:{self.id} and username {self.user.username} and {self.user.password}and has expired {self.has_expired_bills}"
+
+    def update(self):
+
+        booleans = [True, False]
+
+        self.has_expired_bills = random.choice(booleans)
+        self.save()
 
  # Individual Bill 
 class Bill(models.Model):
@@ -51,11 +58,16 @@ class MonthlyBill(models.Model):
     end_date = models.DateField(null=True, default=None)
 
     def __str__(self):
-        return f"Monthly bill {self.start_date} to {self.end_date} belongs to {self.customer.username}."
+        return f"Monthly bill {self.id}, {self.start_date} to {self.end_date} belongs to {self.customer.username}."
 
     def get_current(user):
         m = MonthlyBill.objects.get_or_create(customer = user, end_date=None)
         return m.first()
+    
+    def payoff(self):
+
+        self.monthly_total = 0
+        self.save()
 
  # Stored cards for customer
 class Card(models.Model):
@@ -615,6 +627,9 @@ class Session(models.Model):
             lastday = calendar.monthrange(date.year,date.month)[1]
             start_date = str(date.year) + '-' + str(date.month) +'-01'
             end_date = str(date.year) + '-' + str(date.month) + '-' + str(lastday)
+            customer = random_user.customer
+            customer.has_expired_bills = True
+            customer.save()
             m = MonthlyBill.objects.get_or_create(start_date = start_date, end_date = end_date , customer = random_user)
             if m[1]:
                 m[0].save()

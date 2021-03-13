@@ -20,6 +20,7 @@ urlpatterns = [
     path('signup/', views.UserView.as_view(), name='signup'),
     path('chargingsession/', views.ChargingSession.as_view(),name='charging'),
     path('payoff/', views.Payoff.as_view(),name='payoff'),
+    path('monthlypayoff/', views.MonthlyPayoff.as_view(),name='monthlypayoff'),
     path('refreshtoken/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('cars/',views.GetCars.as_view()),
     path('stations/', views.getStations.as_view()),

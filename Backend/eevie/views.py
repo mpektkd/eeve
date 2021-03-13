@@ -411,36 +411,7 @@ class MyMonthlyBills(APIView):
 
     def get(self,request):
         
-        user = request.user
-        customer_bills = user.customer.has_expired_bills
-
-        if customer_bills:
-            
-            today = datetime.datetime.today()
-            # last_day=calendar.monthrange(today.year,today.month)[1]
-            
-
-            current_start = datetime.datetime(today.year, today.month, 1).strftime('%Y-%m-%d')
-            # current_end = datetime.datetime(today.year, today.month, last_day).strftime('%Y-%m-%d')
-            
-            if today.month == 1:
-                
-                previous_start = datetime.datetime(today.year-1, 12, 1)
-                # prev_last_day=calendar.monthrange(today.year-1,12)[1]
-                # previous_end = datetime.datetime(today.year-1, 12, prev_last_day)
-            
-            else:
-                previous = datetime.datetime(today.year, today.month-1, 1)
-                # prev_last_day=calendar.monthrange(today.year,today.month-1)[1]
-                # previous_end = datetime.datetime(today.year, today.month-1, prev_last_day)
-
-
-            monthly_bills = user.monthlybills.filter(start_date=(current_start, previous_start))
-        
-        else:
-            return Response({'status':'All Bills are Paid'}, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer = MonthlyBillSerializer(monthly_bills,many=True)
+        serializer = MonthlyBillSerializer(request.user.monthlybills,many=True)
 
         return Response(serializer.data)
 
@@ -492,6 +463,25 @@ class ChargingSession(APIView):
             return Response({'status': ['Bad ID']}, status=status.HTTP_404_NOT_FOUND)
         
         return Response(status=status.HTTP_200_OK)
+
+class MonthlyPayoff(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+
+        id = request.data["BillID"]
+        
+
+        bill = MonthlyBill.objects.get(id=id)
+        if bill.monthly_total == 0:
+
+            return Response({'status':'MonthlyBill is Paid'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        bill.payoff()
+
+        return Response(status=status.HTTP_200_OK)
+
 
 class Payoff(APIView):
 
