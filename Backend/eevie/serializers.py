@@ -130,6 +130,12 @@ class StatusTypeSerializer(serializers.ModelSerializer):
         model = StatusType
         fields = '__all__'
 
+class UsageTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UsageType
+        fields = '__all__'
+
 class PointSerializer(serializers.ModelSerializer):
 
     ports = PortSerializer(many=True)
@@ -146,6 +152,8 @@ class StationSerializer(serializers.ModelSerializer):
     providers = ProviderSerializer(many=True)
     comments = PointSerializer(many=True)
     comments.ports = PortSerializer(many=True)
+    statusType = StatusTypeSerializer()
+    usageType = UsageTypeSerializer()
 
     class Meta:
         model=Station

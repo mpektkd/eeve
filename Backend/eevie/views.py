@@ -194,6 +194,7 @@ class UserView(APIView):
         print(request.data['username'])
         if serializer.is_valid():
             serializer.save()
+
             car = CarBase.objects.filter(id=request.data['car_id'])
             user = User.objects.filter(username=request.data['username'])
             if not user:

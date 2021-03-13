@@ -395,7 +395,15 @@ class SessionsTestCase(TestCase):
             print('Not Found')
             return
 
-
+class ProvidersTestCase(TestCase):
+    def setUp(self):
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/providers.json'
+        f = open(fpath)
+        data = json.load(f)
+        for i in data:
+            p = Provider.objects.create(**i)
+            p.save()
+        f.close()
 
 class UsersTestCase(TestCase):
     def setUp(self):
@@ -427,3 +435,10 @@ class UsersTestCase(TestCase):
     def test_users(self):
         u=User.objects.all().first()
         #print(u.id)
+
+class ReferenceTest(TestCase):
+    def setUp(self):
+        ProvidersTestCase().setUp()
+        AddressInfoTestCase().setUp()
+        StationTestCase().setUp()
+        CarBaseTestCase().setUp()
