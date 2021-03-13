@@ -617,10 +617,10 @@ class Session(models.Model):
             is_paid=False
         else:
             is_paid=True
-        b = Bill.objects.create(customer = random_user,
-                                date_created = session.connectionTime,
-                                total = session.price,
-                                is_paid = is_paid)
+            b = Bill.objects.create(customer = random_user,
+                                    date_created = session.connectionTime,
+                                    total = session.price,
+                                    is_paid = is_paid)
         if is_paid==False:
             time = session.connectionTime
             date = datetime.strptime(time,'%Y-%m')
