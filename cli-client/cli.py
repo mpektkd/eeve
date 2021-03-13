@@ -1,5 +1,5 @@
 import argparse
-import textwrap
+import sys
 import json
 import requests
 import os
@@ -8,7 +8,7 @@ def msg(name=None):
     return "General Usage:ev_group13 SCOPE --param1 value1 [--param2 value2 ...]--format fff --apikey kkk\n"
 
 parent_parser = argparse.ArgumentParser(add_help =False)
-requirednames =parent_parser.add_argument_group('always required arguments:')
+requirednames =parent_parser.add_argument_group('always required arguments')
 
 requirednames.add_argument(
         '--format',
@@ -52,22 +52,25 @@ SessionsPerPoint_required.add_argument('--point', type=str, required=True)
 SessionsPerPoint_required.add_argument('--datefrom', type=str, required=True)
 SessionsPerPoint_required.add_argument('--dateto', type=str, required=True)
 
-SessionsPerStation.add_argument('--station',type=str,required=True)
-SessionsPerStation.add_argument('--datefrom', type=str, required=True)
-SessionsPerStation.add_argument('--dateto', type=str, required=True)
+SessionsPerStation_required = SessionsPerStation.add_argument_group('SessionsPerStation required arguments')
+SessionsPerStation_required.add_argument('--station',type=str,required=True)
+SessionsPerStation_required.add_argument('--datefrom', type=str, required=True)
+SessionsPerStation_required.add_argument('--dateto', type=str, required=True)
 
-SessionsPerEV.add_argument('--ev', type=str, required=True)
-SessionsPerEV.add_argument('--datefrom', type=str, required=True)
-SessionsPerEV.add_argument('--dateto', type=str, required=True)
+SessionsPerEV_required = SessionsPerEV.add_argument_group('SessionsPerEV required arguments')
+SessionsPerEV_required.add_argument('--ev', type=str, required=True)
+SessionsPerEV_required.add_argument('--datefrom', type=str, required=True)
+SessionsPerEV_required.add_argument('--dateto', type=str, required=True)
 
-SessionsPerProvider.add_argument('--provider', type=str, required=True)
-SessionsPerProvider.add_argument('--datefrom', type=str, required=True)
-SessionsPerProvider.add_argument('--dateto', type=str, required=True)
+SessionsPerProvider_required = SessionsPerProvider.add_argument_group('SessionsPerProvider required arguments')
+SessionsPerProvider_required.add_argument('--provider', type=str, required=True)
+SessionsPerProvider_required.add_argument('--datefrom', type=str, required=True)
+SessionsPerProvider_required.add_argument('--dateto', type=str, required=True)
 
 Admin.add_argument('--usermod', action='store_true')
 Admin.add_argument('--username', type =str )
 Admin.add_argument('--passw',type =str)
-Admin.add_argument('--users',type = str)
+Admin.add_argument('--users', action ='store_true')
 Admin.add_argument('--sessionsupd', action = 'store_true')
 Admin.add_argument('--source', type = str)
 Admin.add_argument('--healthcheck', action='store_true')
@@ -81,7 +84,7 @@ args = parser.parse_args()
 
 if args.command == 'healthcheck':
     r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/healthcheck/").json()
-    print(r["status"])
+    print(json.dumps(r, indent=2))
 elif args.command == 'resetsessions':
     print('resetsessionsapi')
     if args.format == 'csv': print('csv')
@@ -94,12 +97,20 @@ elif args.command == 'login':
     if os.path.exists("softeng20bAPI.token"):
         print("You are already logged in!")
     else:
-        f = open("softeng20bAPI.token","w")
+        
         json_object = requests.post("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/login/",json=params).json()
-        f.write(json.dumps(json_object))
+        if 'detail' in json_object:
+            print (json_object["detail"])
+        else:
+            f = open("softeng20bAPI.token","w")
+            f.write(json.dumps(json_object,indent = 2))
+            print ("Login Succsessfull...\nWelcome to eevie, " + args.username + '!')
         
     
 elif args.command == 'logout':
+    if not os.path.exists("softeng20bAPI.token"):
+        print("You are not logged in.")
+        sys.exit()
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
     header = {"Authorization" : "JWT " + token_value["access"] }
@@ -155,15 +166,20 @@ elif args.command == 'Admin':
     sessionupd = args.sessionsupd and args.source and (not(args.usermod or args.username or args.passw or args.users or args.healthcheck or args.resetsessions))
     healthcheck = args.healthcheck and (not(args.usermod or args.username or args.passw or args.users or args.sessionsupd or args.source or args.resetsessions))
     resetsessions = args.resetsessions and (not(args.usermod or args.username or args.passw or args.users or args.sessionsupd or args.source or args.healthcheck))
-    
-    if usermod: 
-        print ("/usermod")
-        if args.format == 'csv': print('csv')
-        else: print('json')
+    if  usermod: 
+        f = open("softeng20bAPI.token")
+        token_value = json.load(f)
+        header = {"Authorization" : "JWT " + token_value["access"] }
+        url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/usermod/' + args.username + '/' + args.passw + '/'
+        r = requests.post(url,headers=header)
+        print(json.dumps(r.json(),indent=2))
     elif users:
-        print ("/users")
-        if args.format == 'csv': print('csv')
-        else: print('json')
+        f = open("softeng20bAPI.token")
+        token_value = json.load(f)
+        header = {"Authorization" : "JWT " + token_value["access"] }
+        url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/users/' + args.username + '/'
+        r = requests.get(url,headers=header)
+        print(json.dumps(r.json(),indent=2))
     elif sessionupd: 
         print ("/sessionsupd")
         if args.format == 'csv': print('csv')
@@ -171,7 +187,6 @@ elif args.command == 'Admin':
     elif healthcheck: 
         r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/healthcheck/").json()
         print(r["status"])
-        else: print('json')
     elif resetsessions: 
         print ("resetsessions")
         if args.format == 'csv': print('csv')
