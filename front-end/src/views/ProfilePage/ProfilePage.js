@@ -31,8 +31,11 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import DateRange from "@material-ui/icons/DateRange";
 import Table from "components/Table/Table.js";
 import axiosInstance from "../../axiosApi";
+import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
+import Car2 from '@material-ui/icons/DriveEta';
 
 import styles2 from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import { LocalConvenienceStoreOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles(styles2);
@@ -42,6 +45,9 @@ export default function ProfilePage(props) {
   const classes2 = useStyles2();
   const [billList, setBillList] = React.useState([])
   const [bilLList, setBilLList] = React.useState([])
+  const [carList, setCarList] = React.useState([])
+  const [carList2, setCarList2] = React.useState([])
+  const [carSelected, setCarSelected] = React.useState()
   const [isLoading, setIsLoading] = React.useState(false)
   const [pageNeedsRender, setPageNeedsRender] = React.useState(true)
   const { ...rest } = props;
@@ -58,7 +64,21 @@ export default function ProfilePage(props) {
     }
     const response = axiosInstance.get('user/mycars/')
       .then(res => {
-        console.log(res)
+        let car = {}
+        let tempCarList = [] 
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i].release_year)
+            car.name = res.data[i].car.brandName + " " + res.data[i].car.model + " " + res.data[i].car.release_year
+          else 
+            car.name = res.data[i].car.brandName + " " + res.data[i].car.model
+          car.id = res.data[i].id;
+          tempCarList.push(car)
+          car = {}
+        }
+        if (res.data.length === 1) {
+          localStorage.setItem("selectedCar", tempCarList[0].id)
+        }
+        setCarList(tempCarList);
       })
       .catch(error => {
         console.log(error)
@@ -95,13 +115,43 @@ export default function ProfilePage(props) {
       .catch(error => {
         console.log(error)
       })
+      const response3 = axiosInstance.get('user/mymonthbills/')
+        .then(res => {
+          console.log(res)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+        const response4 = axiosInstance.get('cars/')
+      .then(res => {
+        console.log(res)
+        let car = {}
+        let tempCarList = []
+        for (var i = 0; i <res.data.length; i++) {
+          if (res.data[i].release_year)
+            car.name = res.data[i].brandName + " " + res.data[i].model + " " + res.data[i].release_year
+          else 
+            car.name = res.data[i].brandName + " " + res.data[i].model
+
+          car.id = res.data[i].id;
+          tempCarList.push(car)
+          car = {}
+        }
+        setCarList2(tempCarList);        
+      })
+
   }, []);
 
   function pay (props) {
     setIsLoading(true)
-    console.log(props);
+    const response = axiosInstance.post("user/payoff/", {BillID: props.props.id})
+      .then(res => {
+        console.log(res)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
-
   function Bill(props) {
     return (<GridItem xs={12} sm={7} md={4}>
       <Card>
@@ -121,14 +171,56 @@ export default function ProfilePage(props) {
       </Card>
     </GridItem>);
   }
+  function Car (props) {
+    return (<GridItem xs={12} sm={7} md={4}>
+      <Card>
+        <CardHeader styles = {{userSelected: "none" }} color="success" stats icon>
+         {
+         (localStorage.getItem("selectedCar") === props.props.id.toString()) && <CardIcon color="success" onClick = {() => selectCar(props)}>
+            Active Car
+          </CardIcon>
+          }
+          {
+          (localStorage.getItem("selectedCar") !== props.props.id.toString()) &&
+           <CardIcon color="success" onClick = {() => selectCar(props)}>
+            Select Car
+          </CardIcon>
+          }
+          <p className={classes2.cardCategory}>vehicle</p>
+          <h3 className={classes2.cardTitle}>{props.props.name}</h3>
+        </CardHeader>
+      </Card>
+    </GridItem>);
+  }
+  function selectCar (prop) {
+    localStorage.setItem("selectedCar", prop.props.id);
+    setCarSelected(prop.props.id);
+  }
   function Timer () {
     const timer = setTimeout(() => {
       setIsLoading(false)
       window.location.reload();
 
-    }, 5000);
+    }, 3000);
     return (null);
   }
+ 
+  function handleInsertCar () {
+    const response = axiosInstance.post("user/newcar/", {
+      CarID: localStorage.getItem("carForSignUp")
+    })
+    .then (res => {
+      console.log(res)
+      setIsLoading(true)
+    })
+    .catch (error => {
+      console.log(error)
+    })
+  }
+    
+
+
+  
   return (
     <div>
       { !localStorage.getItem("isLoggedIn") && <Redirect to = "/login-page"/>}
@@ -176,7 +268,7 @@ export default function ProfilePage(props) {
               </p>
             </div>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+              <GridItem xs={12} sm={12} md={9} className={classes.navWrapper}>
                 <NavPills
                   alignCenter
                   color="success"
@@ -222,10 +314,66 @@ export default function ProfilePage(props) {
                       tabButton: "My vehicles",
                       tabIcon: DriveEtaIcon,
                       tabContent: (
-                        <GridContainer>
-                          <GridItem xs={12} sm={12} md={4}>
-                           <p>this is a car!</p>
+                        <GridContainer style = { {padding: 20}}>
+                          <GridItem>
+                            <CustomDropdown
+                                dropDownCar = { true }
+                                buttonText="Select Car"
+                                buttonProps={{
+                                  color: "success"
+                                }}
+                                buttonIcon={ Car2 }
+                                dropdownList={ carList2 }
+                                />   
                           </GridItem>
+                          <GridItem>
+                            <Button color = "success" onClick = { handleInsertCar }>
+                              Insert this Car!
+                            </Button>
+                            <GridItem>
+                              <p>
+                                { }
+                              </p>
+                            </GridItem>
+                            <GridItem>
+                              <p>
+                                { }
+                              </p>
+                            </GridItem>
+                            <GridItem>
+                              <p>
+                                { }
+                              </p>
+                            </GridItem>
+                            <GridItem>
+                              <p>
+                                { }
+                              </p>
+                            </GridItem>
+                            <GridItem>
+                              <p>
+                                { }
+                              </p>
+                            </GridItem>
+                            <GridItem>
+                              <p>
+                                { }
+                              </p>
+                            </GridItem>
+                            <GridItem>
+                              <p>
+                                { }
+                              </p>
+                            </GridItem>
+                          </GridItem>
+                             
+                          {
+                            carList.map((prop, key ) => {
+                              return (
+                                <Car key = {key} props = { prop }></Car>
+                              );
+                            })
+                          }
                         </GridContainer>
                       )
                     }
