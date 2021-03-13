@@ -22,7 +22,7 @@ urlpatterns = [
     path('cars/',views.GetCars.as_view()),
     path('stations/', views.getStations.as_view()),
     path('user/payoff/', views.Payoff.as_view(),name='payoff'),
-    path('user/monthlypayoff/', views.MonthlyPayoff.as_view(),name='monthlypayoff'),
+    path('user/monthpayoff/', views.MonthlyPayoff.as_view(),name='monthlypayoff'),
     path('user/mycars/',views.MyCars.as_view()),
     path('user/mycars/chargingsession/', views.ChargingSession.as_view(),name='charging'),
     path('user/newcar/',views.InsertCar.as_view()),
