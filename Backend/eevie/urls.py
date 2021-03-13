@@ -25,6 +25,7 @@ urlpatterns = [
     path('user/payoff/', views.Payoff.as_view(),name='payoff'),
     path('user/monthlypayoff/', views.MonthlyPayoff.as_view(),name='monthlypayoff'),
     path('user/mycars/',views.MyCars.as_view()),
+    path('user/newcar/',views.InsertCar.as_view()),
     path('user/mybills/', views.MyBills.as_view()),
     path('user/mymonthlybills/', views.MyMonthlyBills.as_view()),
     path('user/deleteme/',views.DeleteMe.as_view()),

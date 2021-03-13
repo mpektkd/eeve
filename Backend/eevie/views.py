@@ -254,7 +254,7 @@ class CurrentUser(APIView):
 
     def get(self,request):
         serializer = UserSerializer(request.user)
-        return Response(serializer.data)
+        return Response(serializer.data,status=status.HTTP_200_OK)
 
 class ResetSessions(APIView):
     permission_classes = (IsAuthenticated,)
@@ -385,7 +385,7 @@ class GetCars(APIView):
         
         serialized = CarSerializer(cars, many=True)
 
-        return Response(serialized.data)
+        return Response(serialized.data,status=status.HTTP_200_OK)
 
 class MyCars(APIView):
     permission_classes = [IsAuthenticated]
@@ -394,7 +394,7 @@ class MyCars(APIView):
 
         serializer = MyCarSerializer(request.user.cars,many=True)
 
-        return Response(serializer.data)
+        return Response(serializer.data,status=status.HTTP_200_OK)
 
 class MyBills(APIView):
     permission_classes = [IsAuthenticated]
@@ -403,7 +403,7 @@ class MyBills(APIView):
 
         serializer = BillSerializer(request.user.bills,many=True)
 
-        return Response(serializer.data)
+        return Response(serializer.data,status=status.HTTP_200_OK)
 
 
 class MyMonthlyBills(APIView):
@@ -413,7 +413,7 @@ class MyMonthlyBills(APIView):
         
         serializer = MonthlyBillSerializer(request.user.monthlybills,many=True)
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class ChargingSession(APIView):
 
@@ -512,3 +512,26 @@ class getStations(APIView):
         serializer = StationSerializer(stations, many=True)
     
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class InsertCar(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+
+        try:
+
+            user = request.user
+
+            car = CarBase.objects.get(id=request.data["CarID"])
+            newCar = Car.objects.create(
+                car = car,
+                customer = user
+                )
+            newCar.save()
+
+        except CarBase.DoesNotExist :
+
+            return Response({'status':['Bad ID']}, status=status.HTTP_404_NOT_FOUND)
+        
+        return Response(status=status.HTTP_200_OK)
