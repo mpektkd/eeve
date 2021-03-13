@@ -473,7 +473,7 @@ class MonthlyPayoff(APIView):
         
 
         bill = MonthlyBill.objects.get(id=id)
-        if bill.monthly_total == 0:
+        if bill.monthly_total < 0:
 
             return Response({'status':'MonthlyBill is Paid'}, status=status.HTTP_400_BAD_REQUEST)
         

@@ -66,7 +66,7 @@ class MonthlyBill(models.Model):
     
     def payoff(self):
 
-        self.monthly_total = 0
+        self.monthly_total = -self.monthly_total 
         self.save()
 
  # Stored cards for customer
@@ -633,7 +633,10 @@ class Session(models.Model):
             m = MonthlyBill.objects.get_or_create(start_date = start_date, end_date = end_date , customer = random_user)
             if m[1]:
                 m[0].save()
-            m[0].monthly_total = m[0].monthly_total+session.price
+            if m[0].monthly_total < 0:
+                m[0].monthly_total = session.price    
+            else:
+                m[0].monthly_total = m[0].monthly_total+session.price
             m[0].save()
 
         return session
