@@ -509,6 +509,6 @@ class getStations(APIView):
     def get(self, request):
 
         stations = Station.objects.all()
-        serializer = PointSerializer(stations, many=True)
+        serializer = StationSerializer(stations, many=True)
     
         return Response(serializer.data, status=status.HTTP_200_OK)

@@ -132,7 +132,7 @@ class StatusTypeSerializer(serializers.ModelSerializer):
 
 class PointSerializer(serializers.ModelSerializer):
 
-    # ports = PortSerializer(many=True)
+    ports = PortSerializer(many=True)
     current_type = CurrentTypeSerializer(many=True)
     status_type = StatusTypeSerializer(many=True)
 
@@ -144,19 +144,9 @@ class StationSerializer(serializers.ModelSerializer):
 
     addressInfo = AddressSerializer()
     providers = ProviderSerializer(many=True)
-    # comments = PointSerializer(many=True)
-    # comments.ports = PortSerializer(many=True)
+    comments = PointSerializer(many=True)
+    comments.ports = PortSerializer(many=True)
 
     class Meta:
         model=Station
         fields='__all__'
-        depth = 1
-
-# class PointSerializer(serializers.ModelSerializer):
-
-#     ports = PortSerializer(many=True)
-#     station = StationSerializer()
-
-#     class Meta:
-#         model = Point
-#         fields = '__all__'
