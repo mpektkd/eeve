@@ -80,7 +80,8 @@ args = parser.parse_args()
 
 
 if args.command == 'healthcheck':
-    print(requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/healthcheck/").json())
+    r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/healthcheck/").json()
+    print(r["status"])
 elif args.command == 'resetsessions':
     print('resetsessionsapi')
     if args.format == 'csv': print('csv')
@@ -107,19 +108,43 @@ elif args.command == 'logout':
         print("Bye")
         os.remove("softeng20bAPI.token")
     else:
-        print(str(r.status_code)+" " + r.reason)      
+        print(str(r.status_code)+" " + r.reason)     
+
 elif args.command == 'SessionsPerPoint':
-    print("/sessionsperpoint")
-    if args.format == 'csv': print('csv')
-    else: print('json')
+    url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/SessionsPerPoint/' + args.point + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
+    f = open("softeng20bAPI.token")
+    token_value = json.load(f) 
+    header = {"Authorization" : "JWT " + token_value["access"] }
+    r = requests.get(url,headers=header)
+    if r.ok:
+        print(r.text)
+    else:
+        print(str(r.status_code) + ' ' + r.reason)
+
 elif args.command == 'SessionsPerStation':
-    print("/sessionsperstation")
-    if args.format == 'csv': print('csv')
-    else: print('json')
+    url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/SessionsPerStation/' + args.station + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
+    f = open("softeng20bAPI.token")
+    token_value = json.load(f) 
+    header = {"Authorization" : "JWT " + token_value["access"] }
+    r = requests.get(url,headers=header)
+    if r.ok:
+        print(r.text)
+    else:
+        print(str(r.status_code) + ' ' + r.reason)
+
+
+
 elif args.command == 'SessionsPerEV':
-    print("/sessionsperEV")
-    if args.format == 'csv': print('csv')
-    else: print('json')
+    url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/SessionsPerEV/' + args.ev + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
+    f = open("softeng20bAPI.token")
+    token_value = json.load(f) 
+    header = {"Authorization" : "JWT " + token_value["access"] }
+    r = requests.get(url,headers=header)
+    if r.ok:
+        print(r.text)
+    else:
+        print(str(r.status_code) + ' ' + r.reason)
+
 elif args.command == 'SessionsPerProvider':
     print("/sessionsperProvider")
     if args.format == 'csv': print('csv')
