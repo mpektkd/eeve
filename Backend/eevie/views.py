@@ -472,12 +472,17 @@ class MonthlyPayoff(APIView):
         id = request.data["BillID"]
         
 
-        bill = MonthlyBill.objects.get(id=id)
-        if bill.monthly_total < 0:
+        monthly_bill = MonthlyBill.objects.get(id=id)
+        if monthly_bill.monthly_total < 0:
 
             return Response({'status':'MonthlyBill is Paid'}, status=status.HTTP_400_BAD_REQUEST)
         
-        bill.payoff()
+        monthly_bill.payoff()
+
+        date_start = monthly_bill.start_date
+        date_end = monthly_bill.end_date
+
+        bills = Bill.objects.filter()
 
         return Response(status=status.HTTP_200_OK)
 

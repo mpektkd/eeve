@@ -38,12 +38,12 @@ class Customer(models.Model):
  # Individual Bill 
 class Bill(models.Model):
     customer = models.ForeignKey(User, related_name="bills", on_delete=models.CASCADE, null=True) # Many to One relationship with Customers
-    date_created = models.DateTimeField(auto_now_add=True) # Updates automatically the time the object is saved
+    date_created = models.DateTimeField() # Updates automatically the time the object is saved
     total = models.FloatField()
     is_paid = models.BooleanField()
 
     def __str__(self):
-        return f"Bill with ID:{self.id} belongs to {self.customer.get_username()} and is_paid is {self.is_paid}."
+        return f"Bill with ID:{self.id} belongs to {self.customer.get_username()} and is_paid is {self.is_paid} created {self.date_created}."
 
     def payoff(self):
 
@@ -573,7 +573,7 @@ class Session(models.Model):
     payment = models.CharField(max_length=10, choices=PAYMENT_OPTIONS, default=CASH,)
 
     def __str__(self):
-        return f"Session with ID {self.id} Charged with {self.provider.name} , transfered totally {self.kWhDelivered} KWh."
+        return f"Session with ID {self.id} Charged with {self.provider.name} , transfered totally {self.kWhDelivered} KWh, created {self.connectionTime}."
     
     @classmethod
     def create(cls, **kwargs):
@@ -618,15 +618,15 @@ class Session(models.Model):
         else:
             is_paid=True
         b = Bill.objects.create(customer = random_user,
+                                date_created = session.connectionTime,
                                 total = session.price,
                                 is_paid = is_paid)
         if is_paid==False:
             time = session.connectionTime
-            time = time[0:6]
             date = datetime.strptime(time,'%Y-%m')
             lastday = calendar.monthrange(date.year,date.month)[1]
-            start_date = str(date.year) + '-' + str(date.month) +'-01'
-            end_date = str(date.year) + '-' + str(date.month) + '-' + str(lastday)
+            start_date = datetime(date.year, date.month, 1).strftime('%Y-%m-%d')
+            end_date = datetime(date.year, date.month, lastday).strftime('%Y-%m-%d')
             customer = random_user.customer
             customer.has_expired_bills = True
             customer.save()
