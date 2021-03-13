@@ -480,11 +480,6 @@ class MonthlyPayoff(APIView):
         
         monthly_bill.payoff()
 
-        date_start = monthly_bill.start_date
-        date_end = monthly_bill.end_date
-
-        bills = Bill.objects.filter()
-
         return Response(status=status.HTTP_200_OK)
 
 
