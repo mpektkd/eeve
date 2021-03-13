@@ -152,8 +152,8 @@ class StationSerializer(serializers.ModelSerializer):
     providers = ProviderSerializer(many=True)
     comments = PointSerializer(many=True)
     comments.ports = PortSerializer(many=True)
-    statusType = StatusTypeSerializer()
-    usageType = UsageTypeSerializer()
+    statusType = StatusTypeSerializer(many=True)
+    usageType = UsageTypeSerializer(many=True)
 
     class Meta:
         model=Station
