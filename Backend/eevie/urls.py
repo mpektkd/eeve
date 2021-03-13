@@ -27,7 +27,7 @@ urlpatterns = [
     path('user/mycars/chargingsession/', views.ChargingSession.as_view(),name='charging'),
     path('user/newcar/',views.InsertCar.as_view()),
     path('user/mybills/', views.MyBills.as_view()),
-    path('user/mymonthlybills/', views.MyMonthlyBills.as_view()),
+    path('user/mymonthbills/', views.MyMonthlyBills.as_view()),
     path('user/deleteme/',views.DeleteMe.as_view()),
     path('admin/healthcheck/', views.HealthCheckView.as_view(), name='healthcheck'),
     path('admin/resetsessions/', views.ResetSessions.as_view()),
