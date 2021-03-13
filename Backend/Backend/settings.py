@@ -35,7 +35,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     '192.168.2.4',
-    'snf-881285.vm.okeanos.grnet.gr'
+    'snf-881285.vm.okeanos.grnet.gr',
+    '192.168.1.20'
 ]
 
 
