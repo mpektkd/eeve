@@ -168,15 +168,35 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-    'http://0.0.0.0:3000',
-    'http://192.168.1.9:3000',
-    'http://192.168.1.16:3000',
-    'http://192.168.1.2:3000',
-    'http://192.168.1.20:3000',
-    'http://172.20.10.2:3000'
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'http://localhost:3000',
+#     'http://0.0.0.0:3000',
+#     'http://192.168.1.9:3000',
+#     'http://192.168.1.16:3000',
+#     'http://192.168.1.2:3000',
+#     'http://192.168.1.20:3000',
+#     'http://172.20.10.2:3000'
+# )
+
+CORS_ORIGIN_ALLOW_ALL=True
+CORS_ALLOW_CREDENTIALS=False
+
+CORS_ALLOW_HEADERS=[
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'X-OBSERVATORY-AUTH',
+    'detail',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'access-control-allow-credentials',
+    'access-control-allow-origin',
+    'access-control-expose-headers'
+]
 
 CRONJOBS = [
     ('* * 1 * *', 'eevie.cron.closeMonthlyBills')
