@@ -5,8 +5,11 @@ import requests
 import os
 import pprint
 import csv
+import pathlib
+from os.path import dirname,abspath
 
 from requests import status_codes
+
 
 def csv_print_point(text):
     csvf = open ("csv.csv", "a")
@@ -143,7 +146,10 @@ def msg(name=None):
 args = parse_args(sys.argv[1:])
 if (vars(args))['command'] == None :
     print('General Usage:ev_group13 SCOPE [--params values] \nScopes Supported: healthcheck|resetsessions|login|logout|SessionsPerPoint|SessionsPerStation|SessionsPerEV|SessionsPerProvider|Admin')
-base_url = "http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/"
+base_url = "https://localhost:8765/evcharge/api/"
+print(dirname(dirname(abspath(__file__))))
+certificate = dirname(dirname(abspath(__file__))) + '/' + 'localhost+1.pem'
+key = dirname(dirname(abspath(__file__))) + '/' + 'localhost+1-key.pem'
 
 
 #healthcheck
@@ -153,7 +159,7 @@ if args.command == 'healthcheck':
         "APIkey": args.apikey
     }   
     url = base_url + 'admin/healthcheck/' 
-    r = requests.get(url,data=datas)
+    r = requests.get(url,data=datas, cert=(certificate,key), verify=True)
     if r.ok:
         print(json.dumps(r, indent=2))
     else: 
@@ -162,7 +168,7 @@ if args.command == 'healthcheck':
 
 #resetsessions
 elif args.command == 'resetsessions':
-    r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/resetsessions/")
+    r = requests.get("http://localhost:8765/evcharge/api/admin/resetsessions/",cert=(certificate,key), verify=True)
     if r.ok:
         print(json.dumps(r,indent=2))
     else:
@@ -178,7 +184,7 @@ elif args.command == 'login':
     if os.path.exists("softeng20bAPI.token"):
         print("You are already logged in!")
     else:
-        json_object = requests.post(url,json=params).json()
+        json_object = requests.post(url,json=params,cert=(certificate,key), verify=True).json()
         if 'detail' in json_object:
             print (json_object["detail"])
         else:
@@ -196,7 +202,7 @@ elif args.command == 'logout':
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
     header = {"Authorization" : "JWT " + token_value["access"] }
-    r = requests.post(url,headers=header,json=token_value)
+    r = requests.post(url,headers=header,json=token_value,cert=(certificate,key), verify=True)
     if r.ok:
         print("Bye")
         os.remove("softeng20bAPI.token")
@@ -216,7 +222,7 @@ elif args.command == 'SessionsPerPoint':
     token_value = json.load(f) 
     header = {"Authorization" : "JWT " + token_value["access"],
     "X-OBSERVATORY-AUTH": token_value["access"] }
-    r = requests.get(url,headers=header)
+    r = requests.get(url,headers=header,cert=(certificate,key), verify=True)
     if r.ok:
         if args.format == 'json':
             print(json.dumps(r.json(),indent = 1))
@@ -234,7 +240,7 @@ elif args.command == 'SessionsPerStation':
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
     header = {"Authorization" : "JWT " + token_value["access"] }
-    r = requests.get(url,headers=header)
+    r = requests.get(url,headers=header,cert=(certificate,key), verify=True)
     if r.ok:
         if args.format == 'json':
             print(json.dumps(r.json(),indent = 1))
@@ -253,7 +259,7 @@ elif args.command == 'SessionsPerEV':
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
     header = {"Authorization" : "JWT " + token_value["access"] }
-    r = requests.get(url,headers=header)
+    r = requests.get(url,headers=header,cert=(certificate,key), verify=True)
     if r.ok:
         if args.format == 'json':
             print(json.dumps(r.json(),indent = 1))
@@ -271,7 +277,7 @@ elif args.command == 'SessionsPerProvider':
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
     header = {"Authorization" : "JWT " + token_value["access"] }
-    r = requests.get(url,headers=header)
+    r = requests.get(url,headers=header,cert=(certificate,key), verify=True)
     if r.ok:
         if args.format == 'json':
             print(json.dumps(r.json(),indent = 1))
@@ -296,8 +302,8 @@ elif args.command == 'Admin':
         f = open("softeng20bAPI.token")
         token_value = json.load(f)
         header = {"Authorization" : "JWT " + token_value["access"] }
-        url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/usermod/' + args.username + '/' + args.passw + '/'
-        r = requests.post(url,headers=header)
+        url = 'https://localhost:8765/evcharge/api/admin/usermod/' + args.username + '/' + args.passw + '/'
+        r = requests.post(url,headers=header,cert=(certificate,key), verify=True)
         if r.ok:
             print(json.dumps(r.json(),indent =2))
         else :
@@ -312,8 +318,8 @@ elif args.command == 'Admin':
         f = open("softeng20bAPI.token")
         token_value = json.load(f)
         header = {"Authorization" : "JWT " + token_value["access"] }
-        url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/users/' + args.username + '/'
-        r = requests.get(url,headers=header)
+        url = 'https://localhost:8765/evcharge/api/admin/users/' + args.username + '/'
+        r = requests.get(url,headers=header,cert=(certificate,key), verify=True)
         if r.ok:
             print('Username: ' + r.json()["username"] + '\n' +'API KEY: ' + r.json()["apikey"])
         else :
@@ -333,9 +339,9 @@ elif args.command == 'Admin':
         source = open(args.source)
         token_value = json.load(f)
         header = {"Authorization" : "JWT " + token_value["access"]}
-        url = "http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/system/sessionsupd/"
+        url = "https://localhost:8765/evcharge/api/admin/system/sessionsupd/"
         file = {'data_file': source}
-        r = requests.post(url,files=file,headers = header)
+        r = requests.post(url,files=file,headers = header,cert=(certificate,key), verify=True)
         print (r.json())
 
     #Admin healthcheck
@@ -343,7 +349,7 @@ elif args.command == 'Admin':
         if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
             sys.exit()
-        r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/healthcheck/").json()
+        r = requests.get("https://localhost:8765/evcharge/api/admin/healthcheck/",cert=(certificate,key), verify=True).json()
         print(json.dumps(r,indent=2))
 
     #Admin resetsessions
@@ -351,7 +357,7 @@ elif args.command == 'Admin':
         if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
             sys.exit()
-        r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/resetsessions/").json()
+        r = requests.get("https://localhost:8765/evcharge/api/admin/resetsessions/",cert=(certificate,key), verify=True).json()
         print(r)
     else: print('No Main Parameter Given\nUsage:ev_group13 Admin --MainParameter [--Subparameters] \nMain Parameters Supported : --usermod | --users | --healthcheck | --resetsessions | --sessionsupd')
     
