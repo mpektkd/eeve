@@ -91,7 +91,6 @@ def parse_args(args):
     login_required = login.add_argument_group('login required arguments')
     login_required.add_argument('--username', type=str, required=True)
     login_required.add_argument('--passw', type=str, required=True)
-    login_required.add_argument('--apikey',type = str,required=True)
 
     #arguments needed in SessionsPerPoint scope
     SessionsPerPoint_required = SessionsPerPoint.add_argument_group('SessionsPerpoint required arguments')
@@ -149,19 +148,25 @@ base_url = "http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/"
 
 #healthcheck
 if args.command == 'healthcheck':
-    data = {
+    datas = {
         "cli": "true",
-        "API key": args.apikey
+        "APIkey": args.apikey
     }   
-    url = base_url + 'admin/healthcheck' 
-    r = requests.get(url).json()
-    print(json.dumps(r, indent=2))
+    url = base_url + 'admin/healthcheck/' 
+    r = requests.get(url,data=datas)
+    if r.ok:
+        print(json.dumps(r, indent=2))
+    else: 
+        print(str(r.status_code) + " " + r.reason)
 
 
 #resetsessions
 elif args.command == 'resetsessions':
-    r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/resetsessions/").json()
-    print(json.dumps(r,indent=2))
+    r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/resetsessions/")
+    if r.ok:
+        print(json.dumps(r,indent=2))
+    else:
+        print(str(r.status_code) + " " + r.reason)
 
 #Login
 elif args.command == 'login':
@@ -190,7 +195,7 @@ elif args.command == 'logout':
         sys.exit()
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
-    header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
+    header = {"Authorization" : "JWT " + token_value["access"] }
     r = requests.post(url,headers=header,json=token_value)
     if r.ok:
         print("Bye")
@@ -209,7 +214,8 @@ elif args.command == 'SessionsPerPoint':
             sys.exit()
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
-    header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
+    header = {"Authorization" : "JWT " + token_value["access"],
+    "X-OBSERVATORY-AUTH": token_value["access"] }
     r = requests.get(url,headers=header)
     if r.ok:
         if args.format == 'json':
@@ -227,7 +233,7 @@ elif args.command == 'SessionsPerStation':
             sys.exit()
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
-    header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
+    header = {"Authorization" : "JWT " + token_value["access"] }
     r = requests.get(url,headers=header)
     if r.ok:
         if args.format == 'json':
@@ -246,7 +252,7 @@ elif args.command == 'SessionsPerEV':
             sys.exit()
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
-    header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
+    header = {"Authorization" : "JWT " + token_value["access"] }
     r = requests.get(url,headers=header)
     if r.ok:
         if args.format == 'json':
@@ -264,7 +270,7 @@ elif args.command == 'SessionsPerProvider':
             sys.exit()
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
-    header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
+    header = {"Authorization" : "JWT " + token_value["access"] }
     r = requests.get(url,headers=header)
     if r.ok:
         if args.format == 'json':
@@ -289,14 +295,14 @@ elif args.command == 'Admin':
             sys.exit()
         f = open("softeng20bAPI.token")
         token_value = json.load(f)
-        header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
+        header = {"Authorization" : "JWT " + token_value["access"] }
         url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/usermod/' + args.username + '/' + args.passw + '/'
         r = requests.post(url,headers=header)
         if r.ok:
-            print(r.content)
+            print(json.dumps(r.json(),indent =2))
         else :
             print(str(r.status_code) + " " + r.reason)
-            print("A problem occured with your request.\nYou are probably not an admin.")
+            print("A problem occured with your request.\nYou are probably not an admin.\nTry to login again")
 
     #Admin users
     elif users:
@@ -305,14 +311,17 @@ elif args.command == 'Admin':
             sys.exit()
         f = open("softeng20bAPI.token")
         token_value = json.load(f)
-        header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
+        header = {"Authorization" : "JWT " + token_value["access"] }
         url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/users/' + args.username + '/'
         r = requests.get(url,headers=header)
         if r.ok:
-            print(json.dumps(r.json(),indent=2))
+            print('Username: ' + r.json()["username"] + '\n' +'API KEY: ' + r.json()["apikey"])
         else :
-            print(str(r.status_code) + " " + r.reason)
-            print("A problem occured with your request.\nYou are probably not an admin.")
+            if r.status_code != '404':
+                print("A problem occured with your request.\nYou are probably not an admin.")
+            else: 
+                print(str(r.status_code) + " " + r.reason)
+            
 
 
     #Admin sessionsupd
@@ -323,7 +332,7 @@ elif args.command == 'Admin':
         f = open("softeng20bAPI.token")
         source = open(args.source)
         token_value = json.load(f)
-        header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"]}
+        header = {"Authorization" : "JWT " + token_value["access"]}
         url = "http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/system/sessionsupd/"
         file = {'data_file': source}
         r = requests.post(url,files=file,headers = header)
