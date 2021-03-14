@@ -67,7 +67,7 @@ def parse_args(args):
     # SCOPE        
     subparser = parser.add_subparsers(dest='command',help='SCOPE') #Implementation of SCOPE aspect with the use of subparser
     #healthcheck scope
-    healthcheck = subparser.add_parser('healthcheck', usage="ev_group13 healthcheck")
+    healthcheck = subparser.add_parser('healthcheck', usage="ev_group13 healthcheck --apikey APIKEY")
     #resetsessions scope
     resetsessions = subparser.add_parser('resetsessions',usage = "ev_group13 resetsessions")
     #login scope
@@ -86,9 +86,12 @@ def parse_args(args):
     Admin = subparser.add_parser('Admin',usage="ev_group13 Admin --MainParameter --Subparameters \nMain Parameters Supported : --usermod | --users | --healthcheck | --resetsessions | --sessionsupd\n\n")
 
     #arguments needed in login scope
+    healthcheck.add_argument('--apikey',type = str,required=True)
+
     login_required = login.add_argument_group('login required arguments')
     login_required.add_argument('--username', type=str, required=True)
     login_required.add_argument('--passw', type=str, required=True)
+    login_required.add_argument('--apikey',type = str,required=True)
 
     #arguments needed in SessionsPerPoint scope
     SessionsPerPoint_required = SessionsPerPoint.add_argument_group('SessionsPerpoint required arguments')
@@ -146,6 +149,10 @@ base_url = "http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/"
 
 #healthcheck
 if args.command == 'healthcheck':
+    data = {
+        "cli": "true",
+        "API key": args.apikey
+    }   
     url = base_url + 'admin/healthcheck' 
     r = requests.get(url).json()
     print(json.dumps(r, indent=2))
