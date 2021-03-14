@@ -150,6 +150,7 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'eevie.authentication.SafeJWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
     ),
 }
 
