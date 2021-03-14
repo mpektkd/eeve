@@ -28,7 +28,10 @@ import codecs, csv
 @api_view(['GET'])
 @renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerPoint(request, pk, date_from, date_to):        
-        
+    
+    if not request.user.is_superuser:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00" ##ισως χρειαστε να αλλαξω το date_from[4:6] με το μηδενικο
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
@@ -47,7 +50,7 @@ def SessionsPerPoint(request, pk, date_from, date_to):
         point_info['PointOperator'] = first.title
     else:
         point_info['PointOperator'] = "Unknown"
-    point_info['RequestTimesamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
+    point_info['RequestTimesamp'] = datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
     point_info['PeriodFrom'] = date_from[:-9]
     point_info['PeriodTo'] = date_to[:-9]
     point_info['NumberOfChargingSessions'] = sessions.count()
@@ -75,6 +78,9 @@ def SessionsPerPoint(request, pk, date_from, date_to):
 @renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerStation(request, pk, date_from, date_to):
 
+    if not request.user.is_superuser:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
@@ -91,7 +97,7 @@ def SessionsPerStation(request, pk, date_from, date_to):
         station_info['Operator'] = station.operators.all().first().title
     else:
         station_info['Operator'] = "Unknown"
-    station_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
+    station_info['RequestTimestamp'] = datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
     station_info['PeriodFrom'] = date_from[:-9]
     station_info['PeriodTo'] = date_to[:-9]
     station_info['TotalEnergyDelivered']=sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum']
@@ -105,6 +111,9 @@ def SessionsPerStation(request, pk, date_from, date_to):
 @renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerEV(request, pk, date_from, date_to):
     
+    if not request.user.is_superuser:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
@@ -117,7 +126,7 @@ def SessionsPerEV(request, pk, date_from, date_to):
 
     ev_info = {}
     ev_info['VehicleID'] = vehicle.id
-    ev_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
+    ev_info['RequestTimestamp'] = datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
     ev_info['PeriodFrom'] = date_from[:-9]
     ev_info['PeriodTo'] = date_to[:-9]
     kWh = sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum'] #average consumption ??
@@ -151,6 +160,10 @@ def SessionsPerEV(request, pk, date_from, date_to):
 @api_view(['GET'])
 @renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerProvider(request, pk, date_from, date_to):
+    
+    if not request.user.is_superuser:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
@@ -333,9 +346,12 @@ class UserMod(APIView):
             return Response({'message':'User successfully created'}, status=status.HTTP_200_OK)
 
 class SessionsUpd(APIView):
-    # parser_classes = [MultiPartParser]
 
     def post(self, request):
+
+        if not request.user.is_superuser:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
         data = csv.DictReader(codecs.iterdecode(request.FILES['data_file'], 'utf-8'))
         # print(data)
         count_sessions = 0
@@ -366,7 +382,7 @@ class SessionsUpd(APIView):
                     kWhDelivered=kWhDelivered
                 )
                 if s:
-                    return Response({'message':'Session already exists.'},status.HTTP_208_ALREADY_REPORTED)
+                    continue
                 session = Session.objects.create(
                     customer=user,
                     vehicle=vehicle,
@@ -459,23 +475,33 @@ class ChargingSession(APIView):
     def post(sef, request):
 
         data = request.data
+        try:
+            provider = Provider.objects.get(id=int(data['ProviderID']))
+            station = provider.providers.all().get(id=int(data['StationID']))
+            point = station.comments.all().get(id=int(data['PointID']))
+            user = request.user
+            vehicle = user.cars.all().get(id=int(data['VehicleID']))
+            if data['accharger']:
+
+                charger = vehicle.car.ac_charger
+
+            else:
+
+                charger = vehicle.car.dc_charger
+
+            charger.ports.all().get(id=int(data['PortID']))
         
-
-        provider = get_object_or_404(Provider,id=data['ProviderID'])
-        station = get_object_or_404(provider.providers.all(), id=data['StationID'])
-        point = get_object_or_404(station.comments, id=data['PointID'])
-        user = request.user
-        vehicle = get_object_or_404(user.cars, id=data['VehicleID'])
-
-        if data['accharger']:
-
-            charger = vehicle.car.ac_charger
-
-        else:
-
-            charger = vehicle.car.dc_charger
-
-        get_object_or_404(charger.ports, id=data['PortID'])
+        except Provider.DoesNotExist:
+            return Response({'status':'Provider Not Found'}, status=status.HTTP_404_NOT_FOUND)
+        except Station.DoesNotExist:
+            return Response({'status':'Station Not Found'}, status=status.HTTP_404_NOT_FOUND)
+        except Point.DoesNotExist:
+            return Response({'status':'Point Not Found'}, status=status.HTTP_404_NOT_FOUND)
+        except Car.DoesNotExist:
+            return Response({'status':'Car Not Found'}, status=status.HTTP_404_NOT_FOUND)
+        except Ports.DoesNotExist:
+            return Response({'status':'Port is not Compatible'}, status=status.HTTP_404_NOT_FOUND)
+     
 
         if data["kWh"]:
             kWhDelivered=data["kWhDelivered"]

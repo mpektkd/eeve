@@ -11,7 +11,7 @@ from pytz import timezone
 
 class BrandsTestCase(TestCase):
     def setUp(self):
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data2.json' #electric_vehicles_data.json'
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
         f = open(fpath)
         data = json.load(f)
         for i in data['brands']:
@@ -49,7 +49,7 @@ class ACchargerTestCase(TestCase):
         for i in data['ConnectionTypes']:
             p = Ports.create(**i)
             p.save()
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data2.json' #electric_vehicles_data.json'
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
         f = open(fpath)
         data = json.load(f)
         for i in data['data']:
@@ -70,7 +70,7 @@ class DCchargerTestCase(TestCase):
         for i in data['ConnectionTypes']:
             p = Ports.create(**i)
             p.save()
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data2.json' #electric_vehicles_data.json'
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
         f = open(fpath)
         data = json.load(f)
         for i in data['data']:
@@ -89,7 +89,7 @@ class CarBaseTestCase(TestCase):
     def setUp(self):
         brands = BrandsTestCase()
         brands.setUp()
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data2.json' #electric_vehicles_data.json'
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
         f = open(fpath)
         data = json.load(f)
         for i in data['data']:
@@ -142,7 +142,7 @@ class StatusTypeTestCase(TestCase):
 
 class AddressInfoTestCase(TestCase):
     def setUp(self):
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr2.json' #station_info_gr.json
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
         f = open(fpath)
         data = json.load(f)
         for i in data:
@@ -207,7 +207,7 @@ class StationTestCase(TestCase):
         usageTypes = UsageTypeTestCase()
         usageTypes.setUp()
 
-        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr2.json' #station_info_gr.json
+        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
         g = open(gpath)
         data = json.load(g)
         for i in data:
@@ -237,7 +237,7 @@ class SessionsTestCase(TestCase):
         users = UsersTestCase()
         users.setUp()
 
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/sessions3.json' #Data/sessions2.json
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/sessions2.json' #Data/sessions2.json
         f = open(fpath)
         data = json.load(f)
         for i in data["_items"]:

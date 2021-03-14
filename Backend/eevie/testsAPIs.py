@@ -9,7 +9,7 @@ class UserInterferenceTest(APITestCase):
     def test_user_interference(self):
 
         ReferenceTest().setUp()
-        
+       
         # Test Signup
         url = reverse('signup')
         user_data = {'username' : 'KiriakosM', 'password' : 'eimaiokalyterosprwthypourgos', 'car_id' : '27d7610e-9a77-498a-b1b5-28d4bc92cbf2'}
@@ -36,22 +36,27 @@ class UserInterferenceTest(APITestCase):
         response = self.client.post(url, data, HTTP_AUTHORIZATION=authorize)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['status'], 'Created')
-
+        
         # Test mycars
         url = reverse('mycars')
         response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), User.objects.get(username='KiriakosM').cars.all().count())
-
+     
         # Test sessions
-        point = Station.objects.get(id=172220).comments.all().first()
+        provider = Provider.objects.get(id=1)
+        station = provider.providers.all().first()
+        print(station.id)
+        point = station.comments.all().first()
+        port = point.ports.all().first()
+        # point = Station.objects.get(id=172220).comments.all().first()
 
         url = reverse('mychargingsession')
         data = {
-            "ProviderID":str(Station.objects.get(id=172220).providers.all().first().id),
-            "StationID":"172220",
+            "ProviderID":str(provider.id),
+            "StationID":str(station.id),
             "PointID":str(point.id),
-            "PortID":str(point.ports.all().first().id),
+            "PortID":str(port.id),
             "VehicleID":"2",
             "kWh":True,
             "accharger":False,
@@ -64,14 +69,15 @@ class UserInterferenceTest(APITestCase):
         }
 
         response = self.client.post(url, data, HTTP_AUTHORIZATION=authorize)
+        print(response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['message'], 'Session created')
 
         data = {
-            "ProviderID":str(Station.objects.get(id=172220).providers.all().first().id),
-            "StationID":"172220",
+            "ProviderID":str(provider.id),
+            "StationID":str(station.id),
             "PointID":str(point.id),
-            "PortID":str(point.ports.all().first().id),
+            "PortID":str(port.id),
             "VehicleID":"2",
             "kWh":True,
             "accharger":False,
@@ -89,12 +95,14 @@ class UserInterferenceTest(APITestCase):
         # Test my bills
         url = reverse('mybills')
         response = self.client.get(url, data, HTTP_AUTHORIZATION=authorize)
+        print(response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data),1)
 
         # Test my monthly bills
         url = reverse('mymonthlybills')
         response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
+        print(response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data),1)
 
@@ -178,6 +186,46 @@ class AdminTest(APITestCase):
         
         # Test healthcheck
         url = reverse('healthcheck')
-        response = self.client.post(url, HTTP_AUTHORIZATION=authorize)
+        response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
         self.assertEqual(response.status_code,status.HTTP_200_OK)
+        provider = Provider.objects.get(id=1)
+        station = provider.providers.all().first()
+        print(station.id)
+        point = station.comments.all().first()
+        port = point.ports.all().first()
+        # Test SessionsPerPoint
+        url = reverse('sessionsperpoint', args=(point.id,'20200809', '20200823'))
+        response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
+        print(response.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+        # Test SessionsPerStation
+        url = reverse('sessionsperstation', args=(172220,'20200809', '20200823'))
+        response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
+        print(response.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Test SessionsPerEV
+        url = reverse('sessionsperev', args=(2,'20200809', '20200823'))
+        response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
+        print(response.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Test SessionsPerProvider
+        url = reverse('sessionsperprovider', args=(provider.id,'20200809', '20200823'))
+        response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
+        print(response.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Test SessionsUpd
+        f = open("data_file.csv")
+        url = reverse('sessionsupd')
+        response = self.client.post(url,  data = {"data_file": f},HTTP_AUTHORIZATION=authorize)
+        print(response.data)
+        f.close()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        f = open("data_file.csv")
+        response = self.client.post(url,  data = {"data_file": f},HTTP_AUTHORIZATION=authorize)
+        print(response.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        f.close()
