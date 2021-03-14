@@ -11,7 +11,7 @@ from pytz import timezone
 
 class BrandsTestCase(TestCase):
     def setUp(self):
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data2.json' #electric_vehicles_data.json'
         f = open(fpath)
         data = json.load(f)
         for i in data['brands']:
@@ -49,7 +49,7 @@ class ACchargerTestCase(TestCase):
         for i in data['ConnectionTypes']:
             p = Ports.create(**i)
             p.save()
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data2.json' #electric_vehicles_data.json'
         f = open(fpath)
         data = json.load(f)
         for i in data['data']:
@@ -70,7 +70,7 @@ class DCchargerTestCase(TestCase):
         for i in data['ConnectionTypes']:
             p = Ports.create(**i)
             p.save()
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data2.json' #electric_vehicles_data.json'
         f = open(fpath)
         data = json.load(f)
         for i in data['data']:
@@ -89,7 +89,7 @@ class CarBaseTestCase(TestCase):
     def setUp(self):
         brands = BrandsTestCase()
         brands.setUp()
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data.json' #electric_vehicles_data.json'
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/electric_vehicles_data2.json' #electric_vehicles_data.json'
         f = open(fpath)
         data = json.load(f)
         for i in data['data']:
@@ -142,7 +142,7 @@ class StatusTypeTestCase(TestCase):
 
 class AddressInfoTestCase(TestCase):
     def setUp(self):
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr2.json' #station_info_gr.json
         f = open(fpath)
         data = json.load(f)
         for i in data:
@@ -207,7 +207,7 @@ class StationTestCase(TestCase):
         usageTypes = UsageTypeTestCase()
         usageTypes.setUp()
 
-        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
+        gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr2.json' #station_info_gr.json
         g = open(gpath)
         data = json.load(g)
         for i in data:
@@ -237,19 +237,19 @@ class SessionsTestCase(TestCase):
         users = UsersTestCase()
         users.setUp()
 
-        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/sessions2.json' #Data/sessions2.json
+        fpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/sessions3.json' #Data/sessions2.json
         f = open(fpath)
         data = json.load(f)
         for i in data["_items"]:
             s = Session.create(**i)
             s.save()
         
-    def test_sessions(self):
+    # def test_sessions(self):
         # print(Session.objects.all())
-        date_from = '2019-9-01 16:56:18.00+00:00'
-        date_to = '2020-8-03 22:02:13.00+00:00'
+        # date_from = '2019-9-01 16:56:18.00+00:00'
+        # date_to = '2020-8-03 22:02:13.00+00:00'
 
-        try:
+        # try:
 
             # points = [Point.objects.get(id=263271)]
             # points = Point.objects.all()
@@ -293,29 +293,29 @@ class SessionsTestCase(TestCase):
             #     print(f"sessions: {sessions.count()}")
 
 
-            stations = Station.objects.all()
-            # stations = [Station.objects.get(id=172220)]
-            for station in stations:
+            # stations = Station.objects.all()
+            # # stations = [Station.objects.get(id=172220)]
+            # for station in stations:
 
-                sessions = station.sessions.all().filter(connectionTime__range=[date_from,date_to])
+            #     sessions = station.sessions.all().filter(connectionTime__range=[date_from,date_to])
                 
-                station_info = {}
-                station_info['StationID'] = station.id
-                if station.operators.all().first() is not None:
-                    station_info['Operator'] = station.operators.all().first().title
-                else:
-                    station_info['Operator'] = "Unknown"
-                # station_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens'))
-                station_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
-                station_info['PeriodFrom'] = date_from
-                station_info['PeriodTo'] = date_to
-                station_info['TotalEnergyDelivered']=sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum']
-                station_info['NumberOfChargingSessions'] = sessions.count()
-                station_info['NumberOfActivePoints'] = len(sessions.values('point').annotate(Count('point__id')))
-                station_info['SessionsSummaryList'] = list(sessions.values('point__id').annotate(PointSessions=Count('point'), EnergyDelivered = Sum('kWhDelivered')).order_by('-PointSessions'))
-                print("----------------Info--------------------------")
-                print(station_info)
-                print(f"sessions: {sessions.count()}")
+            #     station_info = {}
+            #     station_info['StationID'] = station.id
+            #     if station.operators.all().first() is not None:
+            #         station_info['Operator'] = station.operators.all().first().title
+            #     else:
+            #         station_info['Operator'] = "Unknown"
+            #     # station_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens'))
+            #     station_info['RequestTimestamp'] = datetime.datetime.now(timezone('Europe/Athens')).strftime("%Y-%m-%d %H:%M:%S")
+            #     station_info['PeriodFrom'] = date_from
+            #     station_info['PeriodTo'] = date_to
+            #     station_info['TotalEnergyDelivered']=sessions.aggregate(Sum('kWhDelivered'))['kWhDelivered__sum']
+            #     station_info['NumberOfChargingSessions'] = sessions.count()
+            #     station_info['NumberOfActivePoints'] = len(sessions.values('point').annotate(Count('point__id')))
+            #     station_info['SessionsSummaryList'] = list(sessions.values('point__id').annotate(PointSessions=Count('point'), EnergyDelivered = Sum('kWhDelivered')).order_by('-PointSessions'))
+            #     print("----------------Info--------------------------")
+            #     print(station_info)
+            #     print(f"sessions: {sessions.count()}")
             # vehicles = [Car.objects.get(id=int(1))]
             # vehicles = Car.objects.all()
 
@@ -391,9 +391,9 @@ class SessionsTestCase(TestCase):
             #     print(provider_info)
             #     print(f"sessions: {sessions.count()}")
 
-        except Exception as e:
-            print('Not Found')
-            return
+        # except Exception as e:
+        #     print('Not Found')
+        #     return
 
 class ProvidersTestCase(TestCase):
     def setUp(self):

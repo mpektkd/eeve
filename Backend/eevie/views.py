@@ -17,8 +17,9 @@ from django.shortcuts import get_object_or_404
 from django.db import connection
 from eevie.serializers import *
 from eevie.models import *
-from fill_db import setUpSessions
-import json,datetime
+from eevie.fill_db import setUpSessions
+import json
+from datetime import datetime
 from pytz import timezone
 # Create your views here.
 from django.db.models import Count, Sum
@@ -191,7 +192,6 @@ class UserView(APIView):
 
     def post(self,request,format=None):
         serializer = UserSerializer(data=request.data)
-        print(request.data['username'])
         if serializer.is_valid():
             serializer.save()
 
@@ -262,16 +262,15 @@ class ResetSessions(APIView):
 
     def post(self,request):
         if not request.user.is_superuser:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         Session.objects.all().delete()
-        u = User.get_or_create(username = 'admin', password = 'petrol4ever', is_staff=True, is_superuser=True)
-        if not u[1]:
-            u[0].delete()
-            User.create(username = 'admin', password = 'petrol4ever', is_staff=True, is_superuser=True).save()
-        else:
-            u[0].save()
-        
+
+        try:
+            User.objects.get(username = 'admin')
+        except User.DoesNotExist:
+            User.objects.create(username = 'admin', password = 'petrol4ever', is_staff=True, is_superuser=True).save()
+
         if not (Session.objects.all()):
             return Response({'status': 'failed'})
         return Response({'status' : 'OK'})
@@ -323,7 +322,6 @@ class UserMod(APIView):
 
         if User.objects.filter(username=username).exists():
             u = User.objects.get(username=username)
-            print(password)
             u.set_password(password)
             u.save()
             return Response({'message':'Password successfully changed.'}, status=status.HTTP_200_OK)
@@ -355,7 +353,7 @@ class SessionsUpd(APIView):
                 doneChargingTime = row['DoneChargingTime']
                 kWhDelivered = row['kWhDelivered']
                 payment = row['Payment']
-                Session.objects.create(
+                s = Session.objects.filter(
                     customer=user,
                     vehicle=vehicle,
                     provider=provider,
@@ -367,6 +365,45 @@ class SessionsUpd(APIView):
                     doneChargingTime=doneChargingTime,
                     kWhDelivered=kWhDelivered
                 )
+                if s:
+                    return Response({'message':'Session already exists.'},status.HTTP_208_ALREADY_REPORTED)
+                session = Session.objects.create(
+                    customer=user,
+                    vehicle=vehicle,
+                    provider=provider,
+                    station=station,
+                    point=point,
+                    payment=payment,
+                    connectionTime=connectionTime,
+                    disconnectTime=disconnectTime,
+                    doneChargingTime=doneChargingTime,
+                    kWhDelivered=kWhDelivered
+                )
+                if payment == 'Credit':
+                    is_paid=False
+                else:
+                    is_paid=True
+                    Bill.objects.create(customer = user,
+                                            date_created = connectionTime,
+                                            total = session.price,
+                                            is_paid = is_paid).save()
+                if is_paid==False:
+                    time = session.connectionTime
+                    date = datetime.strptime(time,'%Y-%m-%d %I:%M:%S.00+00:00')
+                    lastday = calendar.monthrange(date.year,date.month)[1]
+                    start_date = datetime(date.year, date.month, 1).strftime('%Y-%m-%d')
+                    end_date = datetime(date.year, date.month, lastday).strftime('%Y-%m-%d')
+                    customer = user.customer
+                    customer.has_expired_bills = True
+                    customer.save()
+                    m = MonthlyBill.objects.get_or_create(start_date = start_date, end_date = end_date , customer = user)
+                    if m[1]:
+                        m[0].save()
+                    if m[0].monthly_total < 0:
+                        m[0].monthly_total = session.price    
+                    else:
+                        m[0].monthly_total = m[0].monthly_total+session.price
+                    m[0].save()
             except Exception as e:
                 pass
         count_after = Session.objects.all().count()
@@ -406,7 +443,6 @@ class MyBills(APIView):
 
         return Response(serializer.data,status=status.HTTP_200_OK)
 
-
 class MyMonthlyBills(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -445,10 +481,10 @@ class ChargingSession(APIView):
             kWhDelivered=data["kWhDelivered"]
         else:
             kWhDelivered=data["amount"]/provider.costPerkWh
-        if vehicle.car.usable_battery_size <= kWhDelivered:
+        if vehicle.car.usable_battery_size <= float(kWhDelivered):
                 kWhDelivered = vehicle.car.usable_battery_size
 
-        Session.objects.create(
+        session = Session.objects.create(
                     customer=user,
                     vehicle=vehicle,
                     provider=provider,
@@ -458,11 +494,36 @@ class ChargingSession(APIView):
                     connectionTime=data["connectionTime"],
                     disconnectTime=data["disconnectTime"],
                     doneChargingTime=data["doneChargingTime"],
-                    kWhDelivered=kWhDelivered
+                    kWhDelivered=float(kWhDelivered)
                 )
 
+        if session.payment == 'Credit':
+            is_paid=False
+        else:
+            is_paid=True
+            Bill.objects.create(customer = user,
+                                    date_created = session.connectionTime,
+                                    total = session.price,
+                                    is_paid = is_paid).save()
+        if is_paid==False:
+            time = session.connectionTime
+            date = datetime.strptime(time,'%Y-%m-%d %I:%M:%S.00+00:00')
+            lastday = calendar.monthrange(date.year,date.month)[1]
+            start_date = datetime(date.year, date.month, 1).strftime('%Y-%m-%d')
+            end_date = datetime(date.year, date.month, lastday).strftime('%Y-%m-%d')
+            customer = user.customer
+            customer.has_expired_bills = True
+            customer.save()
+            m = MonthlyBill.objects.get_or_create(start_date = start_date, end_date = end_date , customer = user)
+            if m[1]:
+                m[0].save()
+            if m[0].monthly_total < 0:
+                m[0].monthly_total = session.price    
+            else:
+                m[0].monthly_total = m[0].monthly_total+session.price
+            m[0].save()
     
-        return Response(status=status.HTTP_200_OK)
+        return Response({'message':'Session created'},status=status.HTTP_200_OK)
 
 class MonthlyPayoff(APIView):
 
@@ -476,30 +537,11 @@ class MonthlyPayoff(APIView):
         monthly_bill = MonthlyBill.objects.get(id=id)
         if monthly_bill.monthly_total < 0:
 
-            return Response({'status':'MonthlyBill is Paid'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'status':'Monthly bill is already paid'}, status=status.HTTP_400_BAD_REQUEST)
         
         monthly_bill.payoff()
 
-        return Response(status=status.HTTP_200_OK)
-
-
-class Payoff(APIView):
-
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-
-        id = request.data["BillID"]
-        
-
-        bill = Bill.objects.get(id=id)
-        if bill.is_paid == True:
-
-            return Response({'status':'Bill is Paid'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        bill.payoff()
-
-        return Response(status=status.HTTP_200_OK)
+        return Response({'status':'Monthly bill is now paid'},status=status.HTTP_200_OK)
 
 class getStations(APIView):
 
@@ -532,6 +574,6 @@ class InsertCar(APIView):
 
         except CarBase.DoesNotExist :
 
-            return Response({'status':['Bad ID']}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'status':'Bad ID'}, status=status.HTTP_404_NOT_FOUND)
         
-        return Response(status=status.HTTP_200_OK)
+        return Response({'status':'Created'},status=status.HTTP_200_OK)

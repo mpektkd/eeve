@@ -154,7 +154,8 @@ class StationSerializer(serializers.ModelSerializer):
     comments.ports = PortSerializer(many=True)
     statusType = StatusTypeSerializer(many=True)
     usageType = UsageTypeSerializer(many=True)
+    rating = ReadOnlyField()
 
     class Meta:
         model=Station
-        fields='__all__'
+        fields=('__all__')

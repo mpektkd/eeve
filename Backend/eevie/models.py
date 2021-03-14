@@ -587,7 +587,7 @@ class Session(models.Model):
         random_station = random.choice(stations)
 
         random_provider = random.choice(random_station.providers.all())
-        random_point = random.choice(random_station.points.all())
+        random_point = random.choice(random_station.comments.all())
 
         random_paymentOpt = random.choice(['Credit','Debit Card','Cash'])
 
@@ -623,10 +623,10 @@ class Session(models.Model):
                                     is_paid = is_paid)
         if is_paid==False:
             time = session.connectionTime
-            date = datetime.strptime(time,'%Y-%m')
+            date = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.00+00:00")
             lastday = calendar.monthrange(date.year,date.month)[1]
-            start_date = datetime(date.year, date.month, 1).strftime('%Y-%m-%d')
-            end_date = datetime(date.year, date.month, lastday).strftime('%Y-%m-%d')
+            start_date = datetime(date.year, date.month, 1).strftime("%Y-%m-%d")
+            end_date = datetime(date.year, date.month, lastday).strftime("%Y-%m-%d")
             customer = random_user.customer
             customer.has_expired_bills = True
             customer.save()
