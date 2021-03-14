@@ -181,4 +181,3 @@ class AdminTest(APITestCase):
         response = self.client.post(url, HTTP_AUTHORIZATION=authorize)
         self.assertEqual(response.status_code,status.HTTP_200_OK)
 
-        
