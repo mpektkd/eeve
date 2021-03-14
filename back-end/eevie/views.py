@@ -248,7 +248,7 @@ class HealthCheckView(APIView):
     def get(self, request, *args, **kwargs):
         if "cli" in request.data:
             if not APIKey.objects.filter(apikey=request.data['APIkey']):
-                return Response({'satus':'failed'}, status.HTTP_401_UNAUTHORIZED)
+                return Response({'status':'failed'}, status.HTTP_401_UNAUTHORIZED)
         with connection.cursor() as cursor:
             cursor.execute("select 1")
             one = cursor.fetchone()[0]
