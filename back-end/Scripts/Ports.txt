@@ -1,0 +1,82 @@
+Port with ID: 0 and title Unknown.
+	
+Port with ID: 1 and title Type 1 (J1772).
+	
+Port with ID: 2 and title CHAdeMO.
+	
+Port with ID: 3 and title BS1363 3 Pin 13 Amp.
+	
+Port with ID: 4 and title Blue Commando (2P+E).
+	
+Port with ID: 5 and title LP Inductive.
+	
+Port with ID: 6 and title SP Inductive.
+	
+Port with ID: 7 and title Avcon Connector.
+	
+Port with ID: 8 and title Tesla (Roadster).
+	
+Port with ID: 9 and title NEMA 5-20R.
+	
+Port with ID: 10 and title NEMA 14-30.
+	
+Port with ID: 11 and title NEMA 14-50.
+	
+Port with ID: 13 and title Europlug 2-Pin (CEE 7/16).
+	
+Port with ID: 14 and title NEMA 6-20.
+	
+Port with ID: 15 and title NEMA 6-15.
+	
+Port with ID: 16 and title CEE 3 Pin.
+	
+Port with ID: 17 and title CEE 5 Pin.
+	
+Port with ID: 18 and title CEE+ 7 Pin.
+	
+Port with ID: 21 and title XLR Plug (4 pin).
+	
+Port with ID: 22 and title NEMA 5-15R.
+	
+Port with ID: 23 and title CEE 7/5.
+	
+Port with ID: 24 and title Wireless Charging.
+	
+Port with ID: 25 and title Type 2 (Socket Only).
+	
+Port with ID: 26 and title SCAME Type 3C (Schneider-Legrand).
+	
+Port with ID: 27 and title Tesla Supercharger.
+	
+Port with ID: 28 and title CEE 7/4 - Schuko - Type F.
+	
+Port with ID: 29 and title Type I (AS 3112).
+	
+Port with ID: 30 and title Tesla (Model S/X).
+	
+Port with ID: 31 and title Tesla Battery Swap.
+	
+Port with ID: 32 and title CCS (Type 1).
+	
+Port with ID: 33 and title CCS (Type 2).
+	
+Port with ID: 34 and title IEC 60309 3-pin.
+	
+Port with ID: 35 and title IEC 60309 5-pin.
+	
+Port with ID: 36 and title SCAME Type 3A (Low Power).
+	
+Port with ID: 1036 and title Type 2 (Tethered Connector) .
+	
+Port with ID: 1037 and title T13 - SEC1011 ( Swiss domestic 3-pin ) - Type J.
+	
+Port with ID: 1038 and title GB-T AC - GB/T 20234.2 (Socket).
+	
+Port with ID: 1039 and title GB-T AC - GB/T 20234.2 (Tethered Cable).
+	
+Port with ID: 1040 and title GB-T DC - GB/T 20234.3.
+	
+Port with ID: 1041 and title Three Phase 5-Pin (AS/NZ 3123).
+	
+Port with ID: 1042 and title NEMA TT-30R.
+	

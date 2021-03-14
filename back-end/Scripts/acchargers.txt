@@ -1,0 +1,572 @@
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 2.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 43.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 30.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 4.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 4.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>, <Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.3 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.3 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 7.4 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.3 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.3 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.3 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 2.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 43.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 30.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 22.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 16.5 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 4.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 4.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 6.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>, <Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.3 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.3 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 3.7 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 1 and title Type 1 (J1772).>]> and 7.4 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.7 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.3 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.3 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.3 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 3.6 max power.
+	
+AC charger with 2 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.2 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 3 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 11.0 max power.
+	
+AC charger with 1 phases, available ports: <QuerySet [<Ports: Port with ID: 25 and title Type 2 (Socket Only).>, <Ports: Port with ID: 1036 and title Type 2 (Tethered Connector) .>]> and 7.4 max power.
+	
