@@ -187,6 +187,7 @@ CORS_ALLOW_HEADERS=[
     'authorization',
     'content-type',
     'dnt',
+    'token',
     'X-OBSERVATORY-AUTH',
     'detail',
     'origin',
@@ -195,7 +196,7 @@ CORS_ALLOW_HEADERS=[
     'x-requested-with',
     'access-control-allow-credentials',
     'access-control-allow-origin',
-    'access-control-expose-headers'
+    'access-control-expose-headers',
 ]
 
 CRONJOBS = [
