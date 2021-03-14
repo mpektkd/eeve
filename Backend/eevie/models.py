@@ -7,6 +7,7 @@ from django.core.validators import MaxValueValidator, RegexValidator
 from django.utils import tree
 import random,calendar
 from datetime import datetime
+import rstr
 
 from . import validators
 
@@ -34,6 +35,19 @@ class Customer(models.Model):
 
         self.has_expired_bills = random.choice(booleans)
         self.save()
+
+class APIKey(models.Model):
+    customer = models.OneToOneField(User, related_name="apikey", on_delete = models.CASCADE)
+    apikey = models.CharField(max_length=14)
+
+    @classmethod
+    def generate(cls,user):
+        randomapikey = rstr.xeger(r'[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}')
+        cls.objects.create(
+            customer = user,
+            apikey = randomapikey
+        ).save()
+        return randomapikey
 
  # Individual Bill 
 class Bill(models.Model):
