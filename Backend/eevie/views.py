@@ -405,7 +405,7 @@ class SessionsUpd(APIView):
                                             is_paid = is_paid).save()
                 if is_paid==False:
                     time = session.connectionTime
-                    date = datetime.strptime(time,'%Y-%m-%d %I:%M:%S.00+00:00')
+                    date = datetime.strptime(time,'%Y-%m-%d %H:%M:%S.00+00:00')
                     lastday = calendar.monthrange(date.year,date.month)[1]
                     start_date = datetime(date.year, date.month, 1).strftime('%Y-%m-%d')
                     end_date = datetime(date.year, date.month, lastday).strftime('%Y-%m-%d')
@@ -533,7 +533,7 @@ class ChargingSession(APIView):
                                     is_paid = is_paid).save()
         if is_paid==False:
             time = session.connectionTime
-            date = datetime.strptime(time,'%Y-%m-%d %I:%M:%S.00+00:00')
+            date = datetime.strptime(time,'%Y-%m-%d %H:%M:%S.00+00:00')
             lastday = calendar.monthrange(date.year,date.month)[1]
             start_date = datetime(date.year, date.month, 1).strftime('%Y-%m-%d')
             end_date = datetime(date.year, date.month, lastday).strftime('%Y-%m-%d')
