@@ -8,11 +8,61 @@ import csv
 
 from requests import status_codes
 
+def csv_print_point(text):
+    csvf = open ("csv.csv", "a")
+    csvf.write(text)
+    csvf.close()
+    csvfl = open ("csv.csv","r")
+    csv_f = csv.reader(csvfl)
+    print("EnergyDelivered|-----FinishedOn----|-Payment--|Protocol|SessionID|SessionIndex|-----StartedOn-----|VehicleType")
+    count = 0
+    rows = 0
+    for row in csv_f:
+        linecount = 0
+        counter = 0
+        for i in row:
+            counter = counter + 1
+            if i == "NumberOfChargingSessions":
+                rows = counter/8
+            if count == 1 and rows > counter/8:
+                if linecount ==0: 
+                    print('{:^15}'.format(i),end="|")
+                if linecount ==1: 
+                    print('{:^5}'.format(i),end="|")
+                if linecount ==2: 
+                    print('{:^10}'.format(i),end="|")
+                if linecount ==3: 
+                    print('{:^8}'.format(i[0:7]),end="|")
+                if linecount ==4: 
+                    print('{:^9}'.format(i),end="|")
+                if linecount ==5: 
+                    print('{:^12}'.format(i),end="|")
+                if linecount ==6: 
+                    print('{:^5}'.format(i),end="|")
+                if linecount ==7:    
+                    print(i)
+                    linecount =-1
+                linecount = linecount +1
+            elif count==1 and rows <= counter/8:
+                if linecount ==0: 
+                    print('\nNumberOfChargingSessions: ' + str(i))
+                if linecount ==1: 
+                    print('Date From: ' + str(i))
+                if linecount ==2: 
+                    print('Date to: ' + str(i))
+                if linecount ==3: 
+                    print('Point ID: ' + str(i))
+                linecount +=1
+        count = count +1
+    print("\n")
+    os.remove("csv.csv")
+
+
 def parse_args(args):
 
 #format and apikey are always required
     
-    parser = argparse.ArgumentParser(usage=msg())
+    parser = argparse.ArgumentParser()
 
     # SCOPE        
     subparser = parser.add_subparsers(dest='command',help='SCOPE') #Implementation of SCOPE aspect with the use of subparser
@@ -89,16 +139,26 @@ def msg(name=None):
 
 
 args = parse_args(sys.argv[1:])
+if (vars(args))['command'] == None :
+    print('General Usage:ev_group13 SCOPE [--params values] \nScopes Supported: healthcheck|resetsessions|login|logout|SessionsPerPoint|SessionsPerStation|SessionsPerEV|SessionsPerProvider|Admin')
+base_url = "http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/"
 
 
-if args.command == 'healthcheck':  #healthcheck API 
-    r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/healthcheck/").json()
+#healthcheck
+if args.command == 'healthcheck':
+    url = base_url + 'admin/healthcheck' 
+    r = requests.get(url).json()
     print(json.dumps(r, indent=2))
-elif args.command == 'resetsessions': #resetsessions API Call
-    print('resetsessionsapi')
-    if args.format == 'csv': print('csv')
-    else: print('json')
-elif args.command == 'login': #login API Call
+
+
+#resetsessions
+elif args.command == 'resetsessions':
+    r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/resetsessions/").json()
+    print(json.dumps(r,indent=2))
+
+#Login
+elif args.command == 'login':
+    url = base_url + 'login/'
     params = {
     "username": args.username,
     "password": args.passw
@@ -106,8 +166,7 @@ elif args.command == 'login': #login API Call
     if os.path.exists("softeng20bAPI.token"):
         print("You are already logged in!")
     else:
-        
-        json_object = requests.post("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/login/",json=params).json()
+        json_object = requests.post(url,json=params).json()
         if 'detail' in json_object:
             print (json_object["detail"])
         else:
@@ -115,148 +174,115 @@ elif args.command == 'login': #login API Call
             f.write(json.dumps(json_object,indent = 2))
             print ("Login Succsessfull...\nWelcome to eevie, " + args.username + '!')
         
-    
-elif args.command == 'logout': #logout 
+
+#logout
+elif args.command == 'logout': 
+    url = base_url + 'logout/'
     if not os.path.exists("softeng20bAPI.token"):
         print("You are not logged in.")
         sys.exit()
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
-    header = {"Authorization" : "JWT " + token_value["access"] }
-    r = requests.post("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/logout/",headers=header,json=token_value)
+    header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
+    r = requests.post(url,headers=header,json=token_value)
     if r.ok:
         print("Bye")
         os.remove("softeng20bAPI.token")
     else:
-        print(str(r.status_code)+" " + r.reason)     
+        os.remove("softeng20bAPI.token")
+        print(str(r.status_code)+" " + r.reason)
+        print("Token on system had expired")  
 
+
+#SessionsPerPoint
 elif args.command == 'SessionsPerPoint':
+    url = base_url + 'SessionsPerPoint/' + args.point + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
     if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
             sys.exit()
-    url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/SessionsPerPoint/' + args.point + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
-    header = {"Authorization" : "JWT " + token_value["access"] }
+    header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
     r = requests.get(url,headers=header)
     if r.ok:
         if args.format == 'json':
             print(json.dumps(r.json(),indent = 1))
         elif args.format == 'csv':
-            csvf = open ("csv.csv", "a")
-            csvf.write(r.text)
-            csvf.close()
-            csvfl = open ("csv.csv","r")
-            csv_f = csv.reader(csvfl)
-            print("EnergyDelivered|-----FinishedOn----|-Payment--|Protocol|SessionID|SessionIndex|-----StartedOn-----|VehicleType")
-            count = 0
-            for row in csv_f:
-                linecount = 0
-                counter = 0
-                for i in row:
-                    counter = counter + 1
-                    if i == "NumberOfChargingSessions":
-                        rows = counter/8
-                    if count == 1 and rows > counter/8:
-                        if linecount ==0: 
-                            print('{:^15}'.format(i),end="|")
-                        if linecount ==1: 
-                            print('{:^5}'.format(i),end="|")
-                        if linecount ==2: 
-                            print('{:^10}'.format(i),end="|") 
-                        if linecount ==3: 
-                            print('{:^8}'.format(i[0:7]),end="|")
-                        if linecount ==4: 
-                            print('{:^9}'.format(i),end="|")
-                        if linecount ==5: 
-                            print('{:^12}'.format(i),end="|")
-                        if linecount ==6: 
-                            print('{:^5}'.format(i),end="|")
-                        if linecount ==7:    
-                            print(i)
-                            linecount =-1
-                        linecount = linecount +1
-                    elif count==1 and rows <= counter/8:
-                        if linecount ==0: 
-                            print('NumberOfChargingSessions: ' + str(i))
-                        if linecount ==1: 
-                            print('Da')
-                        if linecount ==2: 
-                            print('{:^10}'.format(i),end="|") 
-                        if linecount ==3: 
-                            print('{:^8}'.format(i[0:7]),end="|")
-                        if linecount ==4: 
-                            print('{:^9}'.format(i),end="|")
-                        if linecount ==5: 
-                            print('{:^12}'.format(i),end="|")
-                        
-                        break
-
-                        
-                count = count +1
-                
-            print("\n")    
-            print(rows)
-            os.remove("csv.csv")
+            csv_print_point(r.text)
     else:
         print(str(r.status_code) + ' ' + r.reason)
 
+#SessionsPerStation
 elif args.command == 'SessionsPerStation':
+    url = base_url + 'SessionsPerStation/' + args.station + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
     if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
             sys.exit()
-    url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/SessionsPerStation/' + args.station + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
-    header = {"Authorization" : "JWT " + token_value["access"] }
+    header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
     r = requests.get(url,headers=header)
     if r.ok:
-        print(r.text)
+        if args.format == 'json':
+            print(json.dumps(r.json(),indent = 1))
+        elif args.format == 'csv':
+            print (r.text)
     else:
         print(str(r.status_code) + ' ' + r.reason)
 
 
-
+#SessionsPerEV
 elif args.command == 'SessionsPerEV':
+    url = base_url + 'SessionsPerEV/' + args.ev + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
     if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
             sys.exit()
-    url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/SessionsPerEV/' + args.ev + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
-    header = {"Authorization" : "JWT " + token_value["access"] }
+    header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
     r = requests.get(url,headers=header)
     if r.ok:
-        print(r.text)
+        if args.format == 'json':
+            print(json.dumps(r.json(),indent = 1))
+        elif args.format == 'csv':
+            print(r.text)
     else:
         print(str(r.status_code) + ' ' + r.reason)
 
+#SessionsPerProvider
 elif args.command == 'SessionsPerProvider':
+    url = base_url + 'SessionsPerProvider/' + args.provider + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
     if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
             sys.exit()
-    url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/SessionsPerProvider/' + args.provider + '/' + args.datefrom + '_from/' + args.dateto + '_to/?format=' + args.format
     f = open("softeng20bAPI.token")
     token_value = json.load(f) 
-    header = {"Authorization" : "JWT " + token_value["access"] }
+    header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
     r = requests.get(url,headers=header)
     if r.ok:
-        print(r.text)
+        if args.format == 'json':
+            print(json.dumps(r.json(),indent = 1))
+        elif args.format == 'csv':
+            print(r.text)
     else:
         print(str(r.status_code) + ' ' + r.reason)
+
+#Admin
 elif args.command == 'Admin':
     usermod = args.usermod and args.username and args.passw  and (not(args.users or args.sessionsupd or args.source or args.healthcheck or args.resetsessions))
     users = args.users and args.username and (not(args.usermod or args.passw or args.sessionsupd or args.source or args.healthcheck or args.resetsessions))
     sessionupd = args.sessionsupd and args.source and (not(args.usermod or args.username or args.passw or args.users or args.healthcheck or args.resetsessions))
     healthcheck = args.healthcheck and (not(args.usermod or args.username or args.passw or args.users or args.sessionsupd or args.source or args.resetsessions))
     resetsessions = args.resetsessions and (not(args.usermod or args.username or args.passw or args.users or args.sessionsupd or args.source or args.healthcheck))
+
+    #Admin usermod
     if  usermod: 
         if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
             sys.exit()
         f = open("softeng20bAPI.token")
         token_value = json.load(f)
-        header = {"Authorization" : "JWT " + token_value["access"] }
+        header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
         url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/usermod/' + args.username + '/' + args.passw + '/'
         r = requests.post(url,headers=header)
         if r.ok:
@@ -264,13 +290,15 @@ elif args.command == 'Admin':
         else :
             print(str(r.status_code) + " " + r.reason)
             print("A problem occured with your request.\nYou are probably not an admin.")
+
+    #Admin users
     elif users:
         if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
             sys.exit()
         f = open("softeng20bAPI.token")
         token_value = json.load(f)
-        header = {"Authorization" : "JWT " + token_value["access"] }
+        header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"] }
         url = 'http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/users/' + args.username + '/'
         r = requests.get(url,headers=header)
         if r.ok:
@@ -278,6 +306,9 @@ elif args.command == 'Admin':
         else :
             print(str(r.status_code) + " " + r.reason)
             print("A problem occured with your request.\nYou are probably not an admin.")
+
+
+    #Admin sessionsupd
     elif sessionupd:
         if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
@@ -285,22 +316,27 @@ elif args.command == 'Admin':
         f = open("softeng20bAPI.token")
         source = open(args.source)
         token_value = json.load(f)
-        header = {"Authorization" : "JWT " + token_value["access"]}
+        header = {"Authorization" : "X-OBSERVATORY-AUTH " + token_value["access"]}
         url = "http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/system/sessionsupd/"
         file = {'data_file': source}
         r = requests.post(url,files=file,headers = header)
         print (r.json())
+
+    #Admin healthcheck
     elif healthcheck: 
         if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
             sys.exit()
         r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/healthcheck/").json()
-        print(r["status"])
+        print(json.dumps(r,indent=2))
+
+    #Admin resetsessions
     elif resetsessions: 
         if not os.path.exists("softeng20bAPI.token"):
             print("Not Logged in.")
             sys.exit()
         r = requests.get("http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/admin/resetsessions/").json()
+        print(r)
     else: print('No Main Parameter Given\nUsage:ev_group13 Admin --MainParameter [--Subparameters] \nMain Parameters Supported : --usermod | --users | --healthcheck | --resetsessions | --sessionsupd')
     
 
