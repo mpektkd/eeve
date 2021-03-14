@@ -23,12 +23,13 @@ class UserInterferenceTest(APITestCase):
         response = self.client.post(url,data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         token = response.data
-        authorize = 'JWT ' + token['access']
+        authorize = 'X-OBSERVATORY-AUTH ' + token['access']
 
         # Test current user 
         url = reverse('current_user')
         response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
-        self.assertEqual(response.data,{'id':1, 'username':'KiriakosM'})
+        self.assertEqual(response.data['id'],1)
+        self.assertEqual(response.data['username'],'KiriakosM')
 
         # Test add car
         url = reverse('addcar')
@@ -46,7 +47,7 @@ class UserInterferenceTest(APITestCase):
         # Test sessions
         provider = Provider.objects.get(id=1)
         station = provider.providers.all().first()
-        print(station.id)
+
         point = station.comments.all().first()
         port = point.ports.all().first()
         # point = Station.objects.get(id=172220).comments.all().first()
@@ -69,7 +70,7 @@ class UserInterferenceTest(APITestCase):
         }
 
         response = self.client.post(url, data, HTTP_AUTHORIZATION=authorize)
-        print(response.data)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['message'], 'Session created')
 
@@ -95,14 +96,14 @@ class UserInterferenceTest(APITestCase):
         # Test my bills
         url = reverse('mybills')
         response = self.client.get(url, data, HTTP_AUTHORIZATION=authorize)
-        print(response.data)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data),1)
 
         # Test my monthly bills
         url = reverse('mymonthlybills')
         response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
-        print(response.data)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data),1)
 
@@ -122,7 +123,7 @@ class UserInterferenceTest(APITestCase):
         # Test logout
         url = reverse('logout')
         data = token
-        response = self.client.post(url,data, HTTP_AUTHORIZATION='JWT ' + response.data['access'])
+        response = self.client.post(url,data, HTTP_AUTHORIZATION='X-OBSERVATORY-AUTH ' + response.data['access'])
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Test Login
@@ -131,7 +132,7 @@ class UserInterferenceTest(APITestCase):
         response = self.client.post(url,data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         token = response.data
-        authorize = 'JWT ' + token['access']
+        authorize = 'X-OBSERVATORY-AUTH ' + token['access']
 
         # Test deletion
         url = reverse('deleteme')
@@ -155,27 +156,29 @@ class AdminTest(APITestCase):
         response = self.client.post(url,data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         token = response.data
-        authorize = 'JWT ' + token['access']
+        authorize = 'X-OBSERVATORY-AUTH ' + token['access']
 
 
         # Test user creation
-        url = reverse('usermod', kwargs={'username':'KiriakosM', 'password':'oibatsoieinaifiloimas'})
+        url = reverse('usermod', kwargs={'username':'Nikos', 'password':'nikosnikos123'})
         response = self.client.post(url,HTTP_AUTHORIZATION=authorize)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['message'],'User successfully created')
 
 
         # Test password change
-        url = reverse('usermod', kwargs={'username':'KiriakosM', 'password':'sike'})
+        url = reverse('usermod', kwargs={'username':'Nikos', 'password':'nikosnikos1312'})
         response = self.client.post(url, HTTP_AUTHORIZATION=authorize)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['message'],'Password successfully changed.')
+        self.assertEqual(response.data['message'],'Password successfuly changed')
+        print(response.data)
        
 
         # Test inspectUser
-        url = reverse('inspectuser', kwargs={'username':'KiriakosM'})
+        url = reverse('inspectuser', kwargs={'username':'Nikos'})
         response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
-        self.assertEqual(response.data['username'],'KiriakosM')
+        self.assertEqual(response.data['username'],'Nikos')
+        
 
         # Test reset sessions
         self.assertNotEqual(len(Session.objects.all()),0)
@@ -190,42 +193,43 @@ class AdminTest(APITestCase):
         self.assertEqual(response.status_code,status.HTTP_200_OK)
         provider = Provider.objects.get(id=1)
         station = provider.providers.all().first()
-        print(station.id)
+
         point = station.comments.all().first()
         port = point.ports.all().first()
+
         # Test SessionsPerPoint
         url = reverse('sessionsperpoint', args=(point.id,'20200809', '20200823'))
         response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
-        print(response.data)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Test SessionsPerStation
         url = reverse('sessionsperstation', args=(172220,'20200809', '20200823'))
         response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
-        print(response.data)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Test SessionsPerEV
         url = reverse('sessionsperev', args=(2,'20200809', '20200823'))
         response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
-        print(response.data)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Test SessionsPerProvider
         url = reverse('sessionsperprovider', args=(provider.id,'20200809', '20200823'))
         response = self.client.get(url, HTTP_AUTHORIZATION=authorize)
-        print(response.data)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Test SessionsUpd
         f = open("data_file.csv")
         url = reverse('sessionsupd')
         response = self.client.post(url,  data = {"data_file": f},HTTP_AUTHORIZATION=authorize)
-        print(response.data)
+
         f.close()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         f = open("data_file.csv")
         response = self.client.post(url,  data = {"data_file": f},HTTP_AUTHORIZATION=authorize)
-        print(response.data)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         f.close()

@@ -7,9 +7,11 @@ from django.contrib.auth.hashers import make_password
 from eevie.models import *
 
 class UserSerializer(serializers.ModelSerializer):
+    apikey = ReadOnlyField(source='apikey.apikey')
+
     class Meta:
         model = User
-        fields = ('id','username','password')
+        fields = ('id','username','apikey','password')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -23,6 +25,8 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 class InspectUserSerializer(serializers.ModelSerializer):
+    apikey = ReadOnlyField(source='apikey.apikey')
+
     class Meta:
         model = User
         fields = '__all__'

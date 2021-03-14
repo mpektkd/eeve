@@ -28,9 +28,6 @@ import codecs, csv
 @api_view(['GET'])
 @renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerPoint(request, pk, date_from, date_to):        
-    
-    if not request.user.is_superuser:
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
 
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00" ##ισως χρειαστε να αλλαξω το date_from[4:6] με το μηδενικο
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
@@ -78,9 +75,6 @@ def SessionsPerPoint(request, pk, date_from, date_to):
 @renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerStation(request, pk, date_from, date_to):
 
-    if not request.user.is_superuser:
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
-
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
 
@@ -110,9 +104,6 @@ def SessionsPerStation(request, pk, date_from, date_to):
 @api_view(['GET'])
 @renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerEV(request, pk, date_from, date_to):
-    
-    if not request.user.is_superuser:
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
 
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
@@ -160,9 +151,6 @@ def SessionsPerEV(request, pk, date_from, date_to):
 @api_view(['GET'])
 @renderer_classes([JSONRenderer,CSVRenderer])
 def SessionsPerProvider(request, pk, date_from, date_to):
-    
-    if not request.user.is_superuser:
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
 
     date_from = date_from[0:4] + "-" + date_from[4:6] + "-" + date_from[6:8] + " 00:00:00.00+00:00"
     date_to = date_to[0:4] + "-" + date_to[4:6] + "-" + date_to[6:8] + " 00:00:00.00+00:00"
@@ -214,7 +202,9 @@ class UserView(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             if car:
                 Car.objects.create(car=car.first(), customer=user.first())
-                
+            
+            a = APIKey.generate(user.first())
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -256,6 +246,9 @@ class HealthCheckView(APIView):
     authentication_classes = ()
 
     def get(self, request, *args, **kwargs):
+        if "cli" in request.data:
+            if not APIKey().filter(apikey=request.data['APIkey']):
+                return Response({'satus':'failed'}, status.HTTP_401_UNAUTHORIZED)
         with connection.cursor() as cursor:
             cursor.execute("select 1")
             one = cursor.fetchone()[0]
@@ -287,7 +280,6 @@ class ResetSessions(APIView):
         if not (Session.objects.all()):
             return Response({'status': 'failed'})
         return Response({'status' : 'OK'})
-            
 
 class RefillSessions(APIView):
     permission_classes = (IsAuthenticated,)
@@ -324,6 +316,7 @@ class UserMod(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
+        response = {}
         if not request.user.is_superuser:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -337,13 +330,18 @@ class UserMod(APIView):
             u = User.objects.get(username=username)
             u.set_password(password)
             u.save()
-            return Response({'message':'Password successfully changed.'}, status=status.HTTP_200_OK)
+            response['APIkey'] = u.apikey.apikey
+            response['message'] = 'Password successfuly changed'
+            return Response(response, status=status.HTTP_200_OK)
         
         else:
             u = User.objects.create(username=username)
             u.set_password(password)
+            APIKey.generate(u)
             u.save()
-            return Response({'message':'User successfully created'}, status=status.HTTP_200_OK)
+            response['APIkey'] = u.apikey.apikey
+            response['message'] = 'User successfully created'
+            return Response(response, status=status.HTTP_200_OK)
 
 class SessionsUpd(APIView):
 

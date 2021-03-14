@@ -43,7 +43,7 @@ class APIKey(models.Model):
     @classmethod
     def generate(cls,user):
         randomapikey = rstr.xeger(r'[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}')
-        cls.objects.create(
+        obj = cls.objects.create(
             customer = user,
             apikey = randomapikey
         ).save()
