@@ -3,7 +3,6 @@ Frontend/
 eevie/__pycache__/
 migrations/
 __pycache__/
-<<<<<<< HEAD
 front-end/node_modules/
 .env.local/
 ../.DS_Store
@@ -16,5 +15,4 @@ src/assets/img/.DS_Store
 src/views/.DS_Store
 src/views/Map/.DS_Store
 src/views/Map/data/
-=======
->>>>>>> master
+cli-client/data-file.csv
