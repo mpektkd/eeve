@@ -33,12 +33,15 @@ export default function CustomDropdown(props) {
     }
   };
   const handleClose = param => {
+    //I know this is extremely bad I am sorry!
+    localStorage.setItem("selectedItem", param);
     setAnchorEl(null);
     if (props && props.onClick) {
       props.onClick(param);
     }
   };
   const handleItemClick = param => {
+    console.log("kwstas")
     setCarSelected(param.name)
     localStorage.setItem("carForSignUp", param.id)
     setAnchorEl(null);

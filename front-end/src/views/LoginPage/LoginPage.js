@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
-// @material-ui/icons
-import Email from "@material-ui/icons/Email";
-// core components
+
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -17,7 +13,6 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-import styles2 from "assets/jss/material-kit-react/components/customInputStyle.js";
 
 import axiosInstance from "../../axiosApi";
 
@@ -59,7 +54,7 @@ export default function LoginPage(props) {
         setAuthError(false);
         localStorage.setItem("isLoggedIn", true);
         localStorage.setItem("username", e.username);
-        axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
+        axiosInstance.defaults.headers['Authorization'] ="JWT " + res.data.access;
         localStorage.setItem('access_token', res.data.access);
         localStorage.setItem('refresh_token', res.data.refresh); 
         const timer = setTimeout(()=> {

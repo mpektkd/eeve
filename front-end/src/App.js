@@ -19,13 +19,24 @@ export default function App (props) {
     const [user, setUser] = React.useState("");
     const [loggedIn, setLoggedIn] = React.useState(null);
     React.useLayoutEffect ( () => {
+        console.log(axiosInstance.defaults.headers);
         const response = axiosInstance.get('current_user/')
           .then(res => {
             setUser(res.data.username);
             setLoggedIn(true)
           })
           .catch(error => {
-            console.log(error)
+            const response2 = axiosInstance.post("refreshtoken/", {
+              refresh: localStorage.getItem("refresh_token")
+            })
+              .then (res => {
+                axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
+                localStorage.setItem('access_token', res.data.access);
+                localStorage.setItem('refresh_token', res.data.refresh); 
+              })
+              .catch (error => {
+                console.log(error)
+              })
           })
       });
 

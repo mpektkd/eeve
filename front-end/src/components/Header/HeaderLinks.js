@@ -19,12 +19,16 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
-
+import axiosInstance from "../../axiosApi"
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
   const onClick = () => {
+    const response = axiosInstance.post("logout/", {
+      "refresh": localStorage.getItem("refresh_token")
+    })
+    axiosInstance.defaults.headers['Authorization'] = null;
     localStorage.clear();
   }
   if (localStorage.getItem("isLoggedIn")) {

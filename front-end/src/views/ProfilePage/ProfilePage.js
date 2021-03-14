@@ -35,7 +35,6 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Car2 from '@material-ui/icons/DriveEta';
 
 import styles2 from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import { LocalConvenienceStoreOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles(styles2);
@@ -43,11 +42,14 @@ const useStyles2 = makeStyles(styles2);
 export default function ProfilePage(props) {
   const classes = useStyles();
   const classes2 = useStyles2();
-  const [billList, setBillList] = React.useState([])
+ // const [billList, setBillList] = React.useState([])
   const [bilLList, setBilLList] = React.useState([])
+  const [monthlyBillList, setMonthlyBillList] = React.useState([])
+  const [monthlyBilLList, setMonthlyBilLList] = React.useState([])
+  const [carSelected, setCarSelected] = React.useState(false)
+ // const [itemSelected, setItemSelected] = React.useState(false)
   const [carList, setCarList] = React.useState([])
   const [carList2, setCarList2] = React.useState([])
-  const [carSelected, setCarSelected] = React.useState()
   const [isLoading, setIsLoading] = React.useState(false)
   const [pageNeedsRender, setPageNeedsRender] = React.useState(true)
   const { ...rest } = props;
@@ -59,7 +61,6 @@ export default function ProfilePage(props) {
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   React.useLayoutEffect ( () => {
     if (!pageNeedsRender) {
-      console.log("Page is about to be rendered again!")
       return;
     }
     const response = axiosInstance.get('user/mycars/')
@@ -75,27 +76,27 @@ export default function ProfilePage(props) {
           tempCarList.push(car)
           car = {}
         }
-        if (res.data.length === 1) {
-          localStorage.setItem("selectedCar", tempCarList[0].id)
-        }
+  
+       localStorage.setItem("selectedCar", tempCarList[0].id)
+        
         setCarList(tempCarList);
       })
       .catch(error => {
         console.log(error)
       })
-    const response2 = axiosInstance.get('user/mybills/')
+     const response2 = axiosInstance.get('user/mybills/')
       .then(res => {
-        let bill = {}
-        let tempBillList = []
+        //let bill = {}
+        //let tempBillList = []
         let tempBilLList = []
         for (let i = 0; i < res.data.length; i++) {
           let bilL = []
-          if (!res.data[i].is_paid) {
+          /* if (!res.data[i].is_paid) {
             bill.amount = (res.data[i].total).toFixed(2);
             bill.date = res.data[i].date_created.toString().slice(0,10);
             bill.id = res.data[i].id;
             tempBillList.push(bill);
-          }
+          } */
           bilL.push(res.data[i].id.toString());
           bilL.push(res.data[i].date_created.toString().slice(0,10));
           bilL.push("$"+(res.data[i].total.toFixed(2)).toString());
@@ -106,19 +107,45 @@ export default function ProfilePage(props) {
             bilL.push("due");
           }
           tempBilLList.push(bilL);
-          bill = {}
+         // bill = {}
         }
-        setBillList(tempBillList)
+       // setBillList(tempBillList)
         setBilLList(tempBilLList);
         setPageNeedsRender(false)
       })
       .catch(error => {
         console.log(error)
-      })
+      }) 
       const response3 = axiosInstance.get('user/mymonthbills/')
         .then(res => {
           console.log(res)
-        })
+          let bill = {}
+          let tempBillList = []
+          let tempBilLList = []
+        for (let i = 0; i < res.data.length; i++) {
+          let bilL = []
+          if (res.data[i].monthly_total > 0) {
+            bill.amount = (res.data[i].monthly_total).toFixed(2);
+            bill.date = res.data[i].start_date.toString().slice(0,10);
+            bill.id = res.data[i].id;
+            tempBillList.push(bill);
+          }
+          bilL.push(res.data[i].id.toString());
+          bilL.push(res.data[i].start_date.toString().slice(0,10));
+          if (res.data[i].monthly_total <= 0) {
+            bilL.push("$"+((-res.data[i].monthly_total).toFixed(2)).toString());
+            bilL.push("paid off");
+          }
+          else {
+            bilL.push("$"+(res.data[i].monthly_total.toFixed(2)).toString());
+            bilL.push("due");
+          }
+          tempBilLList.push(bilL)
+          bill = {}
+        }
+        setMonthlyBillList(tempBillList);
+        setMonthlyBilLList(tempBilLList)
+      })
         .catch(error => {
           console.log(error)
         })
@@ -171,6 +198,39 @@ export default function ProfilePage(props) {
       </Card>
     </GridItem>);
   }
+
+  function monthPay (props) {
+    setIsLoading(true)
+     const response = axiosInstance.post("user/monthpayoff/", {BillID: props.props.id})
+      .then(res => {
+        console.log(res)
+      })
+      .catch(error => {
+        console.log(error)
+      }) 
+  }
+
+  function MonthlyBill(props) {
+    return (<GridItem xs={12} sm={7} md={4}>
+      <Card>
+        <CardHeader color="success" stats icon>
+          <CardIcon color="success" onClick = {() => monthPay(props)}>
+            Click to pay
+          </CardIcon>
+          <p className={classes2.cardCategory}>Monthly Bill</p>
+          <h3 className={classes2.cardTitle}>${props.props.amount}</h3>
+        </CardHeader>
+        <CardFooter stats>
+          <div className={classes2.stats}>
+            <DateRange />
+            {props.props.date}
+          </div>
+        </CardFooter>
+      </Card>
+    </GridItem>);
+  }
+
+  
   function Car (props) {
     return (<GridItem xs={12} sm={7} md={4}>
       <Card>
@@ -187,7 +247,7 @@ export default function ProfilePage(props) {
           </CardIcon>
           }
           <p className={classes2.cardCategory}>vehicle</p>
-          <h3 className={classes2.cardTitle}>{props.props.name}</h3>
+          <h3 className={classes2.cardTitle}>{props.props.name.slice(0,18)}</h3>
         </CardHeader>
       </Card>
     </GridItem>);
@@ -217,10 +277,7 @@ export default function ProfilePage(props) {
       console.log(error)
     })
   }
-    
-
-
-  
+     
   return (
     <div>
       { !localStorage.getItem("isLoggedIn") && <Redirect to = "/login-page"/>}
@@ -274,7 +331,22 @@ export default function ProfilePage(props) {
                   color="success"
                   tabs={[
                     {
-                      tabButton: "My bills",
+                      tabButton: "Monthly bills",
+                      tabIcon: AttachMoneyIcon,
+                      tabContent: (
+                        <GridContainer style = { {padding: 20}} justify = "center">
+                          {
+                            monthlyBillList.map((prop, key ) => {
+                              return (
+                                <MonthlyBill key = {key} props = { prop }/>
+                              );
+                            })
+                          }
+                        </GridContainer>
+                      )
+                    },
+                    /* {
+                      tabButton: "Sessions",
                       tabIcon: AttachMoneyIcon,
                       tabContent: (
                         <GridContainer style = { {padding: 20}} justify = "center">
@@ -287,22 +359,36 @@ export default function ProfilePage(props) {
                           }
                         </GridContainer>
                       )
-                    },
+                    }, */
                     {
                       tabButton: "Statistics",
                       tabIcon: EqualizerIcon,
                       tabContent: (
-                        <GridContainer justify="center">
+                        <GridContainer justify="center">                       
                           <GridItem xs={12} sm={12} md={12}>
                             <Card>
                               <CardHeader color="success">
-                                <h4 className={classes.cardTitleWhite}>Bill History</h4>
+                                <h4 className={classes.cardTitleWhite}>Session History</h4>
                               </CardHeader>
                               <CardBody>
                                 <Table
                                   tableHeaderColor="success"
                                   tableHead={["Bill ID", "Date", "Amount", "State"]}
                                   tableData={bilLList}
+                                />
+                              </CardBody>
+                            </Card>
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={12}>
+                            <Card>
+                              <CardHeader color="success">
+                                <h4 className={classes.cardTitleWhite}>Monthly Bill History</h4>
+                              </CardHeader>
+                              <CardBody>
+                                <Table
+                                  tableHeaderColor="success"
+                                  tableHead={["Bill ID", "Date", "Amount", "State"]}
+                                  tableData={monthlyBilLList}
                                 />
                               </CardBody>
                             </Card>
@@ -365,8 +451,7 @@ export default function ProfilePage(props) {
                                 { }
                               </p>
                             </GridItem>
-                          </GridItem>
-                             
+                          </GridItem>   
                           {
                             carList.map((prop, key ) => {
                               return (

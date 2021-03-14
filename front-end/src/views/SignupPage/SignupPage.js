@@ -60,6 +60,7 @@ export default function LoginPage(props) {
   const [passwordError, setPasswordError] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [signUpSuccessful, setSignUpSuccessful] = useState(false);
+  const [carList, setCarList] = useState([]);
   const [defaultText, setDefaultText] = useState({
     firstName: "",
     lastName: "",
@@ -72,11 +73,12 @@ export default function LoginPage(props) {
   const classes = useStyles();
   const classes2 = useStyles();
   const { ...rest } = props;
-  var car = {}, carList = [];
 
   React.useLayoutEffect ( () => {
     const response = axios.get('http://snf-881285.vm.okeanos.grnet.gr:8000/evcharge/api/cars/')
       .then(res => {
+        console.log(res)
+        var car = {}, tempCarList = [];
         for (var i = 0; i <res.data.length; i++) {
           if (res.data[i].release_year)
             car.name = res.data[i].brandName + " " + res.data[i].model + " " + res.data[i].release_year
@@ -84,9 +86,11 @@ export default function LoginPage(props) {
             car.name = res.data[i].brandName + " " + res.data[i].model
 
           car.id = res.data[i].id;
-          carList.push(car)
+          tempCarList.push(car)
           car = {}
-        }        
+        }      
+        console.log(tempCarList)  
+        setCarList(tempCarList)
       })
       .catch(error => {
         console.log(error)
@@ -96,14 +100,12 @@ export default function LoginPage(props) {
 
   const onSubmit = (e) => {
     if (e.password !== e.confirmPassword) {
-      console.log("Passwords do not match!");
       setPasswordError(true)
       setDefaultText(e);
       return;
     }
     if (!localStorage.getItem("carForSignUp")) {
       setAlertOpen(true)
-      console.log("Car not selected");
       setDefaultText(e);
       return;
     }
@@ -120,7 +122,6 @@ export default function LoginPage(props) {
           setUsernameError(false)
           setSignUpSuccessful(true)
           localStorage.removeItem("carForSignUp")
-          console.log(res)
         })
         .catch(error => {
           setDefaultText(e);
@@ -207,7 +208,6 @@ export default function LoginPage(props) {
   const handleClose = () => {
     setAlertOpen(false)
   };
-  console.log(defaultText);
   return (
     <div>
       {signUpSuccessful && <Redirect to = {'/'}/>}
