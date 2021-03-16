@@ -75,7 +75,7 @@ export default function LoginPage(props) {
   const { ...rest } = props;
 
   React.useLayoutEffect ( () => {
-    const response = axios.get('https://localhost:8765/evcharge/api/cars/')
+    const response = axios.get('https://snf-881285.vm.okeanos.grnet.gr/evcharge/api/cars/')
       .then(res => {
         console.log(res)
         var car = {}, tempCarList = [];

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://localhost:8765/evcharge/api',
+    baseURL: 'https://snf-881285.vm.okeanos.grnet.gr/evcharge/api',
     timeout: 5000,
     headers: {
         'Authorization': "JWT " + localStorage.getItem('access_token'),
