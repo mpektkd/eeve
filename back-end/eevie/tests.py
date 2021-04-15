@@ -187,7 +187,8 @@ class BillTestCase(TestCase):
     def setUp(self):
         Bill.objects.create(
             total=35.000,
-            is_paid=True
+            is_paid=True,
+            date_created=datetime.datetime.now(timezone('Europe/Athens'))
         )
 
     def test_bills(self):
@@ -206,6 +207,8 @@ class StationTestCase(TestCase):
         statusTypes.setUp()
         usageTypes = UsageTypeTestCase()
         usageTypes.setUp()
+        providers = ProvidersTestCase()
+        providers.setUp()
 
         gpath = pathlib.Path(__file__).parent.parent.absolute() / 'Data/station_info_gr.json' #station_info_gr.json
         g = open(gpath)
@@ -230,9 +233,6 @@ class SessionsTestCase(TestCase):
 
         stations = StationTestCase()
         stations.setUp()
-
-        carBase = CarBaseTestCase()
-        carBase.setUp()
 
         users = UsersTestCase()
         users.setUp()
@@ -429,6 +429,9 @@ class UsersTestCase(TestCase):
                 has_expired_bills = False
             )
             c.save()
+        
+        carBase = CarBaseTestCase()
+        carBase.setUp()
         
         Car.create()
 

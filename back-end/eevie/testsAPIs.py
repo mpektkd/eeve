@@ -4,6 +4,7 @@ from django.urls import reverse
 from eevie.models import *
 from eevie.views import *
 from eevie.tests import ReferenceTest,SessionsTestCase
+import pathlib
 
 class UserInterferenceTest(APITestCase):
     def test_user_interference(self):
@@ -23,7 +24,7 @@ class UserInterferenceTest(APITestCase):
         response = self.client.post(url,data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         token = response.data
-        authorize = 'X-OBSERVATORY-AUTH ' + token['access']
+        authorize = 'JWT ' + token['access']
 
         # Test current user 
         url = reverse('current_user')
@@ -60,7 +61,7 @@ class UserInterferenceTest(APITestCase):
             "PortID":str(port.id),
             "VehicleID":"2",
             "kWh":True,
-            "accharger":False,
+            "accharger":True,
             "kWhDelivered":23.3,
             "amount":'null',
             "connectionTime":"2019-09-12 10:41:10.00+00:00",
@@ -70,7 +71,6 @@ class UserInterferenceTest(APITestCase):
         }
 
         response = self.client.post(url, data, HTTP_AUTHORIZATION=authorize)
-
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['message'], 'Session created')
 
@@ -81,7 +81,7 @@ class UserInterferenceTest(APITestCase):
             "PortID":str(port.id),
             "VehicleID":"2",
             "kWh":True,
-            "accharger":False,
+            "accharger":True,
             "kWhDelivered":30.5,
             "amount":'null',
             "connectionTime":"2020-08-09 10:41:10.00+00:00",
@@ -123,7 +123,7 @@ class UserInterferenceTest(APITestCase):
         # Test logout
         url = reverse('logout')
         data = token
-        response = self.client.post(url,data, HTTP_AUTHORIZATION='X-OBSERVATORY-AUTH ' + response.data['access'])
+        response = self.client.post(url,data, HTTP_AUTHORIZATION='JWT ' + response.data['access'])
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Test Login
@@ -132,7 +132,7 @@ class UserInterferenceTest(APITestCase):
         response = self.client.post(url,data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         token = response.data
-        authorize = 'X-OBSERVATORY-AUTH ' + token['access']
+        authorize = 'JWT ' + token['access']
 
         # Test deletion
         url = reverse('deleteme')
@@ -156,7 +156,7 @@ class AdminTest(APITestCase):
         response = self.client.post(url,data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         token = response.data
-        authorize = 'X-OBSERVATORY-AUTH ' + token['access']
+        authorize = 'JWT ' + token['access']
 
 
         # Test user creation
@@ -171,7 +171,6 @@ class AdminTest(APITestCase):
         response = self.client.post(url, HTTP_AUTHORIZATION=authorize)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['message'],'Password successfuly changed')
-        print(response.data)
        
 
         # Test inspectUser
@@ -222,13 +221,15 @@ class AdminTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Test SessionsUpd
-        f = open("data_file.csv")
+
+        file_path = pathlib.Path(__file__).parent.parent.absolute() / 'Scripts/data_file.csv'
+        f = open(file_path)
         url = reverse('sessionsupd')
         response = self.client.post(url,  data = {"data_file": f},HTTP_AUTHORIZATION=authorize)
 
         f.close()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        f = open("data_file.csv")
+        f = open(file_path)
         response = self.client.post(url,  data = {"data_file": f},HTTP_AUTHORIZATION=authorize)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
